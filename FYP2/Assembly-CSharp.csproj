@@ -62,11 +62,11 @@
      <Compile Include="Assets\Scripts\Tile.cs" />
      <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\Scripts\WaterMotion.cs" />
- <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>C:/Users/Ben/Desktop/FYP2/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>C:/Users/Ben/Desktop/FYP2/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/Ben/Desktop/Romote FYP2/FYP2/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.PackageManagerUI.Editor">
+ <HintPath>C:/Users/Ben/Desktop/Romote FYP2/FYP2/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>D:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class MapValue : MonoBehaviour {
 // Map Data Values
-	[SerializeField] private int iTree;
-	[SerializeField] private int iStone;
-	[SerializeField] private int iBush;
+	[SerializeField] public int iTree;
+	[SerializeField] public int iStone;
+	[SerializeField] public int iBush;
 
 // Map Prefabs
-	[SerializeField] private List<Transform> lPrefabs;
+	[SerializeField] public List<Transform> lPrefabs;
 
-// Parse Prefab list
-	public List<Transform> ParseList() {
-		return lPrefabs;
+	private void Start() {
+		// Generate Initial Values
+		iTree = Random.Range(3, 5);
+		iStone = Random.Range(3, 5);
+		iBush = Random.Range(2, 4);
 	}
 }

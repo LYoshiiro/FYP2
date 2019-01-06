@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,16 +10,22 @@ public class MapGenerator : MonoBehaviour {
 
 // Gameobject Holder
 	[SerializeField] private Transform tMapHolder;
+	[SerializeField] private Transform tEnvironmentHolder;
 
 // Map Size
 	[SerializeField] private Vector2 v2Size;
 	[SerializeField] [Range(0, 1)] private float fDownscale;
 	
-// Map Value Offsets
+// Map Value Origins
+	private int[] iOrigins = new int[4]; // Has to be declared here due to L85
+	private int iHalf;
+
+// Map Value Limiters
 	private int iTree;
 	private int iStone;
 	private int iBush;
 	private int iTile;
+	private List<int> lSpawnOffset;
 
 	private void Start() {
 	// Set Initial Values
@@ -26,16 +33,22 @@ public class MapGenerator : MonoBehaviour {
 		iStone = 0;
 		iBush = 0;
 		iTile = 0;
+		lSpawnOffset = new List<int>();
 
-	// Assign caller string for Map Holder
-		string sHolder = "Map Holder";
-	// Search for Map Holder : if true; delete it
-		if (transform.Find(sHolder))
-			DestroyImmediate(transform.Find(sHolder).gameObject);
-	// Initialize new Gameobject to Map Holder
-		tMapHolder = new GameObject (sHolder).transform;
+	// Assign caller string for Holder Object(s)
+		string sMapHolder = "Map Holder";
+		string sEnvironmentHolder = "Environment Holder";
+	// Search for Holder Object(s) : if true; delete it
+		if (transform.Find(sMapHolder))
+			DestroyImmediate(transform.Find(sMapHolder).gameObject);
+		if (transform.Find(sEnvironmentHolder))
+			DestroyImmediate(transform.Find(sEnvironmentHolder).gameObject);
+	// Initialize new Gameobject to Holder Object(s)
+		tMapHolder = new GameObject (sMapHolder).transform;
+		tEnvironmentHolder = new GameObject (sEnvironmentHolder).transform;
 	// Assign Gameobject parent
 		tMapHolder.parent = transform;
+		tEnvironmentHolder.parent = transform;
 
 	// Do Tile Generation here!
 		for (int x = 0; x < v2Size.x; x++) {
@@ -43,7 +56,7 @@ public class MapGenerator : MonoBehaviour {
 			// Get Tile Position
 				Vector3 v3Pos = new Vector3(-v2Size.x / 2 + 0.5f + x, 0, -v2Size.y / 2 + 0.5f + z);
 			// Initialize Tile
-				Transform tTile = Instantiate(rValue.ParseList().ToArray()[0], v3Pos, Quaternion.identity) as Transform;
+				Transform tTile = Instantiate(rValue.lPrefabs.ToArray()[0], v3Pos, Quaternion.identity) as Transform;
 			// Set Tile Parent
 				tTile.parent = tMapHolder;
 			// Rename Tile
@@ -52,6 +65,71 @@ public class MapGenerator : MonoBehaviour {
 				tTile.localScale = Vector3.one * (1 - fDownscale);
 			}
 		}
+
+	// Set iHalf
+		iHalf = Mathf.RoundToInt(v2Size.x / 2);
+	// Store Origins
+		iOrigins[0] = Mathf.RoundToInt((iHalf - 1) * v2Size.x + iHalf - 1);
+		iOrigins[1] = Mathf.RoundToInt((iHalf - 1) * v2Size.x + iHalf);
+		iOrigins[2] = Mathf.RoundToInt((v2Size.x - (iHalf - 1)) * v2Size.x - iHalf);
+		iOrigins[3] = Mathf.RoundToInt((v2Size.x - (iHalf - 1)) * v2Size.x - (iHalf + 1));
+	// Print Origin points
+		// rCore.Pnt(iOrigins[0] + ", " + iOrigins[1] + ", " + iOrigins[2] + ", " + iOrigins[3]);
 	}
 
+	private void FixedUpdate() {
+	// Generate Environment Objects
+		GenerateEnvironment();
+	}
+
+// Generate Environment Objects
+	private void GenerateEnvironment() {
+	// Check the holder for avaliability
+		if (tMapHolder != null) {
+		// Check if limit is reached
+		// Tree =========================================================
+			if (iTree < rValue.iTree) {
+			// Update limiter
+				iTree++;
+			// random generate position of Environment
+				int iChild = Random.Range(1, tMapHolder.childCount);
+			// Check for overstepping
+				if (lSpawnOffset == null) while (iOrigins.Contains(iChild) == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+			// In case its spawning on a repeated tile
+				else while (iOrigins.Contains(iChild) == true || lSpawnOffset.Contains(iChild) == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+			// Update Spawn Offset
+				lSpawnOffset.Add(iChild);
+			// Get Tile of randomized location
+				Transform tPlacement = tMapHolder.GetChild(iChild).transform;
+			// Instantiate new Tree
+				Transform tTree = Instantiate(rValue.lPrefabs.ToArray()[1], tPlacement.position, Quaternion.identity) as Transform;
+			// Assign Parent Object
+				tTree.parent = tEnvironmentHolder;
+			}
+		// Stone =========================================================
+			else if (iStone < rValue.iStone) {
+			// Update limiter
+				iStone++;
+			// random generate position of Environment
+				int iChild = Random.Range(1, tMapHolder.childCount);
+			// Check for overstepping
+				if (lSpawnOffset == null) while (iOrigins.Contains(iChild) == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+			// In case its spawning on a repeated tile
+				else while (iOrigins.Contains(iChild) == true || lSpawnOffset.Contains(iChild) == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+			// Update Spawn Offset
+				lSpawnOffset.Add(iChild);
+			// Get Tile of randomized location
+				Transform tPlacement = tMapHolder.GetChild(iChild).transform;
+			// Instantiate new Stone
+				Transform tStone = Instantiate(rValue.lPrefabs.ToArray()[2], tPlacement.position, Quaternion.identity) as Transform;
+			// Assign Parent Object
+				tStone.parent = tEnvironmentHolder;
+			}
+		}
+
+	}
 }
