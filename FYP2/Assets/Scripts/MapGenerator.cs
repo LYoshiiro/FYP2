@@ -28,7 +28,7 @@ public class MapGenerator : MonoBehaviour {
 	private List<int> lSpawnOffset;
 
 	private void Start() {
-	// Set Initial Values
+	// Set Initial Variables
 		iTree = 0;
 		iStone = 0;
 		iBush = 0;
@@ -130,6 +130,10 @@ public class MapGenerator : MonoBehaviour {
 				tStone.parent = tEnvironmentHolder;
 			}
 		}
+	}
 
+// Get the vector size of the island generated
+	public Vector2 GetIslandSize() {
+		return v2Size;
 	}
 }
