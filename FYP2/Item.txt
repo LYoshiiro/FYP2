@@ -1,0 +1,5 @@
+0,0,Wood,Blank
+1,0,Stone,Blank
+2,0,Cotton,Blank
+3,0,Berries,Blank
+4,0,Raft,Blank

@@ -79,8 +79,8 @@ public class PlayerMovement : MonoBehaviour {
 				v3Last.z = Mathf.Ceil(v3Last.z)  - 0.5f;
 
         // Check if the Player is on the Base Plate or not
-			if (transform.position.y < (tWater.position.y - rCore.BoundLengths(transform.GetChild(1)).y))	bOutofBounds = true;
-			else																				bOutofBounds = false; 
+			if (transform.position.y < (tWater.position.y - rCore.BoundLengths(transform.GetChild(0)).y))	bOutofBounds = true;
+			else																				            bOutofBounds = false; 
         
         // Set Player back on the ground to the last estimated point
 			if (bOutofBounds == true)

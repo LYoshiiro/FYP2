@@ -2,15 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour {
+public class Item {
+// Class Reference
+	[SerializeField] private Core rCore;
 
-	// Use this for initialization
-	void Start () {
-		
+// Data Values
+	[SerializeField] public int iID;
+	[SerializeField] public int iCount;
+	[SerializeField] public string sName;
+	[SerializeField] public string sNote;
+
+// Create Function
+	public Item(int id, int count, string name, string note) {
+		iID 	= id;		// Item ID
+		iCount  = count;	// Item Count in Inventory
+		sName 	= name;		// Item Name
+		sNote 	= note;		// Item Flavor Text
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+// Item Count Updater
+	public void CountUpdate(int value) {
+		iCount += value;
 	}
 }

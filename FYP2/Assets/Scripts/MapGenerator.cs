@@ -107,6 +107,10 @@ public class MapGenerator : MonoBehaviour {
 				Transform tTree = Instantiate(rValue.lPrefabs.ToArray()[1], tPlacement.position, Quaternion.identity) as Transform;
 			// Assign Parent Object
 				tTree.parent = tEnvironmentHolder;
+			// Parse Reference Core
+				tTree.GetComponent<Environment>().SetData(rCore, "Wood");
+			// Update Tile
+				tPlacement.GetComponent<Tile>().SetTile(rCore);
 			}
 		// Stone =========================================================
 			else if (iStone < rValue.iStone) {
@@ -128,6 +132,10 @@ public class MapGenerator : MonoBehaviour {
 				Transform tStone = Instantiate(rValue.lPrefabs.ToArray()[2], tPlacement.position, Quaternion.identity) as Transform;
 			// Assign Parent Object
 				tStone.parent = tEnvironmentHolder;
+			// Parse Reference Core
+				tStone.GetComponent<Environment>().SetData(rCore, "Stone");
+			// Update Tile
+				tPlacement.GetComponent<Tile>().SetTile(rCore);
 			}
 		}
 	}

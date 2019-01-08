@@ -28,6 +28,22 @@ private void FixedUpdate() {
 		return collider.bounds.size;
 	}
 
+// CSV Reader
+	public string[] CSVRead(string file) {
+	// Catch
+        if (!File.Exists(file)) {
+            File.Create(file);
+			Pnt("File was Created!");
+		}
+
+	// Get Status of the File that is being checked
+		// Pnt(File.GetAttributes(file));
+
+	// Get all the lines from the text file
+		string[] sAry = File.ReadAllLines(file);
+
+		return sAry;
+	}
 }
 // Returns Application's Path
 // refCore.Print(System.IO.Directory.GetCurrentDirectory());
