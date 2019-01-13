@@ -37,4 +37,9 @@ public class ItemManager : MonoBehaviour {
 		Item rGather = lItem.Find(i => i.sName == name);
 		rGather.CountUpdate(1);
 	}
+
+// Parse item list
+	public List<Item> GetItems() {
+		return lItem;
+	}
 }

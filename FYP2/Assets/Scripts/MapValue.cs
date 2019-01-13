@@ -6,7 +6,8 @@ public class MapValue : MonoBehaviour {
 // Map Data Values
 	[SerializeField] public int iTree;
 	[SerializeField] public int iStone;
-	[SerializeField] public int iBush;
+	[SerializeField] public int iBerry;
+	[SerializeField] public int iCotton;
 
 // Map Prefabs
 	[SerializeField] public List<Transform> lPrefabs;
@@ -15,6 +16,7 @@ public class MapValue : MonoBehaviour {
 		// Generate Initial Values
 		iTree = Random.Range(3, 5);
 		iStone = Random.Range(3, 5);
-		iBush = Random.Range(2, 4);
+		iBerry = Random.Range(1, 3);
+		iCotton = Random.Range(1, 3);
 	}
 }

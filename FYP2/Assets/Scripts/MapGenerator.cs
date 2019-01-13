@@ -23,7 +23,8 @@ public class MapGenerator : MonoBehaviour {
 // Map Value Limiters
 	private int iTree;
 	private int iStone;
-	private int iBush;
+	private int iBerry;
+	private int iCotton;
 	private int iTile;
 	private List<int> lSpawnOffset;
 
@@ -31,7 +32,8 @@ public class MapGenerator : MonoBehaviour {
 	// Set Initial Variables
 		iTree = 0;
 		iStone = 0;
-		iBush = 0;
+		iBerry = 0;
+		iCotton = 0;
 		iTile = 0;
 		lSpawnOffset = new List<int>();
 
@@ -134,6 +136,56 @@ public class MapGenerator : MonoBehaviour {
 				tStone.parent = tEnvironmentHolder;
 			// Parse Reference Core
 				tStone.GetComponent<Environment>().SetData(rCore, "Stone");
+			// Update Tile
+				tPlacement.GetComponent<Tile>().SetTile(rCore);
+			}
+		// Berry =========================================================
+			else if (iBerry < rValue.iBerry) {
+			// Update limiter
+				iBerry++;
+			// random generate position of Environment
+				int iChild = Random.Range(1, tMapHolder.childCount);
+			// Check for overstepping
+				if (lSpawnOffset == null) while (iOrigins.Contains(iChild) == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+			// In case its spawning on a repeated tile
+				else while (iOrigins.Contains(iChild) == true || lSpawnOffset.Contains(iChild) == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+			// Update Spawn Offset
+				lSpawnOffset.Add(iChild);
+			// Get Tile of randomized location
+				Transform tPlacement = tMapHolder.GetChild(iChild).transform;
+			// Instantiate new Berry
+				Transform tBerry = Instantiate(rValue.lPrefabs.ToArray()[3], tPlacement.position, Quaternion.identity) as Transform;
+			// Assign Parent Object
+				tBerry.parent = tEnvironmentHolder;
+			// Parse Reference Core
+				tBerry.GetComponent<Environment>().SetData(rCore, "Berry");
+			// Update Tile
+				tPlacement.GetComponent<Tile>().SetTile(rCore);
+			}
+		// Berry =========================================================
+			else if (iCotton < rValue.iCotton) {
+			// Update limiter
+				iCotton++;
+			// random generate position of Environment
+				int iChild = Random.Range(1, tMapHolder.childCount);
+			// Check for overstepping
+				if (lSpawnOffset == null) while (iOrigins.Contains(iChild) == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+			// In case its spawning on a repeated tile
+				else while (iOrigins.Contains(iChild) == true || lSpawnOffset.Contains(iChild) == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+			// Update Spawn Offset
+				lSpawnOffset.Add(iChild);
+			// Get Tile of randomized location
+				Transform tPlacement = tMapHolder.GetChild(iChild).transform;
+			// Instantiate new Cotton
+				Transform tCotton = Instantiate(rValue.lPrefabs.ToArray()[4], tPlacement.position, Quaternion.identity) as Transform;
+			// Assign Parent Object
+				tCotton.parent = tEnvironmentHolder;
+			// Parse Reference Core
+				tCotton.GetComponent<Environment>().SetData(rCore, "Cotton");
 			// Update Tile
 				tPlacement.GetComponent<Tile>().SetTile(rCore);
 			}
