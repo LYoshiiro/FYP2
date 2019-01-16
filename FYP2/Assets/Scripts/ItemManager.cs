@@ -35,7 +35,7 @@ public class ItemManager : MonoBehaviour {
 	public void Gather(string name) {
 	// Get Reference
 		Item rGather = lItem.Find(i => i.sName == name);
-		rGather.CountUpdate(1);
+		rGather.CountUpdate(Random.Range(3, 6));
 	}
 
 // Parse item list

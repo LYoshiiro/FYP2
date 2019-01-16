@@ -65,6 +65,11 @@ public class PlayerInteraction : MonoBehaviour {
 					// Update Hold Time
 						fBounceTime += Time.deltaTime;
 				}
+
+			// When RMB is pressed
+				if (Input.GetMouseButtonDown(1)) {
+					
+				}
             }
         }
     }

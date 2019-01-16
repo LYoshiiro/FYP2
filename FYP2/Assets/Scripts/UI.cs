@@ -33,6 +33,9 @@ public class UI : MonoBehaviour {
 		
 		// Cotton
 			lText.ToArray()[4].GetComponent<Text>().text = "Cotton: " + lItem.Find(i => i.sName == "Cotton").iCount;
+
+		// Raft
+			lText.ToArray()[5].GetComponent<Text>().text = "Raft: " + lItem.Find(i => i.sName == "Raft").iCount;
 		}
 	}
 

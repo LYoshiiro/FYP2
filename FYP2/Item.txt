@@ -3,3 +3,6 @@
 2,0,Cotton,Blank
 3,0,Berry,Blank
 4,0,Raft,Blank
+5,0,Cotton Hat,Blank
+6,0,Cotton Shirt,Blank
+7,0,Cotton Pant,Blank
