@@ -11,6 +11,7 @@ public class MapGenerator : MonoBehaviour {
 // Gameobject Holder
 	[SerializeField] private Transform tMapHolder;
 	[SerializeField] private Transform tEnvironmentHolder;
+	[SerializeField] private Transform tPlacementHolder;
 
 // Map Size
 	[SerializeField] private Vector2 v2Size;
@@ -40,6 +41,7 @@ public class MapGenerator : MonoBehaviour {
 	// Assign caller string for Holder Object(s)
 		string sMapHolder = "Map Holder";
 		string sEnvironmentHolder = "Environment Holder";
+		string sPlacementHolder = "Placement Holder";
 	// Search for Holder Object(s) : if true; delete it
 		if (transform.Find(sMapHolder))
 			DestroyImmediate(transform.Find(sMapHolder).gameObject);
@@ -48,9 +50,11 @@ public class MapGenerator : MonoBehaviour {
 	// Initialize new Gameobject to Holder Object(s)
 		tMapHolder = new GameObject (sMapHolder).transform;
 		tEnvironmentHolder = new GameObject (sEnvironmentHolder).transform;
+		tPlacementHolder = new GameObject (sPlacementHolder).transform;
 	// Assign Gameobject parent
 		tMapHolder.parent = transform;
 		tEnvironmentHolder.parent = transform;
+		tPlacementHolder.parent = transform;
 
 	// Do Tile Generation here!
 		for (int x = 0; x < v2Size.x; x++) {
@@ -195,5 +199,13 @@ public class MapGenerator : MonoBehaviour {
 // Get the vector size of the island generated
 	public Vector2 GetIslandSize() {
 		return v2Size;
+	}
+
+// Spawn Raft Functions
+	public void SpawnRaft(Vector3 position) {
+	// Instantiate new Raft
+		Transform tRaft = Instantiate(rValue.lPrefabs.ToArray()[5], position, Quaternion.identity) as Transform;
+	// Assign Parent Object
+		tRaft.parent = tPlacementHolder;
 	}
 }

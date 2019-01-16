@@ -13,8 +13,9 @@ private void FixedUpdate() {
 // Check for if pause button was pressed
 	if (Input.GetKeyDown(KeyCode.P))
 	// Check if the game is already over
-		if (bWin != true)
+		if (bWin != true) {
 			bPause = !bPause;
+		}
 }
 
 // Print info

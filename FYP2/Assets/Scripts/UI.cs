@@ -11,6 +11,7 @@ public class UI : MonoBehaviour {
 // List Reference
 	[SerializeField] private List<Text> lText;
 	[SerializeField] private List<Item> lItem;
+	[SerializeField] private List<Transform> lTransform;
 
 	private void FixedUpdate() {
     // Check if game is paused
@@ -37,6 +38,11 @@ public class UI : MonoBehaviour {
 		// Raft
 			lText.ToArray()[5].GetComponent<Text>().text = "Raft: " + lItem.Find(i => i.sName == "Raft").iCount;
 		}
-	}
 
+	// Update Pop-up
+		lTransform.ToArray()[0].gameObject.SetActive(rCore.bWin);
+	// Check if game is won
+		if (rCore.bWin != true)
+			lTransform.ToArray()[1].gameObject.SetActive(rCore.bPause);
+	}
 }

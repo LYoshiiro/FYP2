@@ -7,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour {
     [SerializeField] private Core rCore;
     [SerializeField] private PlayerCamera rPlayerCamera;
 	[SerializeField] private ItemManager rItemManager;
+	[SerializeField] private MapGenerator rMapGenerator;
 
 // Facing Direction
 	private RaycastHit hit;
@@ -14,6 +15,7 @@ public class PlayerInteraction : MonoBehaviour {
 
 // Interaction
     private float fBounceTime;
+    private float fBouncePress;
 
     private void FixedUpdate() {
  // Check if game is paused
@@ -68,9 +70,24 @@ public class PlayerInteraction : MonoBehaviour {
 
 			// When RMB is pressed
 				if (Input.GetMouseButtonDown(1)) {
-					
+				// Check specifically if its the water that is being interacted with.
+					if (hit.transform.GetComponent<WaterMotion>() != null) {
+					// Item Manager Check
+						if (rItemManager != null) {
+						// Check for Raft
+							if (rItemManager.GetItems().Find(i => i.sName == "Raft").iCount > 0) {
+							// Place Placeholder
+								rMapGenerator.SpawnRaft(hit.point);
+							// Win Game
+								rCore.bWin = true;
+							// Pause Game
+								rCore.bPause = true;
+							}
+						}
+					}
 				}
+
             }
         }
-    }
+	}
 }
