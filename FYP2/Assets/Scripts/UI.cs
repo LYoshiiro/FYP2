@@ -37,7 +37,15 @@ public class UI : MonoBehaviour {
 
 		// Raft
 			lText.ToArray()[5].GetComponent<Text>().text = "Raft: " + lItem.Find(i => i.sName == "Raft").iCount;
-		}
+	
+	// Clothes
+		// Hat
+			lText.ToArray()[6].GetComponent<Text>().text = "Cotton Hat: " + lItem.Find(i => i.sName == "Cotton Hat").iCount;
+		// Shirt
+			lText.ToArray()[7].GetComponent<Text>().text = "Cotton Shirt: " + lItem.Find(i => i.sName == "Cotton Shirt").iCount;
+		// Pant
+			lText.ToArray()[8].GetComponent<Text>().text = "Cotton PAnt: " + lItem.Find(i => i.sName == "Cotton Pant").iCount;
+			}
 
 	// Update Pop-up
 		lTransform.ToArray()[0].gameObject.SetActive(rCore.bWin);

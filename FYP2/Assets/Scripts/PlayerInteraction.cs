@@ -14,8 +14,14 @@ public class PlayerInteraction : MonoBehaviour {
 	private Ray ray;
 
 // Interaction
-    private float fBounceTime;
+    public float fBounceTime;
     private float fBouncePress;
+	public bool bProgressBar;
+
+	private void Start() {
+		// Initialize Progress Bar State
+		bProgressBar = false;
+	}
 
     private void FixedUpdate() {
  // Check if game is paused
@@ -45,16 +51,19 @@ public class PlayerInteraction : MonoBehaviour {
                             // rCore.Pnt(Vector3.Magnitude((transform.position - hit.transform.position)));
 
 						// Check if the distance between the player and the environment object is 'close'
-							if (Vector3.Magnitude(transform.position - hit.transform.position) < 1.25f) {
+							if (Vector3.Magnitude(transform.position - hit.transform.position) < 1.3f) {
 							// Attach a reference transform to the hit object
 								Transform tGather = hit.transform;
 							// Check if the Item Manager is working or not
 								if (rItemManager != null) {
-									// Parse the material just gathered and update the datalist
+								// Parse the material just gathered and update the datalist
 									rItemManager.Gather(tGather.GetComponentInParent<Environment>().sNode);
 
-									// Remove environment object
+								// Remove environment object
 									tGather.GetComponentInParent<Environment>().Despawn();
+
+								// Reset Progress Bar
+									bProgressBar = false;
 								}
 								else
 									rCore.Pnt("Missing Item Manager!");
@@ -63,9 +72,22 @@ public class PlayerInteraction : MonoBehaviour {
 					// Reset Bounce Timer
 						fBounceTime = 0.0f;
 					}
+
 					else
 					// Update Hold Time
 						fBounceTime += Time.deltaTime;
+
+					// Display Progress Bar
+					if ((hit.transform.GetComponentInParent<Environment>() != null) && (Vector3.Magnitude(transform.position - hit.transform.position) < 1.3f))
+						bProgressBar = true;
+				}
+
+			// When LMB is released
+				if (Input.GetMouseButtonUp(0)) {
+				// Reset Bounce Timer
+					fBounceTime = 0.0f;
+				// Reset Progress Bar
+					bProgressBar = false;
 				}
 
 			// When RMB is pressed
