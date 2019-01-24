@@ -2333,6 +2333,7 @@ MonoBehaviour:
   - {fileID: 1801059203}
   - {fileID: 877350100}
   - {fileID: 342517046}
+  v3Offset: {x: 0, y: -50, z: 0}
 --- !u!1 &1491905656
 GameObject:
   m_ObjectHideFlags: 0
