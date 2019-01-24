@@ -12,13 +12,22 @@ public class ProgressBar : MonoBehaviour {
 	[SerializeField] private float fProgress;
 	[SerializeField] private List<Image> lImages;
 
+// Alignment
+	private Vector2 v2Position;
+
 	private void Start() {
+	// Parse UI placement
+	v2Position = transform.position;
+
 	// Set all Images to inactive first
 		foreach (Image img in lImages)
 			img.gameObject.SetActive(false);
 	}
 
-	private void Update() {
+	private void LateUpdate() {
+	// Move placement to follow mouse
+		transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y)+ v2Position;
+
 	// Set active only when mouse is held down
 		foreach (Image img in lImages)
 			img.gameObject.SetActive(rPlayer.bProgressBar);
