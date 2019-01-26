@@ -6,3 +6,6 @@
 5,0,Cotton Hat,Blank
 6,0,Cotton Shirt,Blank
 7,0,Cotton Pant,Blank
+8,0,Hoe,Blank
+9,0,Axe,Blank
+10,0,Pickaxe,Blank
