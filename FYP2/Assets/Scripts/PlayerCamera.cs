@@ -15,6 +15,8 @@ public class PlayerCamera : MonoBehaviour {
 	[SerializeField] private float fCurrentY;
 	[SerializeField] private float fSensitivityX;
 	[SerializeField] private float fSensitivityY;
+	[SerializeField] private float fMinY;
+	[SerializeField] private float fMaxY;
 
 // Manupulators
 	private Vector2 v3Start;
@@ -34,6 +36,8 @@ public class PlayerCamera : MonoBehaviour {
 			if (Input.GetMouseButton(1)) {
 				fCurrentX += Input.GetAxis("Mouse X") * fSensitivityX;
 				fCurrentY += Input.GetAxis("Mouse Y") * fSensitivityX;
+
+				fCurrentY = Mathf.Clamp(fCurrentY, fMinY, fMaxY);
 			}
 		}
 	}

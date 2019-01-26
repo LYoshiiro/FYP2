@@ -1230,6 +1230,8 @@ MonoBehaviour:
   fCurrentY: 30
   fSensitivityX: 5
   fSensitivityY: 5
+  fMinY: 0
+  fMaxY: 80
 --- !u!81 &717632584
 AudioListener:
   m_ObjectHideFlags: 0
