@@ -38,7 +38,8 @@ public class PlayerInteraction : MonoBehaviour {
 				v3Look.y = 0;
 				Quaternion qRotation = Quaternion.LookRotation(v3Look);
 			// Turn Player to the cursor point
-				transform.GetChild(0).transform.rotation = qRotation;
+				// transform.GetChild(0).transform.rotation = qRotation;
+				// transform.rotation = qRotation;
 
 			// When LMB is held down
 				if (Input.GetMouseButton(0)) {

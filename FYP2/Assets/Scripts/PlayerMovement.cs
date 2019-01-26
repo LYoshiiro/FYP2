@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private Core rCore;
     [SerializeField] private MapGenerator rMap;
 	[SerializeField] private Rigidbody rBody;
+    [SerializeField] private Camera rCamera;
 
 // Movement
     [SerializeField] private string sMoveX;
@@ -26,7 +27,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void Start() {
 	// Set Initial Variables
-        // rBody = transform.GetComponent<Rigidbody>();
         bInAir = false;
     // Set Player to ignore water collision
         Physics.IgnoreCollision(tWater.GetComponent<Collider>(), GetComponentInChildren<Collider>());
@@ -49,8 +49,9 @@ public class PlayerMovement : MonoBehaviour {
             else                             bInAir = false;
         
         // Apply Axis Movement Input
-            Vector3 v3Move = new Vector3(-fMoveX, 0.0f, -fMoveZ) * (Time.deltaTime * fSpeed);
-            transform.Translate(v3Move, Space.World);
+            Vector3 v3Move = new Vector3(fMoveX, 0, fMoveZ) * (Time.deltaTime * fSpeed);
+            transform.forward = new Vector3(rCamera.transform.forward.x, 0, rCamera.transform.forward.z);
+            transform.Translate(v3Move, Space.Self);
 
         // Apply Jump Movement Input
             if (bJump) {
@@ -79,7 +80,7 @@ public class PlayerMovement : MonoBehaviour {
 				v3Last.z = Mathf.Ceil(v3Last.z)  - 0.5f;
 
         // Check if the Player is on the Base Plate or not
-			if (transform.position.y < (tWater.position.y - rCore.BoundLengths(transform.GetChild(0)).y))	bOutofBounds = true;
+			if (transform.position.y < (tWater.position.y - rCore.BoundLengths(transform).y))	bOutofBounds = true;
 			else																				            bOutofBounds = false; 
         
         // Set Player back on the ground to the last estimated point
