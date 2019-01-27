@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4165406341350596}
   - component: {fileID: 33639526272426596}
   - component: {fileID: 23075505156216630}
+  - component: {fileID: 114373574684644510}
   m_Layer: 0
   m_Name: Pickaxe
   m_TagString: Untagged
@@ -84,3 +85,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1998428558918270}
   m_Mesh: {fileID: 4300000, guid: ecf69de53d05c9943aa3dd31c3f47c81, type: 3}
+--- !u!114 &114373574684644510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1998428558918270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c2c753e4c398949b745604fd8b8a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fShift: 0

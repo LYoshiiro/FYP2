@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4769823557184170}
   - component: {fileID: 33843683469777932}
   - component: {fileID: 23073738285549952}
+  - component: {fileID: 114746496641450568}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1822525630666736}
   m_Mesh: {fileID: 4300000, guid: 516effccc9cad924b91b11b0497c58fb, type: 3}
+--- !u!114 &114746496641450568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1822525630666736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5c2c753e4c398949b745604fd8b8a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fShift: 0
