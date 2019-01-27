@@ -114,7 +114,7 @@ public class MapGenerator : MonoBehaviour {
 			// Assign Parent Object
 				tTree.parent = tEnvironmentHolder;
 			// Parse Reference Core
-				tTree.GetComponent<Environment>().SetData(rCore, "Wood");
+				tTree.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Wood");
 			// Update Tile
 				tPlacement.GetComponent<Tile>().SetTile(rCore);
 			}
@@ -139,7 +139,7 @@ public class MapGenerator : MonoBehaviour {
 			// Assign Parent Object
 				tStone.parent = tEnvironmentHolder;
 			// Parse Reference Core
-				tStone.GetComponent<Environment>().SetData(rCore, "Stone");
+				tStone.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Stone");
 			// Update Tile
 				tPlacement.GetComponent<Tile>().SetTile(rCore);
 			}
@@ -164,7 +164,7 @@ public class MapGenerator : MonoBehaviour {
 			// Assign Parent Object
 				tBerry.parent = tEnvironmentHolder;
 			// Parse Reference Core
-				tBerry.GetComponent<Environment>().SetData(rCore, "Berry");
+				tBerry.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Berry");
 			// Update Tile
 				tPlacement.GetComponent<Tile>().SetTile(rCore);
 			}
@@ -189,7 +189,7 @@ public class MapGenerator : MonoBehaviour {
 			// Assign Parent Object
 				tCotton.parent = tEnvironmentHolder;
 			// Parse Reference Core
-				tCotton.GetComponent<Environment>().SetData(rCore, "Cotton");
+				tCotton.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Cotton");
 			// Update Tile
 				tPlacement.GetComponent<Tile>().SetTile(rCore);
 			}
