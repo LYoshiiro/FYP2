@@ -23,12 +23,14 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	private void LateUpdate() {
+	// Check if the Dictionary contains instance
 		foreach (Item itm in rItemManager.GetItems()) {
-		// Check if the Dictionary contains instance
 			if (!dItems.ContainsKey(itm.iID))
+			// Add in new item
 				dItems.Add(itm.iID, itm);
 		}
 
+	// Update Menu when player interacts
 		if (rPlayer.bProgressBar)
 			bMenuChange = true;
 
@@ -43,11 +45,14 @@ public class PlayerInventory : MonoBehaviour {
 			// Create new Menu list
 				for (int i = 0; i < dItems.Count; i++) {
 					GameObject gItem = Instantiate(tItem, tContent) as GameObject;
+				// Give Instance a name
 					gItem.name = dItems[i].sName;
+				// Update Visual Details
 					gItem.transform.GetChild(0).GetComponent<Text>().text = "Name: " + dItems[i].sName;
 					gItem.transform.GetChild(1).GetComponent<Text>().text = "x" + dItems[i].iCount;
 					gItem.transform.GetChild(2).GetComponent<Text>().text = dItems[i].sNote;
 				}
+			// Hook for Visual Data Update
 				bMenuChange = false;
 			}
 		// If key is called

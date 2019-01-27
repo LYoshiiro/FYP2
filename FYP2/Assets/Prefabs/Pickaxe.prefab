@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33639526272426596}
   - component: {fileID: 23075505156216630}
   m_Layer: 0
-  m_Name: Hoe
+  m_Name: Pickaxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

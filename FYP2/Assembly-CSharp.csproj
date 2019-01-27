@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\ProgressBar.cs" />
      <Compile Include="Assets\Scripts\SkillSystem.cs" />
      <Compile Include="Assets\Scripts\Tile.cs" />
+     <Compile Include="Assets\Scripts\ToolAnimation.cs" />
      <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\Scripts\WaterMotion.cs" />
  <Reference Include="UnityEditor.StandardEvents">

@@ -790,6 +790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCore: {fileID: 1187164737}
+  rPlayer: {fileID: 929006228}
   rItemManager: {fileID: 1187164738}
   tItem: {fileID: 1998910374029542, guid: 418bc15625684904284c6a334dac666d, type: 2}
   tContent: {fileID: 1649356051}
@@ -1871,6 +1872,7 @@ MonoBehaviour:
   rMapGenerator: {fileID: 1733594383}
   fBounceTime: 0
   bProgressBar: 0
+  bTool: 0
 --- !u!114 &929006229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2183,6 +2185,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCore: {fileID: 1187164737}
+  rPlayer: {fileID: 929006228}
+  lTools:
+  - {fileID: 4769823557184170, guid: 2b03a100b4bbed04f830df66ba70fa4d, type: 2}
+  - {fileID: 4941977659297162, guid: 2cadaec8bcf458d4e9ec8b75ba6bcbc3, type: 2}
+  - {fileID: 4165406341350596, guid: 92be56690b69d4a46b1a906124331a18, type: 2}
 --- !u!1 &1206344944
 GameObject:
   m_ObjectHideFlags: 0

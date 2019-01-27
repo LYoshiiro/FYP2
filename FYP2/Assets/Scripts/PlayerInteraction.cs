@@ -17,10 +17,12 @@ public class PlayerInteraction : MonoBehaviour {
     public float fBounceTime;
     private float fBouncePress;
 	public bool bProgressBar;
+	public bool bTool;
 
 	private void Start() {
-		// Initialize Progress Bar State
+	// Set Initial Values
 		bProgressBar = false;
+		bTool = false;
 	}
 
     private void FixedUpdate() {
@@ -58,6 +60,9 @@ public class PlayerInteraction : MonoBehaviour {
 
 								// Reset Progress Bar
 									bProgressBar = false;
+								// Reset Tool
+									rItemManager.DespawnTool();
+									bTool = false;
 								}
 								else
 									rCore.Pnt("Missing Item Manager!");
@@ -72,8 +77,14 @@ public class PlayerInteraction : MonoBehaviour {
 						fBounceTime += Time.deltaTime;
 
 					// Display Progress Bar
-					if ((hit.transform.GetComponentInParent<Environment>() != null) && (Vector3.Magnitude(transform.position - hit.transform.position) < 1.3f))
+					if ((hit.transform.GetComponentInParent<Environment>() != null) && (Vector3.Magnitude(transform.position - hit.transform.position) < 1.3f)) {
 						bProgressBar = true;
+					// Spawn Tool Once
+						if (bTool == false) {
+							rItemManager.SpawnTool(hit.transform.GetComponentInParent<Environment>().sNode);
+							bTool = true;
+						}
+					}
 				}
 
 			// When LMB is released
@@ -82,6 +93,9 @@ public class PlayerInteraction : MonoBehaviour {
 					fBounceTime = 0.0f;
 				// Reset Progress Bar
 					bProgressBar = false;
+				// Reset Tool
+					bTool = false;
+					rItemManager.DespawnTool();
 				}
 
 			// When RMB is pressed

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour {
 // Class Reference
 	[SerializeField] private Core rCore;
+	[SerializeField] private PlayerInteraction rPlayer;
 
 // Parse Values
 	private string sFile;
@@ -12,6 +13,9 @@ public class ItemManager : MonoBehaviour {
 
 // Management List
 	private List<Item> lItem;
+
+// Tools Prefab
+	[SerializeField] private List<Transform> lTools;
 
 	private void Start() {
 	// Create a new Item list
@@ -44,5 +48,24 @@ public class ItemManager : MonoBehaviour {
 // Parse item list
 	public List<Item> GetItems() {
 		return lItem;
+	}
+
+// Spawn Tool based on value
+	public void SpawnTool(string type) {
+	// Axe
+		if (type == "Wood") 		{ Transform tAxe = Instantiate(lTools.ToArray()[0], rPlayer.transform) as Transform; tAxe.name = "Axe"; }
+	// Pickaxe
+		else if (type == "Stone") 	{ Transform tAxe = Instantiate(lTools.ToArray()[2], rPlayer.transform) as Transform; tAxe.name = "Pickaxe"; }
+	// Hoe
+		else if (type == "Cotton") 	{ Transform tAxe = Instantiate(lTools.ToArray()[1], rPlayer.transform) as Transform; tAxe.name = "Hoe"; }
+	// Hoe
+		else if (type == "Berry") 	{ Transform tAxe = Instantiate(lTools.ToArray()[1], rPlayer.transform) as Transform; tAxe.name = "Hoe"; }
+	}
+
+// Despawn Tool
+	public void DespawnTool() {
+		rCore.Pnt("WH");
+		foreach (Transform child in rPlayer.transform)
+			GameObject.DestroyImmediate(child.gameObject);
 	}
 }
