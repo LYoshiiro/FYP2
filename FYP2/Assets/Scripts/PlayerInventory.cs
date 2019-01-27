@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviour {
 // Class Reference
 	[SerializeField] private Core rCore;
+	[SerializeField] private PlayerInteraction rPlayer;
 	[SerializeField] private ItemManager rItemManager;
 
 // Menu Variables
@@ -24,22 +25,17 @@ public class PlayerInventory : MonoBehaviour {
 	private void LateUpdate() {
 		foreach (Item itm in rItemManager.GetItems()) {
 		// Check if the Dictionary contains instance
-			if (!dItems.ContainsKey(itm.iID)) {
+			if (!dItems.ContainsKey(itm.iID))
 				dItems.Add(itm.iID, itm);
-			}
-		// Check if the count matches
-			else if (dItems.ContainsKey(itm.iID)) {
-				if (dItems[itm.iID].iCount != itm.iCount) {
-					dItems[itm.iID] = itm;
-					bMenuChange = true;
-				}
-			}
 		}
+
+		if (rPlayer.bProgressBar)
+			bMenuChange = true;
 
     // Check if game is paused
         if (rCore.bPause != true) {
 		// Only Update if there is changes
-			if (bMenuChange) {
+			if (bMenuChange == true) {
 			// Destroy all children first
 				foreach (Transform child in tContent)
 					GameObject.Destroy(child.gameObject);
@@ -52,11 +48,11 @@ public class PlayerInventory : MonoBehaviour {
 					gItem.transform.GetChild(1).GetComponent<Text>().text = "x" + dItems[i].iCount;
 					gItem.transform.GetChild(2).GetComponent<Text>().text = dItems[i].sNote;
 				}
-
-			// If key is called
-				if (Input.GetKeyDown(KeyCode.I))
-					tMenu.gameObject.SetActive(!tMenu.gameObject.activeSelf);
+				bMenuChange = false;
 			}
+		// If key is called
+			if (Input.GetKeyDown(KeyCode.I))
+				tMenu.gameObject.SetActive(!tMenu.gameObject.activeSelf);
 		}
 	}
 }

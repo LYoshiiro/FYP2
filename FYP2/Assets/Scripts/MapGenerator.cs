@@ -18,7 +18,7 @@ public class MapGenerator : MonoBehaviour {
 	[SerializeField] [Range(0, 1)] private float fDownscale;
 	
 // Map Value Origins
-	private int[] iOrigins = new int[4]; // Has to be declared here due to L85
+	private int[] iOrigins = new int[4]; // Has to be declared here due to L83
 	private int iHalf;
 
 // Map Value Limiters
