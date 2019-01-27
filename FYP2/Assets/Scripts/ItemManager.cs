@@ -31,7 +31,10 @@ public class ItemManager : MonoBehaviour {
 		for (int i = 0; i < sAry.Length; i++) {
 		// Split the take in line as seperated values
 			string[] sSplit = sAry[i].Split(',');
-			lItem.Add(new Item(int.Parse(sSplit[0]), int.Parse(sSplit[1]), sSplit[2], sSplit[3]));
+		// Assess if the item can be used
+			bool bEat = (sSplit[2] == "yes") ? true : false;
+			bool bUse = (sSplit[3] == "yes") ? true : false;
+			lItem.Add(new Item(int.Parse(sSplit[0]), int.Parse(sSplit[1]), bEat, bUse, sSplit[4], sSplit[5]));
 		}
 	}
 
@@ -64,7 +67,6 @@ public class ItemManager : MonoBehaviour {
 
 // Despawn Tool
 	public void DespawnTool() {
-		rCore.Pnt("WH");
 		foreach (Transform child in rPlayer.transform)
 			GameObject.DestroyImmediate(child.gameObject);
 	}

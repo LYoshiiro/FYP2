@@ -795,6 +795,7 @@ MonoBehaviour:
   tItem: {fileID: 1998910374029542, guid: 418bc15625684904284c6a334dac666d, type: 2}
   tContent: {fileID: 1649356051}
   tMenu: {fileID: 1429292815}
+  bMenuChange: 0
 --- !u!1 &502850027
 GameObject:
   m_ObjectHideFlags: 0

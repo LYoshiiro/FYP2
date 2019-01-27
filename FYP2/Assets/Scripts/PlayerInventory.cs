@@ -14,7 +14,7 @@ public class PlayerInventory : MonoBehaviour {
 	[SerializeField] private Transform tContent;
 	[SerializeField] private Transform tMenu;
 	private Dictionary<int, Item> dItems;
-	private bool bMenuChange;
+	public bool bMenuChange;
 
 	private void Start() {
 	// Set Initial Values
@@ -51,13 +51,26 @@ public class PlayerInventory : MonoBehaviour {
 					gItem.transform.GetChild(0).GetComponent<Text>().text = "Name: " + dItems[i].sName;
 					gItem.transform.GetChild(1).GetComponent<Text>().text = "x" + dItems[i].iCount;
 					gItem.transform.GetChild(2).GetComponent<Text>().text = dItems[i].sNote;
+				// Check usability before setting button
+					gItem.transform.GetChild(3).gameObject.SetActive(dItems[i].bUse);
+				// Assign Reference Function
+					gItem.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(CloseMenu);
+				// Check edibility before setting button
+					gItem.transform.GetChild(4).gameObject.SetActive(dItems[i].bEat);
+				// Assign Reference Function
+					gItem.transform.GetChild(4).GetComponent<ConsumeItem>().SetReference(rCore, dItems[i], GetComponent<PlayerInventory>());
 				}
 			// Hook for Visual Data Update
 				bMenuChange = false;
 			}
 		// If key is called
 			if (Input.GetKeyDown(KeyCode.I))
-				tMenu.gameObject.SetActive(!tMenu.gameObject.activeSelf);
+				CloseMenu();
 		}
+	}
+
+// Close the Inventory Menu
+	private void CloseMenu() {
+		tMenu.gameObject.SetActive(!tMenu.gameObject.activeSelf);
 	}
 }
