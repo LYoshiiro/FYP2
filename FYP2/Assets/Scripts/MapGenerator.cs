@@ -22,12 +22,16 @@ public class MapGenerator : MonoBehaviour {
 	private int iHalf;
 
 // Map Value Limiters
-	private int iTree;
-	private int iStone;
-	private int iBerry;
-	private int iCotton;
+	[SerializeField] private int iTree;
+	[SerializeField] private int iStone;
+	[SerializeField] private int iBerry;
+	[SerializeField] private int iCotton;
 	private int iTile;
 	private List<int> lSpawnOffset;
+	private bool bInitial;
+
+// Respawner
+	[SerializeField] private int iNext;
 
 	private void Start() {
 	// Set Initial Variables
@@ -37,6 +41,9 @@ public class MapGenerator : MonoBehaviour {
 		iCotton = 0;
 		iTile = 0;
 		lSpawnOffset = new List<int>();
+		bInitial = false;
+		
+		iNext = 0;
 
 	// Assign caller string for Holder Object(s)
 		string sMapHolder = "Map Holder";
@@ -85,7 +92,18 @@ public class MapGenerator : MonoBehaviour {
 
 	private void FixedUpdate() {
 	// Generate Environment Objects
-		GenerateEnvironment();
+		if (bInitial == false) {
+			GenerateEnvironment();
+			bInitial = true;
+		}
+		else {
+		// Generate Next time the respawner will kick in
+			if (iNext <= rCore.iDays) {
+				iNext = Random.Range(3, 6) + rCore.iDays;
+				Spawner();
+				rCore.Pnt("Respawner");
+			}
+		}
 	}
 
 // Generate Environment Objects
@@ -94,7 +112,7 @@ public class MapGenerator : MonoBehaviour {
 		if (tMapHolder != null) {
 		// Check if limit is reached
 		// Tree =========================================================
-			if (iTree < rValue.iTree) {
+			while (iTree < rValue.iTree) {
 			// Update limiter
 				iTree++;
 			// random generate position of Environment
@@ -119,7 +137,7 @@ public class MapGenerator : MonoBehaviour {
 				tPlacement.GetComponent<Tile>().SetTile(rCore);
 			}
 		// Stone =========================================================
-			else if (iStone < rValue.iStone) {
+			while (iStone < rValue.iStone) {
 			// Update limiter
 				iStone++;
 			// random generate position of Environment
@@ -144,7 +162,7 @@ public class MapGenerator : MonoBehaviour {
 				tPlacement.GetComponent<Tile>().SetTile(rCore);
 			}
 		// Berry =========================================================
-			else if (iBerry < rValue.iBerry) {
+			while (iBerry < rValue.iBerry) {
 			// Update limiter
 				iBerry++;
 			// random generate position of Environment
@@ -169,7 +187,7 @@ public class MapGenerator : MonoBehaviour {
 				tPlacement.GetComponent<Tile>().SetTile(rCore);
 			}
 		// Berry =========================================================
-			else if (iCotton < rValue.iCotton) {
+			while (iCotton < rValue.iCotton) {
 			// Update limiter
 				iCotton++;
 			// random generate position of Environment
@@ -196,6 +214,103 @@ public class MapGenerator : MonoBehaviour {
 		}
 	}
 
+// Spawn Environment Objects
+	public void Spawner() {
+		// Check the holder for avaliability
+		if (tMapHolder != null) {
+		// RNG Roll for spawn
+			if (Random.Range(0, 11) > 6) {
+		// Check if limit is reached
+			// Tree =========================================================
+				if (iTree < rValue.iTree) {
+				// Update limiter
+					iTree++;
+				// random generate position of Environment
+					int iChild = Random.Range(1, tMapHolder.childCount);
+				// Loop so that the origin doesn't get spawned on and that the tile that it is being placed on doesnt isnt already obstructed
+					while (iOrigins.Contains(iChild) == true || tMapHolder.GetChild(iChild).GetComponent<Tile>().bObstructed == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+				// Get Tile of randomized location
+					Transform tPlacement = tMapHolder.GetChild(iChild).transform;
+				// Instantiate new Tree
+					Transform tTree = Instantiate(rValue.lPrefabs.ToArray()[1], tPlacement.position, Quaternion.identity) as Transform;
+				// Assign Parent Object
+					tTree.parent = tEnvironmentHolder;
+				// Parse Reference Core
+					tTree.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Wood");
+				// Update Tile
+					tPlacement.GetComponent<Tile>().SetTile(rCore);
+				}
+			// Stone =========================================================
+				else if (iStone < rValue.iStone) {
+				// Update limiter
+					iStone++;
+				// random generate position of Environment
+					int iChild = Random.Range(1, tMapHolder.childCount);
+				// Loop so that the origin doesn't get spawned on and that the tile that it is being placed on doesnt isnt already obstructed
+					while (iOrigins.Contains(iChild) == true || tMapHolder.GetChild(iChild).GetComponent<Tile>().bObstructed == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+				// Update Spawn Offset
+					lSpawnOffset.Add(iChild);
+				// Get Tile of randomized location
+					Transform tPlacement = tMapHolder.GetChild(iChild).transform;
+				// Instantiate new Stone
+					Transform tStone = Instantiate(rValue.lPrefabs.ToArray()[2], tPlacement.position, Quaternion.identity) as Transform;
+				// Assign Parent Object
+					tStone.parent = tEnvironmentHolder;
+				// Parse Reference Core
+					tStone.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Stone");
+				// Update Tile
+					tPlacement.GetComponent<Tile>().SetTile(rCore);
+				}
+			// Berry =========================================================
+				else if (iBerry < rValue.iBerry) {
+				// Update limiter
+					iBerry++;
+				// random generate position of Environment
+					int iChild = Random.Range(1, tMapHolder.childCount);
+				// Loop so that the origin doesn't get spawned on and that the tile that it is being placed on doesnt isnt already obstructed
+					while (iOrigins.Contains(iChild) == true || tMapHolder.GetChild(iChild).GetComponent<Tile>().bObstructed == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+				// Update Spawn Offset
+					lSpawnOffset.Add(iChild);
+				// Get Tile of randomized location
+					Transform tPlacement = tMapHolder.GetChild(iChild).transform;
+				// Instantiate new Berry
+					Transform tBerry = Instantiate(rValue.lPrefabs.ToArray()[3], tPlacement.position, Quaternion.identity) as Transform;
+				// Assign Parent Object
+					tBerry.parent = tEnvironmentHolder;
+				// Parse Reference Core
+					tBerry.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Berry");
+				// Update Tile
+					tPlacement.GetComponent<Tile>().SetTile(rCore);
+				}
+			// Berry =========================================================
+				else if (iCotton < rValue.iCotton) {
+				// Update limiter
+					iCotton++;
+				// random generate position of Environment
+					int iChild = Random.Range(1, tMapHolder.childCount);
+				// Loop so that the origin doesn't get spawned on and that the tile that it is being placed on doesnt isnt already obstructed
+					while (iOrigins.Contains(iChild) == true || tMapHolder.GetChild(iChild).GetComponent<Tile>().bObstructed == true)
+						iChild = Random.Range(1, tMapHolder.childCount);
+				// Update Spawn Offset
+					lSpawnOffset.Add(iChild);
+				// Get Tile of randomized location
+					Transform tPlacement = tMapHolder.GetChild(iChild).transform;
+				// Instantiate new Cotton
+					Transform tCotton = Instantiate(rValue.lPrefabs.ToArray()[4], tPlacement.position, Quaternion.identity) as Transform;
+				// Assign Parent Object
+					tCotton.parent = tEnvironmentHolder;
+				// Parse Reference Core
+					tCotton.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Cotton");
+				// Update Tile
+					tPlacement.GetComponent<Tile>().SetTile(rCore);
+				}
+			}
+		}
+	}
+
 // Get the vector size of the island generated
 	public Vector2 GetIslandSize() {
 		return v2Size;
@@ -210,12 +325,27 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 // Spawn Environment Tile
-	public Transform SpawnEnvironment(string node) {
-		if (node == "Berry")
-			return rValue.lPrefabs.ToArray()[3];
-		if (node == "Cotton")
-			return rValue.lPrefabs.ToArray()[4];
-		return null;
+	public void SpawnEnvironment(string node, Transform parent) {
+		if (node == "Berry") {
+			// Instantiate new Berry
+				Transform tBerry = Instantiate(rValue.lPrefabs.ToArray()[3], parent) as Transform;
+			// Assign Parent Object
+				tBerry.parent = tEnvironmentHolder;
+			// Parse Reference Core
+				tBerry.GetComponent<Environment>().SetData(rCore, parent.GetComponent<Tile>(), "Berry");
+			// Update Tile
+				parent.GetComponent<Tile>().SetTile(rCore);
+		}
+		if (node == "Cotton") {
+			// Instantiate new Cotton
+				Transform tCotton = Instantiate(rValue.lPrefabs.ToArray()[4], parent) as Transform;
+			// Assign Parent Object
+				tCotton.parent = tEnvironmentHolder;
+			// Parse Reference Core
+				tCotton.GetComponent<Environment>().SetData(rCore, parent.GetComponent<Tile>(), "Cotton");
+			// Update Tile
+				parent.GetComponent<Tile>().SetTile(rCore);
+		}
 	}
 
 // Get the holder transforms
@@ -226,5 +356,21 @@ public class MapGenerator : MonoBehaviour {
 			case 2: return tPlacementHolder;
 			default: rCore.Pnt("Missing Information: Missing Holder Type!"); return null;
 		}
+	}
+
+// Offset the spawn values for map generation
+	public void GatherOffset(string type) {
+	// Tree
+		if (type == "Wood")
+			iTree -= 1;
+	// Stone
+		if (type == "Stone")
+			iStone -= 1;
+	// Berry Bush
+		if (type == "Berry")
+			iBerry -= 1;
+	// Cotton Bush
+		if (type == "Cotton")
+			iCotton -= 1;
 	}
 }

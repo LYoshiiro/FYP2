@@ -48,11 +48,9 @@ public class PlayerInteraction : MonoBehaviour {
 					// Check if the Object hit was a tile
 						if (hit.transform.GetComponentInParent<Tile>() != null) {
 						// Check if the tile is obstructed
-							if (hit.transform.GetComponentInParent<Tile>().isObstructed == false) {
+							if (hit.transform.GetComponentInParent<Tile>().bObstructed == false) {
 							// Instantiate new placable Environment object
-								Transform tPlace = Instantiate(rMapGenerator.SpawnEnvironment(sPlacing), hit.transform.parent.position, Quaternion.identity) as Transform;
-							// Assign Parent Transform
-								tPlace.parent = rMapGenerator.GetHolder(1);
+								rMapGenerator.SpawnEnvironment(sPlacing, hit.transform.parent);
 							// Search through the array to find instance
 								for (int k = 0; k < rItemManager.GetItems().ToArray().Length; k++) {
 									if (rItemManager.GetItems().ToArray()[k].sName == sPlacing) {

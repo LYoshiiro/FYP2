@@ -32,7 +32,7 @@ public class Core : MonoBehaviour {
 		// Move Time as Game Progresses
 			fTime += Time.deltaTime;
 		// 1 Full Cycle (5mins)
-			if (fTime > 3000.0f) {
+			if (fTime > 150.0f) {
 			// Update Day
 				iDays += 1;
 			// Reset Time

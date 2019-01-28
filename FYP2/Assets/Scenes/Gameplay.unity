@@ -385,7 +385,7 @@ MonoBehaviour:
   rCore: {fileID: 1187164737}
   rPlayerInventory: {fileID: 500944220}
   rItemManager: {fileID: 1187164738}
-  rMenu: {fileID: 805664141}
+  tMenu: {fileID: 805664141}
 --- !u!1 &295522784
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,6 +651,7 @@ MonoBehaviour:
   rCore: {fileID: 1187164737}
   rPlayerInteraction: {fileID: 929006228}
   rItemManager: {fileID: 1187164738}
+  rCrafting: {fileID: 267993860}
   tItem: {fileID: 1998910374029542, guid: 418bc15625684904284c6a334dac666d, type: 2}
   tContent: {fileID: 1649356051}
   tMenu: {fileID: 1429292815}
@@ -1983,6 +1984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rCore: {fileID: 1187164737}
   rPlayer: {fileID: 929006228}
+  rMapGenerator: {fileID: 1733594383}
   lTools:
   - {fileID: 4769823557184170, guid: 2b03a100b4bbed04f830df66ba70fa4d, type: 2}
   - {fileID: 4941977659297162, guid: 2cadaec8bcf458d4e9ec8b75ba6bcbc3, type: 2}
@@ -3473,6 +3475,11 @@ MonoBehaviour:
   tPlacementHolder: {fileID: 0}
   v2Size: {x: 10, y: 10}
   fDownscale: 0.01
+  iTree: 0
+  iStone: 0
+  iBerry: 0
+  iCotton: 0
+  iNext: 0
 --- !u!1 &1769068547
 GameObject:
   m_ObjectHideFlags: 0

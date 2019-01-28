@@ -8,6 +8,7 @@ public class PlayerInventory : MonoBehaviour {
 	[SerializeField] private Core rCore;
 	[SerializeField] private PlayerInteraction rPlayerInteraction;
 	[SerializeField] private ItemManager rItemManager;
+	[SerializeField] private Crafting rCrafting;
 
 // Menu Variables
 	[SerializeField] private GameObject tItem;
@@ -51,8 +52,11 @@ public class PlayerInventory : MonoBehaviour {
 				bMenuChange = false;
 			}
 		// If key is called
-			if (Input.GetKeyDown(KeyCode.I))
+			if (Input.GetKeyDown(KeyCode.I)) {
+			// Close other Menus
+				rCrafting.CloseMenu();
 				tMenu.gameObject.SetActive(!tMenu.gameObject.activeSelf);
+			}
 		}
 	}
 

@@ -7,15 +7,15 @@ public class Tile : MonoBehaviour {
 	[SerializeField] private Core rCore;
 
 // Interaction Data
-	[SerializeField] public bool isObstructed;
+	[SerializeField] public bool bObstructed;
 
 	private void Start() {
-		isObstructed = false;
+		bObstructed = false;
 	}
 
 // Set the Core reference and set object to obstructed / Function called when environment is spawned on it
 	public void SetTile(Core core) {
 		rCore = core;
-		isObstructed = true;
+		bObstructed = true;
 	}
 }

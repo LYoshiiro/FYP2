@@ -6,6 +6,7 @@ public class ItemManager : MonoBehaviour {
 // Class Reference
 	[SerializeField] private Core rCore;
 	[SerializeField] private PlayerInteraction rPlayer;
+	[SerializeField] private MapGenerator rMapGenerator;
 
 // Parse Values
 	private string sFile;
@@ -42,6 +43,8 @@ public class ItemManager : MonoBehaviour {
 	public void Gather(string name) {
 	// Get Reference
 		Item rGather = lItem.Find(i => i.sName == name);
+	// Offset Generated Values
+		rMapGenerator.GatherOffset(name);
 	// Update Count
 		// rGather.CountUpdate(Random.Range(2, 5));
 	// Debug Scenario

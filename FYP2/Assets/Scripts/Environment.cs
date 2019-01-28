@@ -21,7 +21,7 @@ public class Environment : MonoBehaviour {
 	// Hide Updating GameObject
 		transform.GetComponentInChildren<MeshRenderer>().enabled = false;
 	// Reset the Tile to not obstructed
-		rTile.isObstructed = false;
+		rTile.bObstructed = false;
 	// Destroy old GameObject
 		Destroy(transform.gameObject);
 	}

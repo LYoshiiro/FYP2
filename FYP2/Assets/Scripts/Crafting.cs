@@ -7,15 +7,23 @@ public class Crafting : MonoBehaviour {
 	[SerializeField] private Core rCore;
 	[SerializeField] private PlayerInventory rPlayerInventory;
 	[SerializeField] private ItemManager rItemManager;
-	[SerializeField] private Transform rMenu;
+	[SerializeField] private Transform tMenu;
 
 	private void LateUpdate() {
 	// Check if game is paused
         if (rCore.bPause != true) {
-			if (Input.GetKeyDown(KeyCode.C))
-				rMenu.gameObject.SetActive(!rMenu.gameObject.activeSelf);
+			if (Input.GetKeyDown(KeyCode.C)) {
+			// Close other Menus
+				rPlayerInventory.CloseMenu();
+				tMenu.gameObject.SetActive(!tMenu.gameObject.activeSelf);
+			}
 		}
 	}
+
+// Close the Inventory Menu
+	public void CloseMenu() {
+		tMenu.gameObject.SetActive(false);
+	} 
 
 // Crafting Raft Function
 	public void CraftRaft() {
