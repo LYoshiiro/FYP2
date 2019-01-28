@@ -8,6 +8,7 @@ public class PlayerInteraction : MonoBehaviour {
     [SerializeField] private Core rCore;
     [SerializeField] private PlayerCamera rPlayerCamera;
 	[SerializeField] private PlayerInventory rPlayerInventory;
+	[SerializeField] private PlayerStatus rPlayerStatus;
 	[SerializeField] private ItemManager rItemManager;
 	[SerializeField] private MapGenerator rMapGenerator;
 	[SerializeField] private SkillSystem rSkillSystem;
@@ -90,6 +91,9 @@ public class PlayerInteraction : MonoBehaviour {
 
 								// Give Player Experience
 									rSkillSystem.IncreaseExperience(15);
+
+								// Reduce Energy
+									rPlayerStatus.Action();
 
 								// Remove environment object
 									tGather.GetComponentInParent<Environment>().Despawn();

@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Core : MonoBehaviour {
+// Reference
+	[SerializeField] private PlayerStatus rPlayerStatus; 
 // Global Variables
 	[SerializeField] public bool bWin;
 	[SerializeField] public bool bPause;
+	[SerializeField] public bool bDeath;
 	[SerializeField] public float fTime;
 	[SerializeField] public int iDays;
 
@@ -21,7 +24,7 @@ public class Core : MonoBehaviour {
 
 	private void FixedUpdate() {
 	// Check for if pause button was pressed
-		if (Input.GetKeyDown(KeyCode.P))
+		if (Input.GetKeyDown(KeyCode.P) && bDeath != true)
 		// Check if the game is already over
 			if (bWin != true) {
 				bPause = !bPause;
@@ -37,8 +40,14 @@ public class Core : MonoBehaviour {
 				iDays += 1;
 			// Reset Time
 				fTime = 0.0f;
+			// Increase Coldness
+				rPlayerStatus.Freezing();
 			}
 		}
+
+	// Pause the Whole Game Cause Player Died
+		if (bDeath == true)
+			bPause = true;
 	}
 
 // Print info

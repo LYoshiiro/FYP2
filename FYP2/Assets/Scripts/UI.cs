@@ -24,4 +24,18 @@ public class UI : MonoBehaviour {
 		if (rCore.bWin != true)
 			lTransform.ToArray()[1].gameObject.SetActive(rCore.bPause);
 	}
+
+	public void ColdDeath() {
+	// Set message active
+		lTransform.ToArray()[2].gameObject.SetActive(true);
+	// Set game to dead
+		rCore.bDeath = true;
+	}
+
+	public void StarveDeath() {
+	// Set message active
+		lTransform.ToArray()[3].gameObject.SetActive(true);
+	// Set game to dead
+		rCore.bDeath = true;
+	}
 }

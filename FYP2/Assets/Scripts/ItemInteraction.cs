@@ -9,13 +9,15 @@ public class ItemInteraction : MonoBehaviour {
 	[SerializeField] private Item rItem;
 	[SerializeField] private PlayerInventory rPlayerInventory;
 	[SerializeField] private PlayerInteraction rPlayerInteraction;
+	[SerializeField] private PlayerStatus rPlayerStatus;
 
 // Set Reference
-	public void SetReference(Core core, Item item, PlayerInventory inventory, PlayerInteraction interaction, int type) {
+	public void SetReference(Core core, Item item, PlayerInventory inventory, PlayerInteraction interaction, PlayerStatus status, int type) {
 		rCore = core;
 		rItem = item;
 		rPlayerInventory = inventory;
 		rPlayerInteraction = interaction;
+		rPlayerStatus = status;
 		switch (type) {
 		// Use Button
 			case 0:
@@ -49,6 +51,10 @@ public class ItemInteraction : MonoBehaviour {
 		if ((rItem.bEat == true) && (rItem.iCount > 0)) {
 		// Reduce Count
 			rItem.CountUpdate(-1);
+		// Reduce Cold
+			rPlayerStatus.Defreeze();
+		// Increase Energy
+			rPlayerStatus.Rest();
 		// Update Menu
 			rPlayerInventory.bMenuChange = true;
 		}

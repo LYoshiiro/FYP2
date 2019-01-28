@@ -106,7 +106,7 @@ public class SkillSystem : MonoBehaviour {
 						fProgressive *= 2;				// Increase Cost
 						} break; // Mining
 			// Irregularity
-				default: rCore.Pnt("Missing Information: Level Type!"); break;
+				default: rCore.Pnt("Missing Info: Level Type!"); break;
 			}
 		}
 	}
