@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour {
 // Class Reference
     [SerializeField] private Core rCore;
     [SerializeField] private PlayerCamera rPlayerCamera;
+	[SerializeField] private PlayerInventory rPlayerInventory;
 	[SerializeField] private ItemManager rItemManager;
 	[SerializeField] private MapGenerator rMapGenerator;
 
@@ -18,11 +20,13 @@ public class PlayerInteraction : MonoBehaviour {
     private float fBouncePress;
 	public bool bProgressBar;
 	public bool bTool;
+	public string sPlacing;
 
 	private void Start() {
 	// Set Initial Values
 		bProgressBar = false;
 		bTool = false;
+		sPlacing = string.Empty;
 	}
 
     private void FixedUpdate() {
@@ -35,6 +39,35 @@ public class PlayerInteraction : MonoBehaviour {
 
 		// Get RaycastHit Point in the world space
 			if (Physics.Raycast(ray, out hit, 100f)) {
+			// Check for if an object is being placed
+				if (sPlacing != string.Empty) {
+				// When LMB is pressed
+					if (Input.GetMouseButtonDown(0)) {
+					// Disable the progress bar
+						bProgressBar = false;
+					// Check if the Object hit was a tile
+						if (hit.transform.GetComponentInParent<Tile>() != null) {
+						// Check if the tile is obstructed
+							if (hit.transform.GetComponentInParent<Tile>().isObstructed == false) {
+							// Instantiate new placable Environment object
+								Transform tPlace = Instantiate(rMapGenerator.SpawnEnvironment(sPlacing), hit.transform.parent.position, Quaternion.identity) as Transform;
+							// Assign Parent Transform
+								tPlace.parent = rMapGenerator.GetHolder(1);
+							// Search through the array to find instance
+								for (int k = 0; k < rItemManager.GetItems().ToArray().Length; k++) {
+									if (rItemManager.GetItems().ToArray()[k].sName == sPlacing) {
+									// Update Count
+										rItemManager.GetItems().ToArray()[k].CountUpdate(-1);
+									// Reset Reference
+										sPlacing = string.Empty;
+									// Update Menu
+										rPlayerInventory.bMenuChange = true;
+									}
+								}
+							}
+						}
+					}
+				}
 
 			// When LMB is held down
 				if (Input.GetMouseButton(0)) {

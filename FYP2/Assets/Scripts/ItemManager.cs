@@ -56,13 +56,25 @@ public class ItemManager : MonoBehaviour {
 // Spawn Tool based on value
 	public void SpawnTool(string type) {
 	// Axe
-		if (type == "Wood") 		{ Transform tAxe = Instantiate(lTools.ToArray()[0], rPlayer.transform) as Transform; tAxe.name = "Axe"; }
+		if (type == "Wood")
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Axe").iCount > 0)
+				{ Transform tAxe = Instantiate(lTools.ToArray()[0], rPlayer.transform) as Transform; tAxe.name = "Axe"; }
 	// Pickaxe
-		else if (type == "Stone") 	{ Transform tAxe = Instantiate(lTools.ToArray()[2], rPlayer.transform) as Transform; tAxe.name = "Pickaxe"; }
+		if (type == "Stone")
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Pickaxe").iCount > 0)
+				{ Transform tAxe = Instantiate(lTools.ToArray()[2], rPlayer.transform) as Transform; tAxe.name = "Pickaxe"; }
 	// Hoe
-		else if (type == "Cotton") 	{ Transform tAxe = Instantiate(lTools.ToArray()[1], rPlayer.transform) as Transform; tAxe.name = "Hoe"; }
+		if (type == "Cotton")
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Hoe").iCount > 0)
+				{ Transform tAxe = Instantiate(lTools.ToArray()[1], rPlayer.transform) as Transform; tAxe.name = "Hoe"; }
 	// Hoe
-		else if (type == "Berry") 	{ Transform tAxe = Instantiate(lTools.ToArray()[1], rPlayer.transform) as Transform; tAxe.name = "Hoe"; }
+		if (type == "Berry")
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Hoe").iCount > 0)
+				{ Transform tAxe = Instantiate(lTools.ToArray()[1], rPlayer.transform) as Transform; tAxe.name = "Hoe"; }
 	}
 
 // Despawn Tool

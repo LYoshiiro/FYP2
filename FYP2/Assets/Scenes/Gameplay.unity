@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCore: {fileID: 1187164737}
+  rPlayerInventory: {fileID: 500944220}
   rItemManager: {fileID: 1187164738}
   rMenu: {fileID: 805664141}
 --- !u!1 &295522784
@@ -790,7 +791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCore: {fileID: 1187164737}
-  rPlayer: {fileID: 929006228}
+  rPlayerInteraction: {fileID: 929006228}
   rItemManager: {fileID: 1187164738}
   tItem: {fileID: 1998910374029542, guid: 418bc15625684904284c6a334dac666d, type: 2}
   tContent: {fileID: 1649356051}
@@ -1869,11 +1870,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rCore: {fileID: 1187164737}
   rPlayerCamera: {fileID: 717632583}
+  rPlayerInventory: {fileID: 500944220}
   rItemManager: {fileID: 1187164738}
   rMapGenerator: {fileID: 1733594383}
   fBounceTime: 0
   bProgressBar: 0
   bTool: 0
+  sPlacing: 
 --- !u!114 &929006229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3778,7 +3781,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Cost: Wood x12'
+  m_Text: 'Cost: Wood x12, Cotton x8'
 --- !u!222 &1843333797
 CanvasRenderer:
   m_ObjectHideFlags: 0

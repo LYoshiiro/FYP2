@@ -5,6 +5,7 @@ using UnityEngine;
 public class Crafting : MonoBehaviour {
 // Class Reference
 	[SerializeField] private Core rCore;
+	[SerializeField] private PlayerInventory rPlayerInventory;
 	[SerializeField] private ItemManager rItemManager;
 	[SerializeField] private Transform rMenu;
 
@@ -19,11 +20,15 @@ public class Crafting : MonoBehaviour {
 // Crafting Raft Function
 	public void CraftRaft() {
 	// Check cost
-		if (rItemManager.GetItems().Find(i => i.sName == "Wood").iCount >= 12) {
+		if ((rItemManager.GetItems().Find(i => i.sName == "Wood").iCount >= 12) &&
+			(rItemManager.GetItems().Find(i => i.sName == "Cotton").iCount >= 8)){
 		// Reduce cost
-			rItemManager.GetItems().Find(i => i.sName == "Wood").iCount -= 12;
+			rItemManager.GetItems().Find(i => i.sName == "Wood").CountUpdate(-12);
+			rItemManager.GetItems().Find(i => i.sName == "Cotton").CountUpdate(-8);
 		// Add item
-			rItemManager.GetItems().Find(i => i.sName == "Raft").iCount += 1;
+			rItemManager.GetItems().Find(i => i.sName == "Raft").CountUpdate(1);
+		// Update Menu
+			rPlayerInventory.bMenuChange = true;
 		}
 	}
 
@@ -36,10 +41,12 @@ public class Crafting : MonoBehaviour {
 			// Check cost
 				if (rItemManager.GetItems().Find(i => i.sName == "Cotton").iCount >= 3) {
 				// Reduce cost
-					rItemManager.GetItems().Find(i => i.sName == "Cotton").iCount -= 3;
+					rItemManager.GetItems().Find(i => i.sName == "Cotton").CountUpdate(-3);
 				// Add item
-					rItemManager.GetItems().Find(i => i.sName == "Cotton Hat").iCount += 1;
-				}
+					rItemManager.GetItems().Find(i => i.sName == "Cotton Hat").CountUpdate(1);
+				// Update Menu
+					rPlayerInventory.bMenuChange = true;
+			}
 			break;
 		
 		// Shirt
@@ -47,10 +54,12 @@ public class Crafting : MonoBehaviour {
 			// Check cost
 				if (rItemManager.GetItems().Find(i => i.sName == "Cotton").iCount >= 5) {
 				// Reduce cost
-					rItemManager.GetItems().Find(i => i.sName == "Cotton").iCount -= 5;
+					rItemManager.GetItems().Find(i => i.sName == "Cotton").CountUpdate(-5);
 				// Add item
-					rItemManager.GetItems().Find(i => i.sName == "Cotton Shirt").iCount += 1;
-				}
+					rItemManager.GetItems().Find(i => i.sName == "Cotton Shirt").CountUpdate(1);
+				// Update Menu
+					rPlayerInventory.bMenuChange = true;
+			}
 			break;
 		
 		// Pant
@@ -58,10 +67,12 @@ public class Crafting : MonoBehaviour {
 			// Check cost
 				if (rItemManager.GetItems().Find(i => i.sName == "Cotton").iCount >= 5) {
 				// Reduce cost
-					rItemManager.GetItems().Find(i => i.sName == "Cotton").iCount -= 5;
+					rItemManager.GetItems().Find(i => i.sName == "Cotton").CountUpdate(-5);
 				// Add item
-					rItemManager.GetItems().Find(i => i.sName == "Cotton Pant").iCount += 1;
-				}
+					rItemManager.GetItems().Find(i => i.sName == "Cotton Pant").CountUpdate(1);
+				// Update Menu
+					rPlayerInventory.bMenuChange = true;
+			}
 			break;
 			
 		// Irregularity
@@ -81,11 +92,13 @@ public class Crafting : MonoBehaviour {
 				if ((rItemManager.GetItems().Find(i => i.sName == "Wood").iCount >= 2) &&
 					(rItemManager.GetItems().Find(i => i.sName == "Stone").iCount >= 2)) {
 				// Reduce cost
-					rItemManager.GetItems().Find(i => i.sName == "Wood").iCount -= 2;
-					rItemManager.GetItems().Find(i => i.sName == "Stone").iCount -= 2;
+					rItemManager.GetItems().Find(i => i.sName == "Wood").CountUpdate(-2);
+					rItemManager.GetItems().Find(i => i.sName == "Stone").CountUpdate(-2);
 				// Add item
-					rItemManager.GetItems().Find(i => i.sName == "Hoe").iCount += 1;
-				}
+					rItemManager.GetItems().Find(i => i.sName == "Hoe").CountUpdate(1);
+				// Update Menu
+					rPlayerInventory.bMenuChange = true;
+			}
 			break;
 		
 		// Axe
@@ -94,11 +107,13 @@ public class Crafting : MonoBehaviour {
 				if ((rItemManager.GetItems().Find(i => i.sName == "Wood").iCount >= 2) &&
 					(rItemManager.GetItems().Find(i => i.sName == "Stone").iCount >= 3)) {
 				// Reduce cost
-					rItemManager.GetItems().Find(i => i.sName == "Wood").iCount -= 2;
-					rItemManager.GetItems().Find(i => i.sName == "Stone").iCount -= 3;
+					rItemManager.GetItems().Find(i => i.sName == "Wood").CountUpdate(-2);
+					rItemManager.GetItems().Find(i => i.sName == "Stone").CountUpdate(-3);
 				// Add item
-					rItemManager.GetItems().Find(i => i.sName == "Axe").iCount += 1;
-				}
+					rItemManager.GetItems().Find(i => i.sName == "Axe").CountUpdate(1);
+				// Update Menu
+					rPlayerInventory.bMenuChange = true;
+			}
 			break;
 		
 		// Pickaxe
@@ -107,11 +122,13 @@ public class Crafting : MonoBehaviour {
 				if ((rItemManager.GetItems().Find(i => i.sName == "Wood").iCount >= 2) &&
 					(rItemManager.GetItems().Find(i => i.sName == "Stone").iCount >= 3)) {
 				// Reduce cost
-					rItemManager.GetItems().Find(i => i.sName == "Wood").iCount -= 2;
-					rItemManager.GetItems().Find(i => i.sName == "Stone").iCount -= 3;
+					rItemManager.GetItems().Find(i => i.sName == "Wood").CountUpdate(-2);
+					rItemManager.GetItems().Find(i => i.sName == "Stone").CountUpdate(-3);
 				// Add item
-					rItemManager.GetItems().Find(i => i.sName == "Pickaxe").iCount += 1;
-				}
+					rItemManager.GetItems().Find(i => i.sName == "Pickaxe").CountUpdate(1);
+				// Update Menu
+					rPlayerInventory.bMenuChange = true;
+			}
 			break;
 			
 		// Irregularity

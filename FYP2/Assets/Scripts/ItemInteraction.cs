@@ -7,13 +7,15 @@ public class ItemInteraction : MonoBehaviour {
 // Reference
 	[SerializeField] private Core rCore;
 	[SerializeField] private Item rItem;
-	[SerializeField] private PlayerInventory rPlayer;
+	[SerializeField] private PlayerInventory rPlayerInventory;
+	[SerializeField] private PlayerInteraction rPlayerInteraction;
 
 // Set Reference
-	public void SetReference(Core core, Item item, PlayerInventory player, int type) {
+	public void SetReference(Core core, Item item, PlayerInventory inventory, PlayerInteraction interaction, int type) {
 		rCore = core;
 		rItem = item;
-		rPlayer = player;
+		rPlayerInventory = inventory;
+		rPlayerInteraction = interaction;
 		switch (type) {
 		// Use Button
 			case 0:
@@ -28,17 +30,16 @@ public class ItemInteraction : MonoBehaviour {
 		// Irregularity
 			default: rCore.Pnt("Missing Infomation: Button Type!"); break;
 		}
-		rCore.Pnt(rItem.sName + ", " + rItem.bUse + ", " + rItem.bEat);
 	}
 
 // Use Item
 	private void Use() {
 	// Check for Validity
 		if ((rItem.bUse == true) && (rItem.iCount > 0)) {
-		// Reduce Count
-			rItem.CountUpdate(-1);
-		// Update Menu
-			rPlayer.bMenuChange = true;
+		// Close Menu
+			rPlayerInventory.CloseMenu();
+		// Attach Reference
+			rPlayerInteraction.sPlacing = rItem.sName;
 		}
 	}
 
@@ -49,7 +50,7 @@ public class ItemInteraction : MonoBehaviour {
 		// Reduce Count
 			rItem.CountUpdate(-1);
 		// Update Menu
-			rPlayer.bMenuChange = true;
+			rPlayerInventory.bMenuChange = true;
 		}
 	}
 }

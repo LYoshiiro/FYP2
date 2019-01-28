@@ -1,6 +1,6 @@
 0,0,no,no,Wood,Blank
 1,0,no,no,Stone,Blank
-2,0,no,no,Cotton,Blank
+2,0,no,yes,Cotton,Blank
 3,0,yes,yes,Berry,Blank
 4,0,no,yes,Raft,Blank
 5,0,no,no,Cotton Hat,Blank

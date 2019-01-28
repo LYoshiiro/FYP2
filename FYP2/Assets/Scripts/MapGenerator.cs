@@ -208,4 +208,23 @@ public class MapGenerator : MonoBehaviour {
 	// Assign Parent Object
 		tRaft.parent = tPlacementHolder;
 	}
+
+// Spawn Environment Tile
+	public Transform SpawnEnvironment(string node) {
+		if (node == "Berry")
+			return rValue.lPrefabs.ToArray()[3];
+		if (node == "Cotton")
+			return rValue.lPrefabs.ToArray()[4];
+		return null;
+	}
+
+// Get the holder transforms
+	public Transform GetHolder(int type) {
+		switch (type) {
+			case 0: return tMapHolder;
+			case 1: return tEnvironmentHolder;
+			case 2: return tPlacementHolder;
+			default: rCore.Pnt("Missing Information: Missing Holder Type!"); return null;
+		}
+	}
 }
