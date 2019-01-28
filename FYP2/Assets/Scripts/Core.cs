@@ -8,15 +8,38 @@ public class Core : MonoBehaviour {
 // Global Variables
 	[SerializeField] public bool bWin;
 	[SerializeField] public bool bPause;
+	[SerializeField] public float fTime;
+	[SerializeField] public int iDays;
 
-private void FixedUpdate() {
-// Check for if pause button was pressed
-	if (Input.GetKeyDown(KeyCode.P))
-	// Check if the game is already over
-		if (bWin != true) {
-			bPause = !bPause;
+	private void Start() {
+	// Set the timescale to match real time
+		Time.timeScale = 1.0f;
+	// Set Initial Values
+		fTime = 0.0f;
+		iDays = 0;
+	}
+
+	private void FixedUpdate() {
+	// Check for if pause button was pressed
+		if (Input.GetKeyDown(KeyCode.P))
+		// Check if the game is already over
+			if (bWin != true) {
+				bPause = !bPause;
+			}
+
+	// Check if Game is running
+		if (bPause != true) {
+		// Move Time as Game Progresses
+			fTime += Time.deltaTime;
+		// 1 Full Cycle (5mins)
+			if (fTime > 3000.0f) {
+			// Update Day
+				iDays += 1;
+			// Reset Time
+				fTime = 0.0f;
+			}
 		}
-}
+	}
 
 // Print info
 	public void Pnt<T>(T V) {
