@@ -47,8 +47,8 @@ public class ItemManager : MonoBehaviour {
 	// Offset Generated Values
 		rMapGenerator.GatherOffset(name);
 	// Update Count
-		// rGather.CountUpdate(Random.Range(2 + ItemModify(name), 5 + ItemModify(name)));
-		rGather.CountUpdate(5 + ItemModify(name));
+		rGather.CountUpdate(Random.Range(2 + ItemModify(name), 5 + ItemModify(name)));
+		// rGather.CountUpdate(5 + ItemModify(name));
 	// Debug Scenario
 		// rGather.CountUpdate(Random.Range(12, 15));
 	}
@@ -129,7 +129,7 @@ public class ItemManager : MonoBehaviour {
 
 // Get Item Modifier based off level
 	public int ItemModify(string type) {
-		int iModifier = 1;
+		int iModifier = 0;
 	// Axe
 		if (type == "Wood") {
 		// Check for Avaliability
