@@ -52,13 +52,9 @@ public class PlayerInventory : MonoBehaviour {
 					gItem.transform.GetChild(1).GetComponent<Text>().text = "x" + dItems[i].iCount;
 					gItem.transform.GetChild(2).GetComponent<Text>().text = dItems[i].sNote;
 				// Check usability before setting button
-					gItem.transform.GetChild(3).gameObject.SetActive(dItems[i].bUse);
+					gItem.transform.GetChild(3).GetComponent<ItemInteraction>().SetReference(rCore, dItems[i], GetComponent<PlayerInventory>(), 0);
 				// Assign Reference Function
-					gItem.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(CloseMenu);
-				// Check edibility before setting button
-					gItem.transform.GetChild(4).gameObject.SetActive(dItems[i].bEat);
-				// Assign Reference Function
-					gItem.transform.GetChild(4).GetComponent<ConsumeItem>().SetReference(rCore, dItems[i], GetComponent<PlayerInventory>());
+					gItem.transform.GetChild(4).GetComponent<ItemInteraction>().SetReference(rCore, dItems[i], GetComponent<PlayerInventory>(), 1);
 				}
 			// Hook for Visual Data Update
 				bMenuChange = false;
