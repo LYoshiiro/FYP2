@@ -5,8 +5,9 @@ using UnityEngine;
 public class Crafting : MonoBehaviour {
 // Class Reference
 	[SerializeField] private Core rCore;
-	[SerializeField] private PlayerInventory rPlayerInventory;
 	[SerializeField] private ItemManager rItemManager;
+	[SerializeField] private PlayerInventory rPlayerInventory;
+	[SerializeField] private SkillSystem rSkillSystem;
 	[SerializeField] private Transform tMenu;
 
 	private void LateUpdate() {
@@ -15,6 +16,7 @@ public class Crafting : MonoBehaviour {
 			if (Input.GetKeyDown(KeyCode.C)) {
 			// Close other Menus
 				rPlayerInventory.CloseMenu();
+				rSkillSystem.CloseMenu();
 				tMenu.gameObject.SetActive(!tMenu.gameObject.activeSelf);
 			}
 		}

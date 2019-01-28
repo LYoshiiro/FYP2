@@ -101,7 +101,6 @@ public class MapGenerator : MonoBehaviour {
 			if (iNext <= rCore.iDays) {
 				iNext = Random.Range(3, 6) + rCore.iDays;
 				Spawner();
-				rCore.Pnt("Respawner");
 			}
 		}
 	}

@@ -10,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour {
 	[SerializeField] private PlayerInventory rPlayerInventory;
 	[SerializeField] private ItemManager rItemManager;
 	[SerializeField] private MapGenerator rMapGenerator;
+	[SerializeField] private SkillSystem rSkillSystem;
 
 // Facing Direction
 	private RaycastHit hit;
@@ -85,6 +86,9 @@ public class PlayerInteraction : MonoBehaviour {
 								if (rItemManager != null) {
 								// Parse the material just gathered and update the datalist
 									rItemManager.Gather(tGather.GetComponentInParent<Environment>().sNode);
+
+								// Give Player Experience
+									rSkillSystem.IncreaseExperience(15);
 
 								// Remove environment object
 									tGather.GetComponentInParent<Environment>().Despawn();

@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviour {
 // Class Reference
 	[SerializeField] private Core rCore;
-	[SerializeField] private PlayerInteraction rPlayerInteraction;
 	[SerializeField] private ItemManager rItemManager;
+	[SerializeField] private PlayerInteraction rPlayerInteraction;
 	[SerializeField] private Crafting rCrafting;
+	[SerializeField] private SkillSystem rSkillSystem;
 
 // Menu Variables
 	[SerializeField] private GameObject tItem;
@@ -55,6 +56,7 @@ public class PlayerInventory : MonoBehaviour {
 			if (Input.GetKeyDown(KeyCode.I)) {
 			// Close other Menus
 				rCrafting.CloseMenu();
+				rSkillSystem.CloseMenu();
 				tMenu.gameObject.SetActive(!tMenu.gameObject.activeSelf);
 			}
 		}
