@@ -26,8 +26,10 @@ public class Item {
 
 // Item Count Updater
 	public void CountUpdate(int value) {
+	// Updater
+		iCount += value;
 	// Safe Net
-		if (iCount > 0)
-			iCount += value;
+		if (iCount < 0)
+			iCount = 0;
 	}
 }
