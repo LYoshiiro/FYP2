@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ProgressBar : MonoBehaviour {
 // Class Reference
 	[SerializeField] private Core rCore;
-	[SerializeField] private PlayerInteraction rPlayer;
+	[SerializeField] private PlayerInteraction rPlayerInteraction;
 
 // Progress Bar
 	[SerializeField] private float fProgress;
@@ -29,11 +29,11 @@ public class ProgressBar : MonoBehaviour {
 	private void LateUpdate() {
 	// Set active only when mouse is held down
 		foreach (Image img in lImages)
-			img.gameObject.SetActive(rPlayer.bProgressBar);
+			img.gameObject.SetActive(rPlayerInteraction.bProgressBar);
 
 	// If not completed loading cycle
 		if (fProgress < 1.0f) {
-			fProgress = rPlayer.fBounceTime / 1.5f;
+			fProgress = rPlayerInteraction.fBounceTime / (1.5f - rPlayerInteraction.GetModifier());
 			lImages.ToArray()[1].fillAmount = fProgress;
 		}
 		else 

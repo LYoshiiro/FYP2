@@ -7,6 +7,7 @@ public class ItemManager : MonoBehaviour {
 	[SerializeField] private Core rCore;
 	[SerializeField] private PlayerInteraction rPlayer;
 	[SerializeField] private MapGenerator rMapGenerator;
+	[SerializeField] private SkillSystem rSkillSystem;
 
 // Parse Values
 	private string sFile;
@@ -46,9 +47,10 @@ public class ItemManager : MonoBehaviour {
 	// Offset Generated Values
 		rMapGenerator.GatherOffset(name);
 	// Update Count
-		// rGather.CountUpdate(Random.Range(2, 5));
+		// rGather.CountUpdate(Random.Range(2 + ItemModify(name), 5 + ItemModify(name)));
+		rGather.CountUpdate(5 + ItemModify(name));
 	// Debug Scenario
-		rGather.CountUpdate(Random.Range(12, 15));
+		// rGather.CountUpdate(Random.Range(12, 15));
 	}
 
 // Parse item list
@@ -84,5 +86,83 @@ public class ItemManager : MonoBehaviour {
 	public void DespawnTool() {
 		foreach (Transform child in rPlayer.transform)
 			GameObject.DestroyImmediate(child.gameObject);
+	}
+
+// Get Speed Modifier based off level
+	public float SpeedModify(string type) {
+		float fModifier = 0.07f;
+		float fTimes = 0.0f;
+	// Axe
+		if (type == "Wood") {
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Axe").iCount > 0)
+				fTimes += 0.5f;
+		// Additional Levels
+			fTimes += rSkillSystem.GetLevel(1) * 0.5f;
+		}
+	// Pickaxe
+		if (type == "Stone") {
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Pickaxe").iCount > 0)
+				fTimes += 0.5f;
+		// Additional Levels
+			fTimes += rSkillSystem.GetLevel(2) * 0.5f;
+		}
+	// Hoe
+		if (type == "Cotton") {
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Hoe").iCount > 0)
+				fTimes += 0.5f;
+		// Additional Levels
+			fTimes += rSkillSystem.GetLevel(0) * 0.5f;
+		}
+	// Hoe
+		if (type == "Berry") {
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Hoe").iCount > 0)
+				fTimes += 0.5f;
+		// Additional Levels
+			fTimes += rSkillSystem.GetLevel(0) * 0.5f;
+		}
+		return fModifier * fTimes;
+	}
+
+// Get Item Modifier based off level
+	public int ItemModify(string type) {
+		int iModifier = 1;
+	// Axe
+		if (type == "Wood") {
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Axe").iCount > 0)
+				iModifier += 1;
+		// Additional Levels
+			iModifier += rSkillSystem.GetLevel(4);
+		}
+	// Pickaxe
+		if (type == "Stone") {
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Pickaxe").iCount > 0)
+				iModifier += 1;
+		// Additional Levels
+			iModifier += rSkillSystem.GetLevel(5);
+		}
+	// Hoe
+		if (type == "Cotton") {
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Hoe").iCount > 0)
+				iModifier += 1;
+		// Additional Levels
+			iModifier += rSkillSystem.GetLevel(3);
+		}
+	// Hoe
+		if (type == "Berry") {
+		// Check for Avaliability
+			if (lItem.Find(i => i.sName == "Hoe").iCount > 0)
+				iModifier += 1;
+		// Additional Levels
+			iModifier += rSkillSystem.GetLevel(3);
+		}
+
+		return iModifier;
 	}
 }

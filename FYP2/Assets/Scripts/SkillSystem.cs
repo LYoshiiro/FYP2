@@ -71,21 +71,18 @@ public class SkillSystem : MonoBehaviour {
 				case 0: if (iGSpeed < 3) {
 						iGSpeed += 1;					// Increase Level
 						iGLevel += 1;					// Increase Max
-
 						fExperience -= fProgressive;	// Reduce Cost from pool
 						fProgressive *= 2;				// Increase Cost
 						} break; // Gathering
 				case 1: if (iLSpeed < 3) {
 						iLSpeed += 1;					// Increase Level
 						iLLevel += 1;					// Increase Max
-
 						fExperience -= fProgressive;	// Reduce Cost from pool
 						fProgressive *= 2;				// Increase Cost
 						} break; // Lumbering
 				case 2: if (iMSpeed < 3) {
 						iMSpeed += 1;					// Increase Level
 						iMLevel += 1;					// Increase Max
-
 						fExperience -= fProgressive;	// Reduce Cost from pool
 						fProgressive *= 2;				// Increase Cost
 						} break; // Mining
@@ -93,27 +90,37 @@ public class SkillSystem : MonoBehaviour {
 				case 3: if (iGAmount < 3) {
 						iGAmount += 1;					// Increase Level
 						iGLevel += 1;					// Increase Max
-
 						fExperience -= fProgressive;	// Reduce Cost from pool
 						fProgressive *= 2;				// Increase Cost
 						} break; // Gathering
 				case 4: if (iLAmount < 3) {
 						iLAmount += 1;					// Increase Level
 						iLLevel += 1;					// Increase Max
-
 						fExperience -= fProgressive;	// Reduce Cost from pool
 						fProgressive *= 2;				// Increase Cost
 						} break; // Lumbering
 				case 5: if (iMAmount < 3) {
 						iMAmount += 1;					// Increase Level
 						iMLevel += 1;					// Increase Max
-
 						fExperience -= fProgressive;	// Reduce Cost from pool
 						fProgressive *= 2;				// Increase Cost
 						} break; // Mining
 			// Irregularity
 				default: rCore.Pnt("Missing Information: Level Type!"); break;
 			}
+		}
+	}
+
+// Get Type's Level
+	public int GetLevel(int type) {
+		switch (type) {
+			case 0: return iGSpeed;
+			case 1: return iLSpeed;
+			case 2: return iMSpeed;
+			case 3: return iGAmount;
+			case 4: return iLAmount;
+			case 5: return iMAmount;
+			default: rCore.Pnt("Missing Info: Level Type!"); return 0;
 		}
 	}
 

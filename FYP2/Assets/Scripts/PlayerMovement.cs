@@ -39,10 +39,10 @@ public class PlayerMovement : MonoBehaviour {
             fMoveX = Input.GetAxis(sMoveX);
             fMoveZ = Input.GetAxis(sMoveZ);
 
-        // Get Jump Input
-            if (bInAir != true)
-                if (Input.GetKeyDown(KeyCode.Space))
-                    bJump = true;
+        // Get Jump Input (Disabled due to not used)
+            // if (bInAir != true)
+            //     if (Input.GetKeyDown(KeyCode.Space))
+            //         bJump = true;
         
         // Check if Player is in the air
             if (transform.position.y > 0.1f) bInAir = true;

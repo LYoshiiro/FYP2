@@ -3258,6 +3258,7 @@ MonoBehaviour:
   rMapGenerator: {fileID: 1733594383}
   rSkillSystem: {fileID: 858392847}
   fBounceTime: 0
+  fSpeedModifier: 0
   bProgressBar: 0
   bTool: 0
   sPlacing: 
@@ -3770,6 +3771,7 @@ MonoBehaviour:
   rCore: {fileID: 1187164737}
   rPlayer: {fileID: 929006228}
   rMapGenerator: {fileID: 1733594383}
+  rSkillSystem: {fileID: 858392847}
   lTools:
   - {fileID: 4769823557184170, guid: 2b03a100b4bbed04f830df66ba70fa4d, type: 2}
   - {fileID: 4941977659297162, guid: 2cadaec8bcf458d4e9ec8b75ba6bcbc3, type: 2}
@@ -3946,7 +3948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCore: {fileID: 1187164737}
-  rPlayer: {fileID: 929006228}
+  rPlayerInteraction: {fileID: 929006228}
   fProgress: 0
   lImages:
   - {fileID: 1801059203}

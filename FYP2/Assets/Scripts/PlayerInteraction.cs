@@ -19,6 +19,7 @@ public class PlayerInteraction : MonoBehaviour {
 // Interaction
     public float fBounceTime;
     private float fBouncePress;
+	[SerializeField] private float fSpeedModifier;
 	public bool bProgressBar;
 	public bool bTool;
 	public string sPlacing;
@@ -71,7 +72,7 @@ public class PlayerInteraction : MonoBehaviour {
 			// When LMB is held down
 				if (Input.GetMouseButton(0)) {
 				// Check Bounce Timer
-					if (fBounceTime > 1.5f) {
+					if (fBounceTime > 1.5f - fSpeedModifier) {
 
 					// Check if hit object has environment class
 						if (hit.transform.GetComponentInParent<Environment>() != null) {
@@ -119,6 +120,8 @@ public class PlayerInteraction : MonoBehaviour {
 							rItemManager.SpawnTool(hit.transform.GetComponentInParent<Environment>().sNode);
 							bTool = true;
 						}
+					// Generate Speed Modifier from levels and tools
+						fSpeedModifier = rItemManager.SpeedModify(hit.transform.GetComponentInParent<Environment>().sNode);
 					}
 				}
 
@@ -154,5 +157,10 @@ public class PlayerInteraction : MonoBehaviour {
 
             }
         }
+	}
+
+// Get Animation Speed Modifier
+	public float GetModifier() {
+		return fSpeedModifier;
 	}
 }

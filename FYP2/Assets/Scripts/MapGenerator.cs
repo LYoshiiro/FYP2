@@ -43,7 +43,7 @@ public class MapGenerator : MonoBehaviour {
 		lSpawnOffset = new List<int>();
 		bInitial = false;
 		
-		iNext = 0;
+		iNext = Random.Range(2, 5);
 
 	// Assign caller string for Holder Object(s)
 		string sMapHolder = "Map Holder";
@@ -99,7 +99,7 @@ public class MapGenerator : MonoBehaviour {
 		else {
 		// Generate Next time the respawner will kick in
 			if (iNext <= rCore.iDays) {
-				iNext = Random.Range(3, 6) + rCore.iDays;
+				iNext = Random.Range(2, 5) + rCore.iDays;
 				Spawner();
 			}
 		}
