@@ -2450,6 +2450,7 @@ MonoBehaviour:
   rCore: {fileID: 1187164737}
   tPlayer: {fileID: 929006227}
   tCamera: {fileID: 0}
+  iType: 0
   fDistance: 7.35
   fCurrentX: 0
   fCurrentY: 30
@@ -2457,6 +2458,8 @@ MonoBehaviour:
   fSensitivityY: 5
   fMinY: 0
   fMaxY: 80
+  v3Direction: {x: 0, y: 0, z: 0}
+  qRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!81 &717632584
 AudioListener:
   m_ObjectHideFlags: 0
@@ -7129,6 +7132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rCore: {fileID: 1187164737}
   rValue: {fileID: 1733594382}
+  rPlayerStatus: {fileID: 929006231}
   tMapHolder: {fileID: 0}
   tEnvironmentHolder: {fileID: 0}
   tPlacementHolder: {fileID: 0}

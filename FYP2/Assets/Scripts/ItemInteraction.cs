@@ -54,7 +54,7 @@ public class ItemInteraction : MonoBehaviour {
 		// Reduce Cold
 			rPlayerStatus.Defreeze();
 		// Increase Energy
-			rPlayerStatus.Rest();
+			rPlayerStatus.Rest(1);
 		// Update Menu
 			rPlayerInventory.bMenuChange = true;
 		}

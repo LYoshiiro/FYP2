@@ -9,6 +9,9 @@ public class PlayerCamera : MonoBehaviour {
 	[SerializeField] private Transform tCamera;
 	private Camera cCamera;
 
+// Type
+	[SerializeField] private int iType;
+
 // Modifier
 	[SerializeField] private float fDistance;
 	[SerializeField] private float fCurrentX;
@@ -17,6 +20,8 @@ public class PlayerCamera : MonoBehaviour {
 	[SerializeField] private float fSensitivityY;
 	[SerializeField] private float fMinY;
 	[SerializeField] private float fMaxY;
+	[SerializeField] private Vector3 v3Direction;
+	[SerializeField] private Quaternion qRotation;
 
 // Manupulators
 	private Vector2 v3Start;
@@ -30,26 +35,49 @@ public class PlayerCamera : MonoBehaviour {
 	}
 
 	private void Update() {
-    // Check if game is paused
-		if (!rCore.bPause) {
-		// When LMB is held down
-			if (Input.GetMouseButton(1)) {
-				fCurrentX += Input.GetAxis("Mouse X") * fSensitivityX;
-				fCurrentY += Input.GetAxis("Mouse Y") * fSensitivityX;
+		switch (iType) {
+			case 0:
+			// Check if game is paused
+				if (!rCore.bPause) {
+				// When LMB is held down
+					if (Input.GetMouseButton(1)) {
+						fCurrentX += Input.GetAxis("Mouse X") * fSensitivityX;
+						fCurrentY += Input.GetAxis("Mouse Y") * fSensitivityX;
 
-				fCurrentY = Mathf.Clamp(fCurrentY, fMinY, fMaxY);
-			}
+						fCurrentY = Mathf.Clamp(fCurrentY, fMinY, fMaxY);
+					}
+				}
+			break;
+			case 1:
+				fCurrentX += Time.deltaTime * fSensitivityX;
+			break;
+			default: rCore.Pnt("Missing Info: Missing Type!"); break;
 		}
 	}
 
 	private void LateUpdate() {
-	// Set Distance away from the player
-		Vector3 v3Direction = new Vector3(0, 0, -fDistance);
-	// Set rotation around player
-		Quaternion qRotation = Quaternion.Euler(fCurrentY, fCurrentX, 0);
-	// Set Camera away from player at rotation
-		tCamera.position = tPlayer.position + qRotation * v3Direction;
-	// Look at the player
-		tCamera.LookAt(tPlayer.position);
+		switch (iType) {
+			case 0:
+			// Set Distance away from the player
+				v3Direction = new Vector3(0, 0, -fDistance);
+			// Set rotation around player
+				qRotation = Quaternion.Euler(fCurrentY, fCurrentX, 0);
+			// Set Camera away from player at rotation
+				tCamera.position = tPlayer.position + qRotation * v3Direction;
+			// Look at the player
+				tCamera.LookAt(tPlayer.position);
+			break;
+			case 1:
+			// Set Distance away from the origin
+				v3Direction = new Vector3(0, 0, -fDistance);
+			// Set rotation around origin
+				qRotation = Quaternion.Euler(fCurrentY, fCurrentX, 0);
+			// Set Camera away from origin at rotation
+				tCamera.position = Vector3.zero + qRotation * v3Direction;
+			// Look at the origin
+				tCamera.LookAt(Vector3.zero);
+			break;
+			default: rCore.Pnt("Missing Info: Missing Type!"); break;
+		}
 	}
 }

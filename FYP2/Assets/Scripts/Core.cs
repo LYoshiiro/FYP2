@@ -42,6 +42,8 @@ public class Core : MonoBehaviour {
 				fTime = 0.0f;
 			// Increase Coldness
 				rPlayerStatus.Freezing();
+			// Increase Energy
+				rPlayerStatus.Rest(5);
 			}
 		}
 

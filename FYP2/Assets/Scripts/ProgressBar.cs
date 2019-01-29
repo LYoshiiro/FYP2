@@ -51,7 +51,7 @@ public class ProgressBar : MonoBehaviour {
 					img.gameObject.SetActive(true);
 
 				tText.text = "Cold: " + rPlayerStatus.GetStatus(0) + " / 10";
-				fProgress = (float)rPlayerStatus.GetStatus(0) / 10;
+				fProgress = Mathf.Clamp((float)rPlayerStatus.GetStatus(0), 0, 10) / 10;
 				lImages.ToArray()[1].fillAmount = fProgress;
 			break;
 			case 2: // Energy
@@ -60,7 +60,7 @@ public class ProgressBar : MonoBehaviour {
 					img.gameObject.SetActive(true);
 
 				tText.text = "Energy: " + rPlayerStatus.GetStatus(1) + " / 10";
-				fProgress = (float)rPlayerStatus.GetStatus(1) / 10;
+				fProgress = Mathf.Clamp((float)rPlayerStatus.GetStatus(1), 0, 10) / 10;
 				lImages.ToArray()[1].fillAmount = fProgress;
 			break;
 		}

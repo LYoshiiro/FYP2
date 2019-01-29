@@ -42,27 +42,31 @@ public class PlayerInteraction : MonoBehaviour {
 
 		// Get RaycastHit Point in the world space
 			if (Physics.Raycast(ray, out hit, 100f)) {
+
 			// Check for if an object is being placed
 				if (sPlacing != string.Empty) {
-				// When LMB is pressed
-					if (Input.GetMouseButtonDown(0)) {
-					// Disable the progress bar
-						bProgressBar = false;
-					// Check if the Object hit was a tile
-						if (hit.transform.GetComponentInParent<Tile>() != null) {
-						// Check if the tile is obstructed
-							if (hit.transform.GetComponentInParent<Tile>().bObstructed == false) {
-							// Instantiate new placable Environment object
-								rMapGenerator.SpawnEnvironment(sPlacing, hit.transform.parent);
-							// Search through the array to find instance
-								for (int k = 0; k < rItemManager.GetItems().ToArray().Length; k++) {
-									if (rItemManager.GetItems().ToArray()[k].sName == sPlacing) {
-									// Update Count
-										rItemManager.GetItems().ToArray()[k].CountUpdate(-1);
-									// Reset Reference
-										sPlacing = string.Empty;
-									// Update Menu
-										rPlayerInventory.bMenuChange = true;
+					// Check if player has enough energy to plant stuff
+					if (rPlayerStatus.GetStatus(1) >= 2) {
+					// When LMB is pressed
+						if (Input.GetMouseButtonDown(0)) {
+						// Disable the progress bar
+							bProgressBar = false;
+						// Check if the Object hit was a tile
+							if (hit.transform.GetComponentInParent<Tile>() != null) {
+							// Check if the tile is obstructed
+								if (hit.transform.GetComponentInParent<Tile>().bObstructed == false) {
+								// Instantiate new placable Environment object
+									rMapGenerator.SpawnEnvironment(sPlacing, hit.transform.parent);
+								// Search through the array to find instance
+									for (int k = 0; k < rItemManager.GetItems().ToArray().Length; k++) {
+										if (rItemManager.GetItems().ToArray()[k].sName == sPlacing) {
+										// Update Count
+											rItemManager.GetItems().ToArray()[k].CountUpdate(-1);
+										// Reset Reference
+											sPlacing = string.Empty;
+										// Update Menu
+											rPlayerInventory.bMenuChange = true;
+										}
 									}
 								}
 							}
@@ -72,60 +76,62 @@ public class PlayerInteraction : MonoBehaviour {
 
 			// When LMB is held down
 				if (Input.GetMouseButton(0)) {
-				// Check Bounce Timer
-					if (fBounceTime > 1.5f - fSpeedModifier) {
+					if (rPlayerStatus.GetStatus(1) >= 1) {
+					// Check Bounce Timer
+						if (fBounceTime > 1.5f - fSpeedModifier) {
 
-					// Check if hit object has environment class
-						if (hit.transform.GetComponentInParent<Environment>() != null) {
-						// Display the distance between the gathering object and the player
-                            // rCore.Pnt(Vector3.Magnitude((transform.position - hit.transform.position)));
+						// Check if hit object has environment class
+							if (hit.transform.GetComponentInParent<Environment>() != null) {
+							// Display the distance between the gathering object and the player
+								// rCore.Pnt(Vector3.Magnitude((transform.position - hit.transform.position)));
 
-						// Check if the distance between the player and the environment object is 'close'
-							if (Vector3.Magnitude(transform.position - hit.transform.position) < 1.3f) {
-							// Attach a reference transform to the hit object
-								Transform tGather = hit.transform;
-							// Check if the Item Manager is working or not
-								if (rItemManager != null) {
-								// Parse the material just gathered and update the datalist
-									rItemManager.Gather(tGather.GetComponentInParent<Environment>().sNode);
+							// Check if the distance between the player and the environment object is 'close'
+								if (Vector3.Magnitude(transform.position - hit.transform.position) < 1.3f) {
+								// Attach a reference transform to the hit object
+									Transform tGather = hit.transform;
+								// Check if the Item Manager is working or not
+									if (rItemManager != null) {
+									// Parse the material just gathered and update the datalist
+										rItemManager.Gather(tGather.GetComponentInParent<Environment>().sNode);
 
-								// Give Player Experience
-									rSkillSystem.IncreaseExperience(15);
+									// Give Player Experience
+										rSkillSystem.IncreaseExperience(15);
 
-								// Reduce Energy
-									rPlayerStatus.Action();
+									// Reduce Energy
+										rPlayerStatus.Action(1);
 
-								// Remove environment object
-									tGather.GetComponentInParent<Environment>().Despawn();
+									// Remove environment object
+										tGather.GetComponentInParent<Environment>().Despawn();
 
-								// Reset Progress Bar
-									bProgressBar = false;
-								// Reset Tool
-									rItemManager.DespawnTool();
-									bTool = false;
+									// Reset Progress Bar
+										bProgressBar = false;
+									// Reset Tool
+										rItemManager.DespawnTool();
+										bTool = false;
+									}
+									else
+										rCore.Pnt("Missing Item Manager!");
 								}
-								else
-									rCore.Pnt("Missing Item Manager!");
 							}
+						// Reset Bounce Timer
+							fBounceTime = 0.0f;
 						}
-					// Reset Bounce Timer
-						fBounceTime = 0.0f;
-					}
 
-					else
-					// Update Hold Time
-						fBounceTime += Time.deltaTime;
+						else
+						// Update Hold Time
+							fBounceTime += Time.deltaTime;
 
-					// Display Progress Bar
-					if ((hit.transform.GetComponentInParent<Environment>() != null) && (Vector3.Magnitude(transform.position - hit.transform.position) < 1.3f)) {
-						bProgressBar = true;
-					// Spawn Tool Once
-						if (bTool == false) {
-							rItemManager.SpawnTool(hit.transform.GetComponentInParent<Environment>().sNode);
-							bTool = true;
+						// Display Progress Bar
+						if ((hit.transform.GetComponentInParent<Environment>() != null) && (Vector3.Magnitude(transform.position - hit.transform.position) < 1.3f)) {
+							bProgressBar = true;
+						// Spawn Tool Once
+							if (bTool == false) {
+								rItemManager.SpawnTool(hit.transform.GetComponentInParent<Environment>().sNode);
+								bTool = true;
+							}
+						// Generate Speed Modifier from levels and tools
+							fSpeedModifier = rItemManager.SpeedModify(hit.transform.GetComponentInParent<Environment>().sNode);
 						}
-					// Generate Speed Modifier from levels and tools
-						fSpeedModifier = rItemManager.SpeedModify(hit.transform.GetComponentInParent<Environment>().sNode);
 					}
 				}
 

@@ -7,6 +7,7 @@ public class MapGenerator : MonoBehaviour {
 // Class References
 	[SerializeField] private Core rCore;
 	[SerializeField] private MapValue rValue;
+	[SerializeField] private PlayerStatus rPlayerStatus;
 
 // Gameobject Holder
 	[SerializeField] private Transform tMapHolder;
@@ -97,10 +98,13 @@ public class MapGenerator : MonoBehaviour {
 			bInitial = true;
 		}
 		else {
-		// Generate Next time the respawner will kick in
-			if (iNext <= rCore.iDays) {
-				iNext = Random.Range(2, 5) + rCore.iDays;
-				Spawner();
+		// Check if the Core reference object exists
+			if (rCore != null) {
+			// Generate Next time the respawner will kick in
+				if (iNext <= rCore.iDays) {
+					iNext = Random.Range(2, 5) + rCore.iDays;
+					Spawner();
+				}
 			}
 		}
 	}
@@ -334,6 +338,8 @@ public class MapGenerator : MonoBehaviour {
 				tBerry.GetComponent<Environment>().SetData(rCore, parent.GetComponent<Tile>(), "Berry");
 			// Update Tile
 				parent.GetComponent<Tile>().SetTile(rCore);
+			// Reduce Energy
+				rPlayerStatus.Action(2);
 		}
 		if (node == "Cotton") {
 			// Instantiate new Cotton
@@ -344,6 +350,8 @@ public class MapGenerator : MonoBehaviour {
 				tCotton.GetComponent<Environment>().SetData(rCore, parent.GetComponent<Tile>(), "Cotton");
 			// Update Tile
 				parent.GetComponent<Tile>().SetTile(rCore);
+			// Reduce Energy
+				rPlayerStatus.Action(2);
 		}
 	}
 

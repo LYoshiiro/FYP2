@@ -23,6 +23,7 @@ public class PlayerStatus : MonoBehaviour {
 		if (iCold < 15)
 			iCold++;
 
+	// Kill
 		if (iCold >= 15)
 			rUI.ColdDeath();
 	}
@@ -37,20 +38,20 @@ public class PlayerStatus : MonoBehaviour {
 	}
 
 // Increase Energy
-	public void Rest() {
+	public void Rest(int value) {
 	// Increase Levels
-		iEnergy++;
+		iEnergy += value;
 	// Limiter
 		if (iEnergy > 10)
 			iEnergy = 10;
 	}
 
 // Decrease Energy
-	public void Action() {
+	public void Action(int value) {
 	// Hidden Addition length for kill pop-up
 		if (iEnergy > -5)
-			iEnergy--;
-	// Limiter
+			iEnergy -= value;
+	// Kill
 		if (iEnergy <= -5)
 			rUI.StarveDeath();
 	}

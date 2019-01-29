@@ -16,10 +16,7 @@ public class WaterMotion : MonoBehaviour {
 	}
 
 	private void FixedUpdate() {
-    // Check if game is paused
-        if (rCore.bPause != true)
-		// Water Motion
-			transform.position = v3Origin + (transform.up * (Mathf.Sin(Time.time * fShift)) / fDivision);
+	// Water Motion
+		transform.position = v3Origin + (transform.up * (Mathf.Sin(Time.time * fShift)) / fDivision);
 	}
-
 }
