@@ -1,11 +1,11 @@
-0,0,no,no,Wood,Blank
-1,0,no,no,Stone,Blank
-2,0,no,yes,Cotton,Blank
-3,0,yes,yes,Berry,Blank
-4,0,no,yes,Raft,Blank
-5,0,no,no,Cotton Hat,Blank
-6,0,no,no,Cotton Shirt,Blank
-7,0,no,no,Cotton Pant,Blank
-8,0,no,no,Hoe,Blank
-9,0,no,no,Axe,Blank
-10,0,no,no,Pickaxe,Blank
+0,0,no,no,Wood,Crafting material
+1,0,no,no,Stone,Crafting material
+2,0,no,yes,Cotton,Crafting material
+3,0,yes,yes,Berry,Crafting material
+4,0,no,yes,Raft,A means to escape
+5,0,no,no,Cotton Hat,Warm Clothing
+6,0,no,no,Cotton Shirt,Warm Clothing
+7,0,no,no,Cotton Pant,Warm Clothing
+8,0,no,no,Hoe,Tool to help gathering
+9,0,no,no,Axe,Tool to help lumbering
+10,0,no,no,Pickaxe,Tool to help mining
