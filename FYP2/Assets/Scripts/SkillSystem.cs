@@ -52,6 +52,9 @@ public class SkillSystem : MonoBehaviour {
 			lText.ToArray()[6].text = iGLevel.ToString();	// Update UI
 			lText.ToArray()[7].text = iLLevel.ToString();	// Update UI
 			lText.ToArray()[8].text = iMLevel.ToString();	// Update UI
+
+			lText.ToArray()[9].text = "Level: " + Mathf.Clamp(fExperience, 0, fProgressive) + " / " + fProgressive;
+			lText.ToArray()[10].text = "Experience: "+ fExperience;
 		}
 	}
 
