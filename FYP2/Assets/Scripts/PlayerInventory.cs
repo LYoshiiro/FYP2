@@ -11,6 +11,7 @@ public class PlayerInventory : MonoBehaviour {
 	[SerializeField] private PlayerStatus rPlayerStatus;
 	[SerializeField] private Crafting rCrafting;
 	[SerializeField] private SkillSystem rSkillSystem;
+	[SerializeField] private CursorIndicator rCursorIndicator;
 
 // Menu Variables
 	[SerializeField] private GameObject tItem;
@@ -46,9 +47,9 @@ public class PlayerInventory : MonoBehaviour {
 					gItem.transform.GetChild(1).GetComponent<Text>().text = "x" + rItemManager.GetItems().ToArray()[i].iCount;
 					gItem.transform.GetChild(2).GetComponent<Text>().text = rItemManager.GetItems().ToArray()[i].sNote;
 				// Check usability before setting button
-					gItem.transform.GetChild(3).GetComponent<ItemInteraction>().SetReference(rCore, rItemManager.GetItems().ToArray()[i], GetComponent<PlayerInventory>(), rPlayerInteraction, rPlayerStatus, 0);
+					gItem.transform.GetChild(3).GetComponent<ItemInteraction>().SetReference(rCore, rItemManager.GetItems().ToArray()[i], GetComponent<PlayerInventory>(), rPlayerInteraction, rPlayerStatus, rCursorIndicator, 0);
 				// Assign Reference Function
-					gItem.transform.GetChild(4).GetComponent<ItemInteraction>().SetReference(rCore, rItemManager.GetItems().ToArray()[i], GetComponent<PlayerInventory>(), rPlayerInteraction, rPlayerStatus, 1);
+					gItem.transform.GetChild(4).GetComponent<ItemInteraction>().SetReference(rCore, rItemManager.GetItems().ToArray()[i], GetComponent<PlayerInventory>(), rPlayerInteraction, rPlayerStatus, rCursorIndicator, 1);
 				}
 			// Hook for Visual Data Update
 				bMenuChange = false;

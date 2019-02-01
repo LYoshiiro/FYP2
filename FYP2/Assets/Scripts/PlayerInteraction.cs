@@ -12,6 +12,7 @@ public class PlayerInteraction : MonoBehaviour {
 	[SerializeField] private ItemManager rItemManager;
 	[SerializeField] private MapGenerator rMapGenerator;
 	[SerializeField] private SkillSystem rSkillSystem;
+	[SerializeField] private CursorIndicator rCursorIndicator;
 
 // Facing Direction
 	private RaycastHit hit;
@@ -66,6 +67,8 @@ public class PlayerInteraction : MonoBehaviour {
 											sPlacing = string.Empty;
 										// Update Menu
 											rPlayerInventory.bMenuChange = true;
+										// Reset Cursor
+											rCursorIndicator.ResetCursor();
 										}
 									}
 								}

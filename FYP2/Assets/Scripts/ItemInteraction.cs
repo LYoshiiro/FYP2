@@ -10,14 +10,16 @@ public class ItemInteraction : MonoBehaviour {
 	[SerializeField] private PlayerInventory rPlayerInventory;
 	[SerializeField] private PlayerInteraction rPlayerInteraction;
 	[SerializeField] private PlayerStatus rPlayerStatus;
+	[SerializeField] private CursorIndicator rCursorIndicator;
 
 // Set Reference
-	public void SetReference(Core core, Item item, PlayerInventory inventory, PlayerInteraction interaction, PlayerStatus status, int type) {
+	public void SetReference(Core core, Item item, PlayerInventory inventory, PlayerInteraction interaction, PlayerStatus status, CursorIndicator cursor, int type) {
 		rCore = core;
 		rItem = item;
 		rPlayerInventory = inventory;
 		rPlayerInteraction = interaction;
 		rPlayerStatus = status;
+		rCursorIndicator = cursor;
 		switch (type) {
 		// Use Button
 			case 0:
@@ -42,6 +44,8 @@ public class ItemInteraction : MonoBehaviour {
 			rPlayerInventory.CloseMenu();
 		// Attach Reference
 			rPlayerInteraction.sPlacing = rItem.sName;
+		// Change Cursor
+			rCursorIndicator.SetCursor();
 		}
 	}
 
