@@ -52,11 +52,12 @@ public class PlayerInteraction : MonoBehaviour {
 					// Print sPlacing
 						// rCore.Pnt(sPlacing);
 					// Set the indicator
-						rUI.SetIndicator(sPlacing, 1);
+						rUI.SetIndicator(sPlacing, 2);
 					// When LMB is pressed
 						if (Input.GetMouseButtonDown(0)) {
 						// Disable the progress bar
 							bProgressBar = false;
+
 						// Check if the Object hit was a tile
 							if (hit.transform.GetComponentInParent<Tile>() != null) {
 							// Check if the tile is obstructed
@@ -80,6 +81,23 @@ public class PlayerInteraction : MonoBehaviour {
 									}
 								}
 							}
+
+						// Check specifically if its the water that is being interacted with.
+							else if (hit.transform.GetComponent<WaterMotion>() != null) {
+							// Item Manager Check
+								if (rItemManager != null) {
+								// Check for Raft
+									if (rItemManager.GetItems().Find(i => i.sName == "Raft").iCount > 0) {
+									// Place Placeholder
+										rMapGenerator.SpawnRaft(hit.point);
+									// Win Game
+										rCore.bWin = true;
+									// Pause Game
+										rCore.bPause = true;
+									}
+								}
+							}
+
 						}
 					}
 				}
@@ -155,26 +173,6 @@ public class PlayerInteraction : MonoBehaviour {
 					bTool = false;
 					rItemManager.DespawnTool();
 				}
-
-			// When RMB is pressed
-				if (Input.GetMouseButtonDown(1)) {
-				// Check specifically if its the water that is being interacted with.
-					if (hit.transform.GetComponent<WaterMotion>() != null) {
-					// Item Manager Check
-						if (rItemManager != null) {
-						// Check for Raft
-							if (rItemManager.GetItems().Find(i => i.sName == "Raft").iCount > 0) {
-							// Place Placeholder
-								rMapGenerator.SpawnRaft(hit.point);
-							// Win Game
-								rCore.bWin = true;
-							// Pause Game
-								rCore.bPause = true;
-							}
-						}
-					}
-				}
-
             }
         }
 	}

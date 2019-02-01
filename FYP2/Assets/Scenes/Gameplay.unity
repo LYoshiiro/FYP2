@@ -5745,6 +5745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCore: {fileID: 1187164737}
+  rUI: {fileID: 886340558}
   rItemManager: {fileID: 1187164738}
   rPlayerInventory: {fileID: 500944220}
   rSkillSystem: {fileID: 858392847}

@@ -24,7 +24,7 @@ public class ProgressBar : MonoBehaviour {
 			img.gameObject.SetActive(false);
 	}
 
-	private void Update() {
+	private void FixedUpdate() {
 		if (iType == 0)
 		// Move placement to follow mouse
 			transform.position = Input.mousePosition + v3Offset;

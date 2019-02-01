@@ -43,10 +43,26 @@ public class UI : MonoBehaviour {
 		switch (call) {
 		// Turn off the Indicator
 			default: lTransform.ToArray()[4].gameObject.SetActive(false); break;
-		// Turn on the Indicator
+		// Turn on the Indicator(Blank)
 			case 1: 
 			// Set message text
+				lTransform.ToArray()[4].GetComponentInChildren<Text>().text = type;
+
+			// Set message active
+				lTransform.ToArray()[4].gameObject.SetActive(true);
+			break;
+		// Turn on the Indicator(Placing)
+			case 2: 
+			// Set message text
 				lTransform.ToArray()[4].GetComponentInChildren<Text>().text = "Placing: " + type;
+
+			// Set message active
+				lTransform.ToArray()[4].gameObject.SetActive(true);
+			break;
+		// Turn on the Indicator(Crafting)
+			case 3:
+			// Set message text
+				lTransform.ToArray()[4].GetComponentInChildren<Text>().text = "Crafted: " + type;
 
 			// Set message active
 				lTransform.ToArray()[4].gameObject.SetActive(true);

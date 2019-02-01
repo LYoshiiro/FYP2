@@ -5,6 +5,7 @@ using UnityEngine;
 public class Crafting : MonoBehaviour {
 // Class Reference
 	[SerializeField] private Core rCore;
+	[SerializeField] private UI rUI;
 	[SerializeField] private ItemManager rItemManager;
 	[SerializeField] private PlayerInventory rPlayerInventory;
 	[SerializeField] private SkillSystem rSkillSystem;
@@ -18,6 +19,7 @@ public class Crafting : MonoBehaviour {
 				rPlayerInventory.CloseMenu();
 				rSkillSystem.CloseMenu();
 				tMenu.gameObject.SetActive(!tMenu.gameObject.activeSelf);
+				rUI.SetIndicator("Crafting!", (tMenu.gameObject.activeSelf == true)? 1 : 0);
 			}
 		}
 	}
@@ -25,6 +27,7 @@ public class Crafting : MonoBehaviour {
 // Close the Inventory Menu
 	public void CloseMenu() {
 		tMenu.gameObject.SetActive(false);
+		rUI.SetIndicator(string.Empty, 0);
 	} 
 
 // Crafting Raft Function
@@ -39,6 +42,8 @@ public class Crafting : MonoBehaviour {
 			rItemManager.GetItems().Find(i => i.sName == "Raft").CountUpdate(1);
 		// Update Menu
 			rPlayerInventory.bMenuChange = true;
+		// Update Indicator
+			rUI.SetIndicator("Raft x1", 3);
 		}
 	}
 
@@ -56,6 +61,8 @@ public class Crafting : MonoBehaviour {
 					rItemManager.GetItems().Find(i => i.sName == "Cotton Hat").CountUpdate(1);
 				// Update Menu
 					rPlayerInventory.bMenuChange = true;
+				// Update Indicator
+					rUI.SetIndicator("Cotton Hat x1", 3);
 			}
 			break;
 		
@@ -69,6 +76,8 @@ public class Crafting : MonoBehaviour {
 					rItemManager.GetItems().Find(i => i.sName == "Cotton Shirt").CountUpdate(1);
 				// Update Menu
 					rPlayerInventory.bMenuChange = true;
+				// Update Indicator
+					rUI.SetIndicator("Cotton Shirt x1", 3);
 			}
 			break;
 		
@@ -82,6 +91,8 @@ public class Crafting : MonoBehaviour {
 					rItemManager.GetItems().Find(i => i.sName == "Cotton Pant").CountUpdate(1);
 				// Update Menu
 					rPlayerInventory.bMenuChange = true;
+				// Update Indicator
+					rUI.SetIndicator("Cotton Pant x1", 3);
 			}
 			break;
 			
@@ -108,6 +119,8 @@ public class Crafting : MonoBehaviour {
 					rItemManager.GetItems().Find(i => i.sName == "Hoe").CountUpdate(1);
 				// Update Menu
 					rPlayerInventory.bMenuChange = true;
+				// Update Indicator
+					rUI.SetIndicator("Hoe x1", 3);
 			}
 			break;
 		
@@ -123,6 +136,8 @@ public class Crafting : MonoBehaviour {
 					rItemManager.GetItems().Find(i => i.sName == "Axe").CountUpdate(1);
 				// Update Menu
 					rPlayerInventory.bMenuChange = true;
+				// Update Indicator
+					rUI.SetIndicator("Axe x1", 3);
 			}
 			break;
 		
@@ -138,6 +153,8 @@ public class Crafting : MonoBehaviour {
 					rItemManager.GetItems().Find(i => i.sName == "Pickaxe").CountUpdate(1);
 				// Update Menu
 					rPlayerInventory.bMenuChange = true;
+				// Update Indicator
+					rUI.SetIndicator("Pickaxe x1", 3);
 			}
 			break;
 			

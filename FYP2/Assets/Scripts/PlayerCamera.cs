@@ -34,7 +34,7 @@ public class PlayerCamera : MonoBehaviour {
 		cCamera = transform.GetComponent<Camera>();
 	}
 
-	private void Update() {
+	private void FixedUpdate() {
 		switch (iType) {
 			case 0:
 			// Check if game is paused
