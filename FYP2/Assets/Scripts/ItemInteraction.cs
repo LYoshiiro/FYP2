@@ -45,7 +45,7 @@ public class ItemInteraction : MonoBehaviour {
 		// Attach Reference
 			rPlayerInteraction.sPlacing = rItem.sName;
 		// Change Cursor
-			rCursorIndicator.SetCursor();
+			rCursorIndicator.SetCursor(1);
 		}
 	}
 

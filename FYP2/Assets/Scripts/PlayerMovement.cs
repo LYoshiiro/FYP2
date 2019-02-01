@@ -17,8 +17,8 @@ public class PlayerMovement : MonoBehaviour {
     private float fMoveZ;
 
 // Jump
-    private bool bJump;
-    private bool bInAir;
+    // private bool bJump;
+    // private bool bInAir;
 
 // Out of Bounce
     [SerializeField] private Transform tWater;
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	private void Start() {
 	// Set Initial Variables
-        bInAir = false;
+        // bInAir = false;
     // Set Player to ignore water collision
         Physics.IgnoreCollision(tWater.GetComponent<Collider>(), GetComponentInChildren<Collider>());
 	}
@@ -45,8 +45,8 @@ public class PlayerMovement : MonoBehaviour {
             //         bJump = true;
         
         // Check if Player is in the air
-            if (transform.position.y > 0.1f) bInAir = true;
-            else                             bInAir = false;
+            // if (transform.position.y > 0.1f) bInAir = true;
+            // else                             bInAir = false;
         
         // Apply Axis Movement Input
             Vector3 v3Move = new Vector3(fMoveX, 0, fMoveZ) * (Time.deltaTime * fSpeed);
@@ -54,14 +54,14 @@ public class PlayerMovement : MonoBehaviour {
             transform.Translate(v3Move, Space.Self);
 
         // Apply Jump Movement Input
-            if (bJump) {
-            // unset jump
-                bJump = false;
-                if (rBody != null) {
-                    Vector3 v3Jump = transform.up * fSpeed;
-                    rBody.AddForce(v3Jump, ForceMode.Impulse);
-                }
-            }
+            // if (bJump) {
+            // // unset jump
+            //     bJump = false;
+            //     if (rBody != null) {
+            //         Vector3 v3Jump = transform.up * fSpeed;
+            //         rBody.AddForce(v3Jump, ForceMode.Impulse);
+            //     }
+            // }
         
         // Get Player's last closest point
             if ((transform.position.x <  (rMap.GetIslandSize().x / 2.0f) && transform.position.z <  (rMap.GetIslandSize().y / 2.0f)) &&

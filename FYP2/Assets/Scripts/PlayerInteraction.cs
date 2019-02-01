@@ -13,6 +13,7 @@ public class PlayerInteraction : MonoBehaviour {
 	[SerializeField] private MapGenerator rMapGenerator;
 	[SerializeField] private SkillSystem rSkillSystem;
 	[SerializeField] private CursorIndicator rCursorIndicator;
+	[SerializeField] private UI rUI;
 
 // Facing Direction
 	private RaycastHit hit;
@@ -46,8 +47,12 @@ public class PlayerInteraction : MonoBehaviour {
 
 			// Check for if an object is being placed
 				if (sPlacing != string.Empty) {
-					// Check if player has enough energy to plant stuff
+				// Check if player has enough energy to plant stuff
 					if (rPlayerStatus.GetStatus(1) >= 2) {
+					// Print sPlacing
+						// rCore.Pnt(sPlacing);
+					// Set the indicator
+						rUI.SetIndicator(sPlacing, 1);
 					// When LMB is pressed
 						if (Input.GetMouseButtonDown(0)) {
 						// Disable the progress bar
@@ -68,7 +73,9 @@ public class PlayerInteraction : MonoBehaviour {
 										// Update Menu
 											rPlayerInventory.bMenuChange = true;
 										// Reset Cursor
-											rCursorIndicator.ResetCursor();
+											rCursorIndicator.SetCursor(0);
+										// Reset Indicator
+											rUI.SetIndicator(sPlacing, 0);
 										}
 									}
 								}

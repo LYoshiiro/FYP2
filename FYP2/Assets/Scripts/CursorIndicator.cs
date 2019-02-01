@@ -7,18 +7,17 @@ public class CursorIndicator : MonoBehaviour {
 	[SerializeField] private Texture2D tCursorOriginal;
 	[SerializeField] private Texture2D tCursorChanged;
 	private CursorMode cMode = CursorMode.Auto;
+	
 	private void Start() {
 	// Reset the cursor
-		ResetCursor();
+		SetCursor(0);
 	}
 
-// Set new Cursor
-	public void SetCursor() {
-		Cursor.SetCursor(tCursorChanged, Vector2.zero, cMode);
-	}
-
-// Reset Cursor
-	public void ResetCursor() {
-		Cursor.SetCursor(tCursorOriginal, Vector2.zero, cMode);
+// Set Cursor
+	public void SetCursor(int value) {
+		switch (value) {
+			case 0: Cursor.SetCursor(tCursorOriginal, Vector2.zero, cMode); break;
+			case 1: Cursor.SetCursor(tCursorChanged, Vector2.zero, cMode); break;
+		}
 	}
 }

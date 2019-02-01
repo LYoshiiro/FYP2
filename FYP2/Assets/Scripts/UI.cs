@@ -38,4 +38,19 @@ public class UI : MonoBehaviour {
 	// Set game to dead
 		rCore.bDeath = true;
 	}
+
+	public void SetIndicator(string type, int call) {
+		switch (call) {
+		// Turn off the Indicator
+			default: lTransform.ToArray()[4].gameObject.SetActive(false); break;
+		// Turn on the Indicator
+			case 1: 
+			// Set message text
+				lTransform.ToArray()[4].GetComponentInChildren<Text>().text = "Placing: " + type;
+
+			// Set message active
+				lTransform.ToArray()[4].gameObject.SetActive(true);
+			break;
+		}
+	}
 }

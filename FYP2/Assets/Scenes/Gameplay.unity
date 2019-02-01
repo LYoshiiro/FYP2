@@ -8128,6 +8128,7 @@ MonoBehaviour:
   - {fileID: 1613416548}
   - {fileID: 2055275293}
   - {fileID: 1851128944}
+  - {fileID: 1823470913}
 --- !u!1 &896314155
 GameObject:
   m_ObjectHideFlags: 0
@@ -8310,6 +8311,7 @@ MonoBehaviour:
   rMapGenerator: {fileID: 1733594383}
   rSkillSystem: {fileID: 858392847}
   rCursorIndicator: {fileID: 1949062036}
+  rUI: {fileID: 886340558}
   fBounceTime: 0
   fSpeedModifier: 0
   bProgressBar: 0
@@ -12236,12 +12238,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1823470913}
   m_Layer: 5
-  m_Name: Current Selected
+  m_Name: Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1823470913
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13081,7 +13083,7 @@ GameObject:
   - component: {fileID: 2058894680}
   - component: {fileID: 2058894679}
   m_Layer: 5
-  m_Name: Selected
+  m_Name: Placing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13137,7 +13139,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Selected: '
+  m_Text: 'Placing:'
 --- !u!222 &2058894680
 CanvasRenderer:
   m_ObjectHideFlags: 0
