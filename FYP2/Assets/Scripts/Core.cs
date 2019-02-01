@@ -7,6 +7,8 @@ using UnityEngine;
 public class Core : MonoBehaviour {
 // Reference
 	[SerializeField] private PlayerStatus rPlayerStatus; 
+	[SerializeField] private Transform tLight;
+
 // Global Variables
 	[SerializeField] public bool bWin;
 	[SerializeField] public bool bPause;
@@ -45,6 +47,12 @@ public class Core : MonoBehaviour {
 			// Increase Energy
 				rPlayerStatus.Rest(5);
 			}
+			
+		// Update Skybox
+			Quaternion qRotation = Quaternion.Euler((fTime / 150.0f * 360), 90, 0);
+			tLight.rotation = qRotation;
+			// tLight.RotateAround(tLight.position, Vector3.right, ((fTime / 150.0f) * 360.0f));
+			// Pnt(fTime / 150.0f * 360);
 		}
 
 	// Pause the Whole Game Cause Player Died
