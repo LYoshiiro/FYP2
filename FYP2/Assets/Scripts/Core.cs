@@ -8,11 +8,13 @@ public class Core : MonoBehaviour {
 // Reference
 	[SerializeField] private PlayerStatus rPlayerStatus; 
 	[SerializeField] private Transform tLight;
+	[SerializeField] private Rain rRain;
 
 // Global Variables
 	[SerializeField] public bool bWin;
 	[SerializeField] public bool bPause;
 	[SerializeField] public bool bDeath;
+	[SerializeField] public bool bRain;
 	[SerializeField] public float fTime;
 	[SerializeField] public int iDays;
 
@@ -22,6 +24,8 @@ public class Core : MonoBehaviour {
 	// Set Initial Values
 		fTime = 0.0f;
 		iDays = 0;
+	// Generate Chance of Rain
+		bRain = (UnityEngine.Random.Range(1, 3) == 2);
 	}
 
 	private void FixedUpdate() {
@@ -46,6 +50,8 @@ public class Core : MonoBehaviour {
 				rPlayerStatus.Freezing();
 			// Increase Energy
 				rPlayerStatus.Rest(5);
+			// Generate Chance of Rain
+				bRain = (UnityEngine.Random.Range(1, 3) == 2);
 			}
 			
 		// Update Skybox
@@ -53,6 +59,9 @@ public class Core : MonoBehaviour {
 			tLight.rotation = qRotation;
 			// tLight.RotateAround(tLight.position, Vector3.right, ((fTime / 150.0f) * 360.0f));
 			// Pnt(fTime / 150.0f * 360);
+
+		// Update Rain
+			rRain.gameObject.SetActive(bRain);
 		}
 
 	// Pause the Whole Game Cause Player Died

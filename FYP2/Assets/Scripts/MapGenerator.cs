@@ -27,6 +27,7 @@ public class MapGenerator : MonoBehaviour {
 	[SerializeField] private int iStone;
 	[SerializeField] private int iBerry;
 	[SerializeField] private int iCotton;
+	[SerializeField] private int[] iTent;
 	private int iTile;
 	private List<int> lSpawnOffset;
 	private bool bInitial;
@@ -380,15 +381,28 @@ public class MapGenerator : MonoBehaviour {
 		}
 		else if (node == "Tent") {
 		// Check if it is in the valid columns
-			if ((0 < parent.GetComponent<Tile>().GetNumber() / 10) && (parent.GetComponent<Tile>().GetNumber() / 10 < v2Size.x)) {
+			if ((0 < parent.GetComponent<Tile>().GetNumber() / 10) && (parent.GetComponent<Tile>().GetNumber() / 10 < v2Size.x - 1)) {
 			// Check if it is in the valid rows
-				if ((0 < parent.GetComponent<Tile>().GetNumber() % 10) && (parent.GetComponent<Tile>().GetNumber() % 10 < v2Size.x)) {
+				if ((0 < parent.GetComponent<Tile>().GetNumber() % 10) && (parent.GetComponent<Tile>().GetNumber() % 10 < v2Size.x - 1)) {
 				// Instantiate new Tent
 					Transform tTent = Instantiate(rValue.lPrefabs.ToArray()[7], parent) as Transform;
 				// Assign Parent Object
 					tTent.parent = tPlacementHolder;
 				// Update Tile
 					parent.GetComponent<Tile>().SetTile(rCore);
+				// Get Tile Number;
+					int iCentral = parent.GetComponent<Tile>().GetNumber();
+					iTent = new int[] { (iCentral - (int)(v2Size.x - 1)), 
+										(iCentral - (int)(v2Size.x)),
+										(iCentral - (int)(v2Size.x + 1)),
+										(iCentral - 1),
+										(iCentral + 1),
+										(iCentral + (int)(v2Size.x - 1)),
+										(iCentral + (int)(v2Size.x)),
+										(iCentral + (int)(v2Size.x + 1))};
+				// Obstruct rhw area around the Tent spawn
+					for (int child = 0; child < iTent.Length; child++)
+						tMapHolder.GetChild(iTent[child]).GetComponent<Tile>().SetTile(rCore);
 				// Reduce Energy
 					rPlayerStatus.Action(2);
 				// Return Complete
