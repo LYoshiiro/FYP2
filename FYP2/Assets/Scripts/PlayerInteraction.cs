@@ -63,24 +63,23 @@ public class PlayerInteraction : MonoBehaviour {
 							// Check if the tile is obstructed
 									
 								if (hit.transform.GetComponentInParent<Tile>().bObstructed == false) {
-								// Instantiate new placable Environment object <if>
-									rMapGenerator.SpawnEnvironment(sPlacing, hit.transform.parent);
-								// Instantiate new placable Structure object <else>
-									rMapGenerator.SpawnPlaceable(sPlacing, hit.transform.parent);
-								
-								// Search through the array to find instance
-									for (int k = 0; k < rItemManager.GetItems().ToArray().Length; k++) {
-										if (rItemManager.GetItems().ToArray()[k].sName == sPlacing) {
-										// Update Count
-											rItemManager.GetItems().ToArray()[k].CountUpdate(-1);
-										// Reset Reference
-											sPlacing = string.Empty;
-										// Update Menu
-											rPlayerInventory.bMenuChange = true;
-										// Reset Cursor
-											rCursorIndicator.SetCursor(0);
-										// Reset Indicator
-											rUI.SetIndicator(sPlacing, 0);
+								// Check if the Placing OBject failed to parsed
+									if ((rMapGenerator.SpawnEnvironment(sPlacing, hit.transform.parent) == true) ||
+										(rMapGenerator.SpawnPlaceable(sPlacing, hit.transform.parent) == true)) {
+									// Search through the array to find instance
+										for (int k = 0; k < rItemManager.GetItems().ToArray().Length; k++) {
+											if (rItemManager.GetItems().ToArray()[k].sName == sPlacing) {
+											// Update Count
+												rItemManager.GetItems().ToArray()[k].CountUpdate(-1);
+											// Reset Reference
+												sPlacing = string.Empty;
+											// Update Menu
+												rPlayerInventory.bMenuChange = true;
+											// Reset Cursor
+												rCursorIndicator.SetCursor(0);
+											// Reset Indicator
+												rUI.SetIndicator(sPlacing, 0);
+											}
 										}
 									}
 								}

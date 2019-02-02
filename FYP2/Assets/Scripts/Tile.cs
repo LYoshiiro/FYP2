@@ -8,6 +8,7 @@ public class Tile : MonoBehaviour {
 
 // Interaction Data
 	[SerializeField] public bool bObstructed;
+	[SerializeField] private int iNumber;
 
 	private void Start() {
 		bObstructed = false;
@@ -17,5 +18,13 @@ public class Tile : MonoBehaviour {
 	public void SetTile(Core core) {
 		rCore = core;
 		bObstructed = true;
+	}
+
+	public void SetNumber(int value) {
+		iNumber = value;
+	}
+
+	public int GetNumber() {
+		return iNumber;
 	}
 }

@@ -75,6 +75,8 @@ public class MapGenerator : MonoBehaviour {
 				tTile.parent = tMapHolder;
 			// Rename Tile
 				tTile.name = "T" + iTile++;
+			// Assign Number
+				tTile.GetComponentInChildren<Tile>().SetNumber(iTile - 1);
 			// Downscale Tile Size
 				tTile.localScale = Vector3.one * (1 - fDownscale);
 			}
@@ -328,7 +330,7 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 // Spawn Environment Tile
-	public void SpawnEnvironment(string node, Transform parent) {
+	public bool SpawnEnvironment(string node, Transform parent) {
 		if (node == "Berry") {
 			// Instantiate new Berry
 				Transform tBerry = Instantiate(rValue.lPrefabs.ToArray()[3], parent) as Transform;
@@ -340,6 +342,8 @@ public class MapGenerator : MonoBehaviour {
 				parent.GetComponent<Tile>().SetTile(rCore);
 			// Reduce Energy
 				rPlayerStatus.Action(2);
+			// Return Complete
+				return true;
 		}
 		else if (node == "Cotton") {
 			// Instantiate new Cotton
@@ -352,14 +356,16 @@ public class MapGenerator : MonoBehaviour {
 				parent.GetComponent<Tile>().SetTile(rCore);
 			// Reduce Energy
 				rPlayerStatus.Action(2);
+			// Return Complete
+				return true;
 		}
-		// If no match
-		else
-			return;
+	// If no match
+		else return false;
+
 	}
 
 // Spawn Placables
-	public void SpawnPlaceable(string node, Transform parent) {
+	public bool SpawnPlaceable(string node, Transform parent) {
 		if (node == "Fireplace") {
 			// Instantiate new Fireplace
 				Transform tFireplace = Instantiate(rValue.lPrefabs.ToArray()[6], parent) as Transform;
@@ -369,20 +375,33 @@ public class MapGenerator : MonoBehaviour {
 				parent.GetComponent<Tile>().SetTile(rCore);
 			// Reduce Energy
 				rPlayerStatus.Action(2);
+			// Return Complete
+				return true;
 		}
 		else if (node == "Tent") {
-			// Instantiate new Tent
-				Transform tTent = Instantiate(rValue.lPrefabs.ToArray()[7], parent) as Transform;
-			// Assign Parent Object
-				tTent.parent = tPlacementHolder;
-			// Update Tile
-				parent.GetComponent<Tile>().SetTile(rCore);
-			// Reduce Energy
-				rPlayerStatus.Action(2);
+		// Check if it is in the valid columns
+			if ((0 < parent.GetComponent<Tile>().GetNumber() / 10) && (parent.GetComponent<Tile>().GetNumber() / 10 < v2Size.x)) {
+			// Check if it is in the valid rows
+				if ((0 < parent.GetComponent<Tile>().GetNumber() % 10) && (parent.GetComponent<Tile>().GetNumber() % 10 < v2Size.x)) {
+				// Instantiate new Tent
+					Transform tTent = Instantiate(rValue.lPrefabs.ToArray()[7], parent) as Transform;
+				// Assign Parent Object
+					tTent.parent = tPlacementHolder;
+				// Update Tile
+					parent.GetComponent<Tile>().SetTile(rCore);
+				// Reduce Energy
+					rPlayerStatus.Action(2);
+				// Return Complete
+					return true;
+				}
+			// Return Failed
+				else return false;
+			}
+		// Return Failed
+			else return false;
 		}
-		// If no match
-		else
-			return;
+	// If no match
+		else return false;
 	}
 
 // Get the holder transforms
