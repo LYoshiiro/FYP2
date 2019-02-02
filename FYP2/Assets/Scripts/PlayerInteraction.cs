@@ -61,9 +61,13 @@ public class PlayerInteraction : MonoBehaviour {
 						// Check if the Object hit was a tile
 							if (hit.transform.GetComponentInParent<Tile>() != null) {
 							// Check if the tile is obstructed
+									
 								if (hit.transform.GetComponentInParent<Tile>().bObstructed == false) {
-								// Instantiate new placable Environment object
+								// Instantiate new placable Environment object <if>
 									rMapGenerator.SpawnEnvironment(sPlacing, hit.transform.parent);
+								// Instantiate new placable Structure object <else>
+									rMapGenerator.SpawnPlaceable(sPlacing, hit.transform.parent);
+								
 								// Search through the array to find instance
 									for (int k = 0; k < rItemManager.GetItems().ToArray().Length; k++) {
 										if (rItemManager.GetItems().ToArray()[k].sName == sPlacing) {

@@ -49,7 +49,7 @@ public class Core : MonoBehaviour {
 			}
 			
 		// Update Skybox
-			Quaternion qRotation = Quaternion.Euler((fTime / 150.0f * 360), 90, 0);
+			Quaternion qRotation = Quaternion.Euler((fTime / 150.0f * 360), 135, 0);
 			tLight.rotation = qRotation;
 			// tLight.RotateAround(tLight.position, Vector3.right, ((fTime / 150.0f) * 360.0f));
 			// Pnt(fTime / 150.0f * 360);

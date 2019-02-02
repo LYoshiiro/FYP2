@@ -158,10 +158,69 @@ public class Crafting : MonoBehaviour {
 			}
 			break;
 			
+		// Bucket
+			case 3:
+			// Check cost
+				if (rItemManager.GetItems().Find(i => i.sName == "Wood").iCount >= 3) {
+				// Reduce cost
+					rItemManager.GetItems().Find(i => i.sName == "Wood").CountUpdate(-3);
+				// Add item
+					rItemManager.GetItems().Find(i => i.sName == "Bucket").CountUpdate(1);
+				// Update Menu
+					rPlayerInventory.bMenuChange = true;
+				// Update Indicator
+					rUI.SetIndicator("Bucket x1", 3);
+			}
+			break;
+
 		// Irregularity
 			default:
 				rCore.Pnt("No call value!");
 			break;
 		}
 	}
+
+// Fireplace & Tent
+	public void CraftStructures(int call) {
+	// Check which section is being called
+		switch (call) {
+		// Fireplace
+			case 0:
+			// Check cost
+				if ((rItemManager.GetItems().Find(i => i.sName == "Wood").iCount >= 3) &&
+					(rItemManager.GetItems().Find(i => i.sName == "Stone").iCount >= 3)) {
+				// Reduce cost
+					rItemManager.GetItems().Find(i => i.sName == "Wood").CountUpdate(-3);
+					rItemManager.GetItems().Find(i => i.sName == "Stone").CountUpdate(-3);
+				// Add item
+					rItemManager.GetItems().Find(i => i.sName == "Fireplace").CountUpdate(1);
+				// Update Menu
+					rPlayerInventory.bMenuChange = true;
+				// Update Indicator
+					rUI.SetIndicator("Fireplace x1", 3);
+			}
+			break;
+		// Tent
+			case 1:
+			// Check cost
+				if ((rItemManager.GetItems().Find(i => i.sName == "Wood").iCount >= 3) &&
+					(rItemManager.GetItems().Find(i => i.sName == "Cotton").iCount >= 3)) {
+				// Reduce cost
+					rItemManager.GetItems().Find(i => i.sName == "Wood").CountUpdate(-3);
+					rItemManager.GetItems().Find(i => i.sName == "Cotton").CountUpdate(-3);
+				// Add item
+					rItemManager.GetItems().Find(i => i.sName == "Tent").CountUpdate(1);
+				// Update Menu
+					rPlayerInventory.bMenuChange = true;
+				// Update Indicator
+					rUI.SetIndicator("Tent x1", 3);
+			}
+			break;
+		// Irregularity
+			default:
+				rCore.Pnt("No call value!");
+			break;
+		}
+	}
+
 }

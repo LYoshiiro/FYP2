@@ -341,7 +341,7 @@ public class MapGenerator : MonoBehaviour {
 			// Reduce Energy
 				rPlayerStatus.Action(2);
 		}
-		if (node == "Cotton") {
+		else if (node == "Cotton") {
 			// Instantiate new Cotton
 				Transform tCotton = Instantiate(rValue.lPrefabs.ToArray()[4], parent) as Transform;
 			// Assign Parent Object
@@ -353,6 +353,36 @@ public class MapGenerator : MonoBehaviour {
 			// Reduce Energy
 				rPlayerStatus.Action(2);
 		}
+		// If no match
+		else
+			return;
+	}
+
+// Spawn Placables
+	public void SpawnPlaceable(string node, Transform parent) {
+		if (node == "Fireplace") {
+			// Instantiate new Fireplace
+				Transform tFireplace = Instantiate(rValue.lPrefabs.ToArray()[6], parent) as Transform;
+			// Assign Parent Object
+				tFireplace.parent = tPlacementHolder;
+			// Update Tile
+				parent.GetComponent<Tile>().SetTile(rCore);
+			// Reduce Energy
+				rPlayerStatus.Action(2);
+		}
+		else if (node == "Tent") {
+			// Instantiate new Tent
+				Transform tTent = Instantiate(rValue.lPrefabs.ToArray()[7], parent) as Transform;
+			// Assign Parent Object
+				tTent.parent = tPlacementHolder;
+			// Update Tile
+				parent.GetComponent<Tile>().SetTile(rCore);
+			// Reduce Energy
+				rPlayerStatus.Action(2);
+		}
+		// If no match
+		else
+			return;
 	}
 
 // Get the holder transforms
