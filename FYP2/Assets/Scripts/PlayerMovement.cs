@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private MapGenerator rMap;
 	[SerializeField] private Rigidbody rBody;
     [SerializeField] private Camera rCamera;
+    [SerializeField] private Transform tTornado;
 
 // Movement
     [SerializeField] private string sMoveX;
@@ -38,6 +39,8 @@ public class PlayerMovement : MonoBehaviour {
         // Get Axis Input
             fMoveX = Input.GetAxis(sMoveX);
             fMoveZ = Input.GetAxis(sMoveZ);
+
+        // Shift Player closer to tornado
 
         // Get Jump Input (Disabled due to not used)
             // if (bInAir != true)

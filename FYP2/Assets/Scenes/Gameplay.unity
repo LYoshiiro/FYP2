@@ -2460,6 +2460,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &663807719 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1785277925669886, guid: 46de2ea2e3e5d124a9047aa0ed5d87bc,
+    type: 2}
+  m_PrefabInternal: {fileID: 1178729515}
+--- !u!114 &663807720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 663807719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d76d29fd0dbfe846895f04b91e1de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rCore: {fileID: 1187164737}
+  rMapGenerator: {fileID: 1733594383}
+  v3Offset: {x: 0, y: 0, z: 0}
+  v3Direction: {x: 0, y: 0, z: 0}
+  fSpeed: 0.01
 --- !u!1 &671513569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2730,7 +2751,7 @@ MonoBehaviour:
   fSensitivityX: 5
   fSensitivityY: 5
   fMinY: 0
-  fMaxY: 80
+  fMaxY: 35
   v3Direction: {x: 0, y: 0, z: 0}
   qRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!81 &717632584
@@ -4110,6 +4131,7 @@ MonoBehaviour:
   rMap: {fileID: 1733594383}
   rBody: {fileID: 929006230}
   rCamera: {fileID: 717632586}
+  tTornado: {fileID: 0}
   sMoveX: Horizontal
   sMoveZ: Vertical
   fSpeed: 3
@@ -4797,10 +4819,12 @@ MonoBehaviour:
   rPlayerStatus: {fileID: 929006231}
   tLight: {fileID: 932312295}
   rRain: {fileID: 329749444}
+  rTornado: {fileID: 663807720}
   bWin: 0
   bPause: 0
   bDeath: 0
   bRain: 0
+  bTornado: 0
   fTime: 0
   iDays: 0
 --- !u!114 &1187164738
@@ -8164,6 +8188,7 @@ MonoBehaviour:
   iStone: 0
   iBerry: 0
   iCotton: 0
+  iTent: 
   iNext: 0
 --- !u!198 &1763034921 stripped
 ParticleSystem:
@@ -8271,7 +8296,7 @@ Transform:
   m_GameObject: {fileID: 1770648550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.25, z: 0}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 500, y: 1, z: 500}
   m_Children: []
   m_Father: {fileID: 1932761434}
   m_RootOrder: 3
