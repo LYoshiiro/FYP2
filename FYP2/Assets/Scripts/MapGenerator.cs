@@ -110,6 +110,36 @@ public class MapGenerator : MonoBehaviour {
 				}
 			}
 		}
+
+	// Firespawning
+		if (tPlacementHolder.childCount != 0) {
+		// Get Fireplace
+			Transform tFireplace = tPlacementHolder.Find("Fireplace");
+		// Create list for trees
+			List<Transform> lTrees = new List<Transform>();
+		// Get Trees
+			foreach (Transform child in tEnvironmentHolder) {
+			// Search via Environment's sNode Value
+				if (child.GetComponent<Environment>().sNode == "Wood") {
+					lTrees.Add(child);
+				}
+			}
+
+		// Create distance array
+			float[] fTreeDistance = new float[lTrees.ToArray().Length];
+		// Get the distance
+			for (int i = 0; i < lTrees.ToArray().Length; i++) {
+				fTreeDistance[i] = Vector3.Magnitude(tFireplace.position - lTrees[i].position);
+			}
+
+		// Spawn Fire
+			for (int j = 0; j < lTrees.ToArray().Length; j++) {
+			// Check distance
+				if (fTreeDistance[j] < 2) {
+					SpawnFire(lTrees[j].GetComponent<Environment>().GetTile());
+				}
+			}
+		}
 	}
 
 // Generate Environment Objects
@@ -137,6 +167,8 @@ public class MapGenerator : MonoBehaviour {
 				Transform tTree = Instantiate(rValue.lPrefabs.ToArray()[1], tPlacement.position, Quaternion.identity) as Transform;
 			// Assign Parent Object
 				tTree.parent = tEnvironmentHolder;
+			// Assign Name
+				tTree.name = "Tree " + iTree;
 			// Parse Reference Core
 				tTree.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Wood");
 			// Update Tile
@@ -162,6 +194,8 @@ public class MapGenerator : MonoBehaviour {
 				Transform tStone = Instantiate(rValue.lPrefabs.ToArray()[2], tPlacement.position, Quaternion.identity) as Transform;
 			// Assign Parent Object
 				tStone.parent = tEnvironmentHolder;
+			// Assign Name
+				tStone.name = "Stone " + iStone;
 			// Parse Reference Core
 				tStone.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Stone");
 			// Update Tile
@@ -187,6 +221,8 @@ public class MapGenerator : MonoBehaviour {
 				Transform tBerry = Instantiate(rValue.lPrefabs.ToArray()[3], tPlacement.position, Quaternion.identity) as Transform;
 			// Assign Parent Object
 				tBerry.parent = tEnvironmentHolder;
+			// Assign Name
+				tBerry.name = "Berry " + iBerry;
 			// Parse Reference Core
 				tBerry.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Berry");
 			// Update Tile
@@ -212,6 +248,8 @@ public class MapGenerator : MonoBehaviour {
 				Transform tCotton = Instantiate(rValue.lPrefabs.ToArray()[4], tPlacement.position, Quaternion.identity) as Transform;
 			// Assign Parent Object
 				tCotton.parent = tEnvironmentHolder;
+			// Assign Name
+				tCotton.name = "Cotton " + iCotton;
 			// Parse Reference Core
 				tCotton.GetComponent<Environment>().SetData(rCore, tPlacement.GetComponent<Tile>(), "Cotton");
 			// Update Tile
@@ -372,6 +410,8 @@ public class MapGenerator : MonoBehaviour {
 				Transform tFireplace = Instantiate(rValue.lPrefabs.ToArray()[6], parent) as Transform;
 			// Assign Parent Object
 				tFireplace.parent = tPlacementHolder;
+			// Rename Transform
+				tFireplace.name = "Fireplace";
 			// Update Tile
 				parent.GetComponent<Tile>().SetTile(rCore);
 			// Reduce Energy
@@ -415,6 +455,25 @@ public class MapGenerator : MonoBehaviour {
 			else return false;
 		}
 	// If no match
+		else return false;
+	}
+
+// Spawn Fire
+	public bool SpawnFire(Transform parent) {
+	// Check if the Tile is already on fire or not
+		if (parent.GetComponent<Tile>().bFire != true) {
+		// Instantiate new Fire
+			Transform tFire = Instantiate(rValue.lPrefabs.ToArray()[8], parent) as Transform;
+		// Assign Parent Object
+			tFire.parent = tPlacementHolder;
+		// Update Tile
+			parent.GetComponent<Tile>().SetTile(rCore);
+		// Update on Fire status
+			parent.GetComponent<Tile>().bFire = true;
+		// Return Complete
+			return true;
+		}
+	// Return Failed
 		else return false;
 	}
 

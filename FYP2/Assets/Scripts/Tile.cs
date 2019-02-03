@@ -8,10 +8,13 @@ public class Tile : MonoBehaviour {
 
 // Interaction Data
 	[SerializeField] public bool bObstructed;
+	[SerializeField] public bool bFire;
 	[SerializeField] private int iNumber;
 
 	private void Start() {
+	// Set Initial Values
 		bObstructed = false;
+		bFire = false;
 	}
 
 // Set the Core reference and set object to obstructed / Function called when environment is spawned on it

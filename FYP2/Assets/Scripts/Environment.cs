@@ -17,6 +17,7 @@ public class Environment : MonoBehaviour {
 		sNode = node;
 	}
 
+// Despawn Function
 	public void Despawn() {
 	// Hide Updating GameObject
 		transform.GetComponentInChildren<MeshRenderer>().enabled = false;
@@ -24,5 +25,10 @@ public class Environment : MonoBehaviour {
 		rTile.bObstructed = false;
 	// Destroy old GameObject
 		Destroy(transform.gameObject);
+	}
+
+// Get the Tile Reference
+	public Transform GetTile() {
+		return rTile.transform;
 	}
 }
