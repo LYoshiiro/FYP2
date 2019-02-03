@@ -466,6 +466,8 @@ public class MapGenerator : MonoBehaviour {
 			Transform tFire = Instantiate(rValue.lPrefabs.ToArray()[8], parent) as Transform;
 		// Assign Parent Object
 			tFire.parent = tPlacementHolder;
+		// Assign Fire Class
+			tFire.GetComponent<Fire>().SetFire(rCore, parent.GetComponent<Tile>());
 		// Update Tile
 			parent.GetComponent<Tile>().SetTile(rCore);
 		// Update on Fire status

@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Crafting.cs" />
      <Compile Include="Assets\Scripts\CursorIndicator.cs" />
      <Compile Include="Assets\Scripts\Environment.cs" />
+     <Compile Include="Assets\Scripts\Fire.cs" />
      <Compile Include="Assets\Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\ItemInteraction.cs" />
      <Compile Include="Assets\Scripts\ItemManager.cs" />

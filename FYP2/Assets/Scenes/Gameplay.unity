@@ -2751,7 +2751,7 @@ MonoBehaviour:
   fSensitivityX: 5
   fSensitivityY: 5
   fMinY: 0
-  fMaxY: 35
+  fMaxY: 45
   v3Direction: {x: 0, y: 0, z: 0}
   qRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!81 &717632584
@@ -4136,7 +4136,7 @@ MonoBehaviour:
   sMoveX: Horizontal
   sMoveZ: Vertical
   fSpeed: 3
-  fPull: 0.5
+  fPull: 0.025
   tWater: {fileID: 1770648551}
 --- !u!54 &929006230
 Rigidbody:
@@ -4829,6 +4829,7 @@ MonoBehaviour:
   bTornado: 0
   fTime: 0
   iDays: 0
+  iChance: 0
 --- !u!114 &1187164738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8170,6 +8171,7 @@ MonoBehaviour:
   - {fileID: 4153779439388496, guid: c4ffc421c89bf70429a8439d401af162, type: 2}
   - {fileID: 4958952138099062, guid: c460dc6b6789d8044bbe5657d2b4417d, type: 2}
   - {fileID: 4492123032439766, guid: d14cb5c2194c03d43b1d0918d3d320cd, type: 2}
+  - {fileID: 4120849430037154, guid: 41dc7e553a9bef34f93f54ef9cc2336b, type: 2}
 --- !u!114 &1733594383
 MonoBehaviour:
   m_ObjectHideFlags: 0

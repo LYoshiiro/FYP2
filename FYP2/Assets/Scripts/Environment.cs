@@ -9,12 +9,26 @@ public class Environment : MonoBehaviour {
 
 // Data Values
 	[SerializeField] public string sNode;
+	[SerializeField] private float fFireDegrade;
+
+	private void FixedUpdate() {
+	// Check Fire Status
+		if (rTile.bFire == true)
+		// Check Fire lifespan
+			if (fFireDegrade < 5.5f)
+			// Propergade Fire lifespan
+				fFireDegrade += Time.deltaTime;
+			else
+			// Destroy Environment Object
+				Despawn();
+	}
 
 // Set data for references
 	public void SetData(Core core, Tile tile, string node) {
 		rCore = core;
 		rTile = tile;
 		sNode = node;
+		fFireDegrade = 0;
 	}
 
 // Despawn Function
@@ -23,6 +37,9 @@ public class Environment : MonoBehaviour {
 		transform.GetComponentInChildren<MeshRenderer>().enabled = false;
 	// Reset the Tile to not obstructed
 		rTile.bObstructed = false;
+	// Reset Fire Status
+		fFireDegrade = 0;
+		rTile.bFire = false;
 	// Destroy old GameObject
 		Destroy(transform.gameObject);
 	}
