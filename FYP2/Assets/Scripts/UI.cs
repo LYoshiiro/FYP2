@@ -39,34 +39,54 @@ public class UI : MonoBehaviour {
 		rCore.bDeath = true;
 	}
 
+	public void BurnedDeath() {
+	// Set message active
+		lTransform.ToArray()[4].gameObject.SetActive(true);
+	// Set game to dead
+		rCore.bDeath = true;
+	}
+
 	public void SetIndicator(string type, int call) {
 		switch (call) {
 		// Turn off the Indicator
-			default: lTransform.ToArray()[4].gameObject.SetActive(false); break;
+			default: lTransform.ToArray()[5].gameObject.SetActive(false); break;
 		// Turn on the Indicator(Blank)
 			case 1: 
 			// Set message text
-				lTransform.ToArray()[4].GetComponentInChildren<Text>().text = type;
+				lTransform.ToArray()[5].GetComponentInChildren<Text>().text = type;
 
 			// Set message active
-				lTransform.ToArray()[4].gameObject.SetActive(true);
+				lTransform.ToArray()[5].gameObject.SetActive(true);
 			break;
 		// Turn on the Indicator(Placing)
 			case 2: 
 			// Set message text
-				lTransform.ToArray()[4].GetComponentInChildren<Text>().text = "Placing: " + type;
+				lTransform.ToArray()[5].GetComponentInChildren<Text>().text = "Placing: " + type;
 
 			// Set message active
-				lTransform.ToArray()[4].gameObject.SetActive(true);
+				lTransform.ToArray()[5].gameObject.SetActive(true);
 			break;
 		// Turn on the Indicator(Crafting)
 			case 3:
 			// Set message text
-				lTransform.ToArray()[4].GetComponentInChildren<Text>().text = "Crafted: " + type;
+				lTransform.ToArray()[5].GetComponentInChildren<Text>().text = "Crafted: " + type;
 
 			// Set message active
-				lTransform.ToArray()[4].gameObject.SetActive(true);
+				lTransform.ToArray()[5].gameObject.SetActive(true);
+			break;
+		// Turn on the Indicator(Bucket)
+			case 4:
+			// Set message text
+				lTransform.ToArray()[5].GetComponentInChildren<Text>().text = "Using: " + type;
+
+			// Set message active
+				lTransform.ToArray()[5].gameObject.SetActive(true);
 			break;
 		}
+	}
+
+	public void BucketMessage() {
+	// Turn on the Message
+		lTransform.ToArray()[6].gameObject.SetActive(true);
 	}
 }

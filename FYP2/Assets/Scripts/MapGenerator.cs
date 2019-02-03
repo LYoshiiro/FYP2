@@ -485,6 +485,17 @@ public class MapGenerator : MonoBehaviour {
 		else return false;
 	}
 
+// Put out Fire
+	public bool PutOutFire(Transform parent) {
+	// Set Fire off
+		rCore.Pnt(parent.name);
+		parent.GetComponent<Fire>().GetTile().bFire = false;
+	// Destroy Fire
+		Destroy(parent.gameObject);
+		// Return Complete
+			return true;
+	}
+
 // Get the holder transforms
 	public Transform GetHolder(int type) {
 		switch (type) {

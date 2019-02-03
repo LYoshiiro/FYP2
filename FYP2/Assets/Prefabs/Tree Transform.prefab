@@ -126,7 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCore: {fileID: 0}
+  rTile: {fileID: 0}
   sNode: 
+  fFireDegrade: 0
 --- !u!136 &136004137850292948
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -139,4 +141,4 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 3
   m_Direction: 1
-  m_Center: {x: -0.056511536, y: 1.4996512, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}

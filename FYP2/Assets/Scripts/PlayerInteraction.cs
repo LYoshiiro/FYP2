@@ -52,7 +52,10 @@ public class PlayerInteraction : MonoBehaviour {
 					// Print sPlacing
 						// rCore.Pnt(sPlacing);
 					// Set the indicator
-						rUI.SetIndicator(sPlacing, 2);
+						if (sPlacing != "Bucket")
+							rUI.SetIndicator(sPlacing, 2);
+						else
+							rUI.SetIndicator(sPlacing, 4);
 					// When LMB is pressed
 						if (Input.GetMouseButtonDown(0)) {
 						// Disable the progress bar
@@ -85,7 +88,7 @@ public class PlayerInteraction : MonoBehaviour {
 								}
 							}
 
-						// Check specifically if its the water that is being interacted with.
+						// Check specifically if its the water that is being interacted with
 							else if (hit.transform.GetComponent<WaterMotion>() != null) {
 							// Item Manager Check
 								if (rItemManager != null) {
@@ -101,6 +104,20 @@ public class PlayerInteraction : MonoBehaviour {
 								}
 							}
 
+						// Check specifically if its something that is on fire
+							else if (hit.transform.GetComponent<Fire>() != null) {
+							// Put out the fire
+								if (rMapGenerator.PutOutFire(hit.transform) == true) {
+								// Reset Reference
+									sPlacing = string.Empty;
+								// Update Menu
+									rPlayerInventory.bMenuChange = true;
+								// Reset Cursor
+									rCursorIndicator.SetCursor(0);
+								// Reset Indicator
+									rUI.SetIndicator(sPlacing, 0);
+								}
+							}
 						}
 					}
 				}

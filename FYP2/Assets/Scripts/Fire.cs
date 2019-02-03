@@ -22,4 +22,9 @@ public class Fire : MonoBehaviour {
 		rCore = core;
 		rTile = tile;
 	}
+
+// Get Tile Reference
+	public Tile GetTile() {
+		return rTile;
+	}
 }

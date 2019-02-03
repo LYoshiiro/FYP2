@@ -15,7 +15,7 @@ public class Environment : MonoBehaviour {
 	// Check Fire Status
 		if (rTile.bFire == true)
 		// Check Fire lifespan
-			if (fFireDegrade < 5.5f)
+			if (fFireDegrade < 10.5f)
 			// Propergade Fire lifespan
 				fFireDegrade += Time.deltaTime;
 			else
