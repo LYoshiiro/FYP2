@@ -116,27 +116,33 @@ public class MapGenerator : MonoBehaviour {
 		// Get Fireplace
 			Transform tFireplace = tPlacementHolder.Find("Fireplace");
 		// Create list for trees
-			List<Transform> lTrees = new List<Transform>();
-		// Get Trees
+			List<Transform> lCombustables = new List<Transform>();
+		// Get Combustables
 			foreach (Transform child in tEnvironmentHolder) {
 			// Search via Environment's sNode Value
 				if (child.GetComponent<Environment>().sNode == "Wood") {
-					lTrees.Add(child);
+					lCombustables.Add(child);
+				}
+				else if (child.GetComponent<Environment>().sNode == "Berry") {
+					lCombustables.Add(child);
+				}
+				else if (child.GetComponent<Environment>().sNode == "Cotton") {
+					lCombustables.Add(child);
 				}
 			}
 
 		// Create distance array
-			float[] fTreeDistance = new float[lTrees.ToArray().Length];
+			float[] fCombustableDistance = new float[lCombustables.ToArray().Length];
 		// Get the distance
-			for (int i = 0; i < lTrees.ToArray().Length; i++) {
-				fTreeDistance[i] = Vector3.Magnitude(tFireplace.position - lTrees[i].position);
+			for (int i = 0; i < lCombustables.ToArray().Length; i++) {
+				fCombustableDistance[i] = Vector3.Magnitude(tFireplace.position - lCombustables[i].position);
 			}
 
 		// Spawn Fire
-			for (int j = 0; j < lTrees.ToArray().Length; j++) {
+			for (int j = 0; j < lCombustables.ToArray().Length; j++) {
 			// Check distance
-				if (fTreeDistance[j] < 2) {
-					SpawnFire(lTrees[j].GetComponent<Environment>().GetTile());
+				if (fCombustableDistance[j] < 2) {
+					SpawnFire(lCombustables[j].GetComponent<Environment>().GetTile());
 				}
 			}
 		}
