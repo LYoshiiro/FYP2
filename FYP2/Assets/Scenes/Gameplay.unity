@@ -4131,10 +4131,12 @@ MonoBehaviour:
   rMap: {fileID: 1733594383}
   rBody: {fileID: 929006230}
   rCamera: {fileID: 717632586}
-  tTornado: {fileID: 0}
+  rPlayerStatus: {fileID: 929006231}
+  tTornado: {fileID: 1178729516}
   sMoveX: Horizontal
   sMoveZ: Vertical
   fSpeed: 3
+  fPull: 0.5
   tWater: {fileID: 1770648551}
 --- !u!54 &929006230
 Rigidbody:
@@ -4973,6 +4975,7 @@ MonoBehaviour:
   rPlayerInteraction: {fileID: 929006228}
   rPlayerStatus: {fileID: 929006231}
   fProgress: 0
+  fDisplay: 0
   lImages:
   - {fileID: 385415816}
   - {fileID: 1082271460}
@@ -5155,6 +5158,7 @@ MonoBehaviour:
   rPlayerInteraction: {fileID: 929006228}
   rPlayerStatus: {fileID: 929006231}
   fProgress: 0
+  fDisplay: 0
   lImages:
   - {fileID: 1801059203}
   - {fileID: 877350100}
@@ -7838,6 +7842,7 @@ MonoBehaviour:
   rPlayerInteraction: {fileID: 929006228}
   rPlayerStatus: {fileID: 929006231}
   fProgress: 0
+  fDisplay: 0
   lImages:
   - {fileID: 1244891431}
   - {fileID: 466517010}

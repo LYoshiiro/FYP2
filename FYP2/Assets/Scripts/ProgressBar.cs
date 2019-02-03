@@ -11,6 +11,7 @@ public class ProgressBar : MonoBehaviour {
 
 // Progress Bar
 	[SerializeField] private float fProgress;
+	[SerializeField] private float fDisplay;
 	[SerializeField] private List<Image> lImages;
 	[SerializeField] private int iType;
 	[SerializeField] private Text tText;
@@ -50,8 +51,9 @@ public class ProgressBar : MonoBehaviour {
 				foreach (Image img in lImages)
 					img.gameObject.SetActive(true);
 
-				tText.text = "Cold: " + rPlayerStatus.GetStatus(0) + " / 10";
-				fProgress = Mathf.Clamp((float)rPlayerStatus.GetStatus(0), 0, 10) / 10;
+				fDisplay = Mathf.Clamp(rPlayerStatus.GetStatus(0), 0, 10);
+				tText.text = "Cold: " + fDisplay + " / 10";
+				fProgress = fDisplay / 10;
 				lImages.ToArray()[1].fillAmount = fProgress;
 			break;
 			case 2: // Energy
@@ -59,8 +61,9 @@ public class ProgressBar : MonoBehaviour {
 				foreach (Image img in lImages)
 					img.gameObject.SetActive(true);
 
-				tText.text = "Energy: " + rPlayerStatus.GetStatus(1) + " / 10";
-				fProgress = Mathf.Clamp((float)rPlayerStatus.GetStatus(1), 0, 10) / 10;
+				fDisplay = Mathf.Clamp(rPlayerStatus.GetStatus(1), 0, 10);
+				tText.text = "Energy: " + fDisplay + " / 10";
+				fProgress = fDisplay / 10;
 				lImages.ToArray()[1].fillAmount = fProgress;
 			break;
 		}

@@ -36,7 +36,9 @@ public class Tornado : MonoBehaviour {
 		if (Vector3.Magnitude(transform.position - v3Offset) < 15.0f)
 			transform.Translate(v3Direction * fSpeed, Space.Self);
 	// Turn off the gameobject when completed
-		else
+		else {
 			transform.gameObject.SetActive(false);
+			rCore.bTornado = false;
+		}
 	}
 }

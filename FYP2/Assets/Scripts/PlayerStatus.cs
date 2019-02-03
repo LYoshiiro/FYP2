@@ -18,10 +18,10 @@ public class PlayerStatus : MonoBehaviour {
 	}
 
 // Increase Cold
-	public void Freezing() {
+	public void Freezing(int value) {
 	// Hidden Addition length for kill pop-up
 		if (iCold < 15)
-			iCold++;
+			iCold += value;
 
 	// Kill
 		if (iCold >= 15)

@@ -19,6 +19,7 @@ public class Core : MonoBehaviour {
 	[SerializeField] public bool bTornado;
 	[SerializeField] public float fTime;
 	[SerializeField] public int iDays;
+	[SerializeField] public int iChance;
 
 	private void Start() {
 	// Set the timescale to match real time
@@ -49,13 +50,14 @@ public class Core : MonoBehaviour {
 			// Reset Time
 				fTime = 0.0f;
 			// Increase Coldness
-				rPlayerStatus.Freezing();
+				rPlayerStatus.Freezing(1);
 			// Increase Energy
 				rPlayerStatus.Rest(5);
 			// Generate Chance of Rain
 				bRain = (UnityEngine.Random.Range(0, 2) == 1);
 			// Generate Chance of Tornado
-				bTornado = (UnityEngine.Random.Range(0, 13) == 12);
+				iChance = UnityEngine.Random.Range(0, 21); 
+				bTornado = (iChance == 17);
 			}
 			
 		// Update Skybox

@@ -8,12 +8,14 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private MapGenerator rMap;
 	[SerializeField] private Rigidbody rBody;
     [SerializeField] private Camera rCamera;
+    [SerializeField] private PlayerStatus rPlayerStatus;
     [SerializeField] private Transform tTornado;
 
 // Movement
     [SerializeField] private string sMoveX;
     [SerializeField] private string sMoveZ;
     [SerializeField] private float fSpeed;
+    [SerializeField] private float fPull;
     private float fMoveX;
     private float fMoveZ;
 
@@ -40,8 +42,16 @@ public class PlayerMovement : MonoBehaviour {
             fMoveX = Input.GetAxis(sMoveX);
             fMoveZ = Input.GetAxis(sMoveZ);
 
-        // Shift Player closer to tornado
-
+        // Tornado Influence
+            if (tTornado.gameObject.activeSelf == true) {
+            // Get direction of player to tornado
+                Vector3 v3Direction = tTornado.position - transform.position;
+            // Get magnitude of player to the tornado
+                float fDistance = Vector3.Magnitude(v3Direction);
+            // Shift Player closer to tornado
+                transform.position += v3Direction * (fPull / fDistance);
+        }
+            
         // Get Jump Input (Disabled due to not used)
             // if (bInAir != true)
             //     if (Input.GetKeyDown(KeyCode.Space))
@@ -87,8 +97,13 @@ public class PlayerMovement : MonoBehaviour {
 			else																				            bOutofBounds = false; 
         
         // Set Player back on the ground to the last estimated point
-			if (bOutofBounds == true)
+			if (bOutofBounds == true) {
 				transform.position = v3Last;
+            // Reduce Energy for falling into the water
+                rPlayerStatus.Action(1);
+            // Freeze Player
+                rPlayerStatus.Freezing(2);
+            }
         }
     }
 }
