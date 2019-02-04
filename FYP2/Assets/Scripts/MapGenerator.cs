@@ -458,6 +458,8 @@ public class MapGenerator : MonoBehaviour {
 				tFireplace.parent = tPlacementHolder;
 			// Rename Transform
 				tFireplace.name = "Fireplace";
+			// Assign Core Reference
+				tFireplace.GetComponent<Fireplace>().SetCore(rCore);
 			// Update Tile
 				parent.GetComponent<Tile>().SetTile(rCore);
 			// Reduce Energy
