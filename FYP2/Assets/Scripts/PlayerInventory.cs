@@ -67,5 +67,6 @@ public class PlayerInventory : MonoBehaviour {
 // Close the Inventory Menu
 	public void CloseMenu() {
 		tMenu.gameObject.SetActive(false);
+		rPlayerInteraction.ResetSplacing();
 	}
 }

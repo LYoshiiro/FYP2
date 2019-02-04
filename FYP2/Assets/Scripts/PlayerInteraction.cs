@@ -64,11 +64,15 @@ public class PlayerInteraction : MonoBehaviour {
 						// Check if the Object hit was a tile
 							if (hit.transform.GetComponentInParent<Tile>() != null) {
 							// Check if the tile is obstructed
-									
 								if (hit.transform.GetComponentInParent<Tile>().bObstructed == false) {
+								// Print what was hit
+									// rCore.Pnt(hit.transform.parent.name);
+									// rCore.Pnt(hit.transform.GetComponentInParent<Tile>().bObstructed);
 								// Check if the Placing OBject failed to parsed
 									if ((rMapGenerator.SpawnEnvironment(sPlacing, hit.transform.parent) == true) ||
 										(rMapGenerator.SpawnPlaceable(sPlacing, hit.transform.parent) == true)) {
+									// Notify system that a fireplace was placed down.
+										if (sPlacing == "Fireplace") rMapGenerator.FireplaceSpawned();
 									// Search through the array to find instance
 										for (int k = 0; k < rItemManager.GetItems().ToArray().Length; k++) {
 											if (rItemManager.GetItems().ToArray()[k].sName == sPlacing) {
@@ -200,5 +204,10 @@ public class PlayerInteraction : MonoBehaviour {
 // Get Animation Speed Modifier
 	public float GetModifier() {
 		return fSpeedModifier;
+	}
+
+// Reset Splacing
+	public void ResetSplacing() {
+		sPlacing = string.Empty;
 	}
 }

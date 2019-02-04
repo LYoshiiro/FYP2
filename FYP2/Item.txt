@@ -10,5 +10,5 @@
 9,0,no,no,Axe,Tool to help lumbering
 10,0,no,no,Pickaxe,Tool to help mining
 11,0,no,yes,Bucket,Tool to help put out fires
-12,0,no,yes,Fireplace,Placable to keep you warm
+12,3,no,yes,Fireplace,Placable to keep you warm
 13,0,no,yes,Tent,Placable to keep you warm

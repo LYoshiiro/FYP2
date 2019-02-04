@@ -28,9 +28,10 @@ public class MapGenerator : MonoBehaviour {
 	[SerializeField] private int iBerry;
 	[SerializeField] private int iCotton;
 	[SerializeField] private int[] iTent;
-	private int iTile;
 	private List<int> lSpawnOffset;
+	private int iTile;
 	private bool bInitial;
+	private bool bFireplace;
 
 // Respawner
 	[SerializeField] private int iNext;
@@ -41,9 +42,10 @@ public class MapGenerator : MonoBehaviour {
 		iStone = 0;
 		iBerry = 0;
 		iCotton = 0;
-		iTile = 0;
 		lSpawnOffset = new List<int>();
+		iTile = 0;
 		bInitial = false;
+		bFireplace = false;
 		
 		iNext = Random.Range(2, 5);
 
@@ -113,37 +115,75 @@ public class MapGenerator : MonoBehaviour {
 
 	// Firespawning
 		if (tPlacementHolder.childCount != 0) {
-		// Get Fireplace
-			Transform tFireplace = tPlacementHolder.Find("Fireplace");
-		// Create list for trees
-			List<Transform> lCombustables = new List<Transform>();
-		// Get Combustables
+		// Check if a fireplace is spawned
+			if (bFireplace == true) {
+			// List for Fireplace transform
+				List<Transform> lFireplace = new List<Transform>();
+			// List for Combustable transform
+				List<Transform> lCombustable = new List<Transform>();
+			// Populate Fireplace list
+				foreach (Transform child in tPlacementHolder) {
+					if (child.name.Contains("Fireplace")) {
+						lFireplace.Add(child);
+					// Print Child name
+						// rCore.Pnt(child.name);
+					}
+				}
+			// Populate Combustable list
+				foreach (Transform child in tEnvironmentHolder) {
+					if (child.name.Contains("Tree")) {
+						lCombustable.Add(child);
+					// Print Child name
+						// rCore.Pnt(child.name);
+					}
+					else if (child.name.Contains("Berry")) {
+						lCombustable.Add(child);
+					// Print Child name
+						// rCore.Pnt(child.name);
+					}
+					else if (child.name.Contains("Cotton")) {
+						lCombustable.Add(child);
+					// Print Child name
+						// rCore.Pnt(child.name);
+					}
+				}
+			// Print Size
+				rCore.Pnt("lFireplace: " + lFireplace.ToArray().Length);
+				rCore.Pnt("lCombustable: " + lCombustable.ToArray().Length);
+			// Distance between fireplace and combustable objects
+				float[,] fDistance = new float[lFireplace.ToArray().Length, lCombustable.ToArray().Length];
+			// Populate the 2D distance array
+				for (int i = 0; i < lFireplace.ToArray().Length; i++) {
+					for (int j = 0; j < lCombustable.ToArray().Length; j++) {
+						fDistance[i, j] = Vector3.Magnitude(lFireplace[i].position - lCombustable[j].position);
+					// Print corresponding data
+						// rCore.Pnt(lFireplace[i].name + ": " + lFireplace[i].position + " - " + lCombustable[j].name + ": " + lCombustable[j].position + " = " + fDistance[i, j]);
+					}
+				}
+			// Do action when Fireplace is within range of Combustables
+				for (int k = 0; k < lFireplace.ToArray().Length; k++) {
+					for (int m = 0; m < lCombustable.ToArray().Length; m++) {
+						if (fDistance[k, m] < 2) {
+							SpawnFire(lCombustable[m].GetComponent<Environment>().GetTile());
+						// // Print corresponding data
+						// 	rCore.Pnt(k);
+						// 	rCore.Pnt(m);
+						// rCore.Pnt(lFireplace[k].name + ": " + lFireplace[k].position);
+						// rCore.Pnt(lCombustable[m].name + ": " + lCombustable[m].position);
+						}
+					}
+				}
+			}
+		}
+
+	// Do Action if the Environment Holder isnt empty
+		if (tEnvironmentHolder.childCount != 0) {
+		// Check obstruct state
 			foreach (Transform child in tEnvironmentHolder) {
-			// Search via Environment's sNode Value
-				if (child.GetComponent<Environment>().sNode == "Wood") {
-					lCombustables.Add(child);
-				}
-				else if (child.GetComponent<Environment>().sNode == "Berry") {
-					lCombustables.Add(child);
-				}
-				else if (child.GetComponent<Environment>().sNode == "Cotton") {
-					lCombustables.Add(child);
-				}
-			}
-
-		// Create distance array
-			float[] fCombustableDistance = new float[lCombustables.ToArray().Length];
-		// Get the distance
-			for (int i = 0; i < lCombustables.ToArray().Length; i++) {
-				fCombustableDistance[i] = Vector3.Magnitude(tFireplace.position - lCombustables[i].position);
-			}
-
-		// Spawn Fire
-			for (int j = 0; j < lCombustables.ToArray().Length; j++) {
-			// Check distance
-				if (fCombustableDistance[j] < 2) {
-					SpawnFire(lCombustables[j].GetComponent<Environment>().GetTile());
-				}
+			// Check if the Referenced Tile is marked as obstructed yet or not
+				if (child.GetComponent<Environment>().GetTile().GetComponent<Tile>().bObstructed != true)
+				// Mark it to true if havent yet
+					child.GetComponent<Environment>().GetTile().GetComponent<Tile>().bObstructed = true;
 			}
 		}
 	}
@@ -424,6 +464,7 @@ public class MapGenerator : MonoBehaviour {
 				rPlayerStatus.Action(2);
 			// Return Complete
 				return true;
+			// Toggle check
 		}
 		else if (node == "Tent") {
 		// Check if it is in the valid columns
@@ -520,5 +561,11 @@ public class MapGenerator : MonoBehaviour {
 	// Cotton Bush
 		if (type == "Cotton")
 			iCotton -= 1;
+	}
+
+// Give notification that a fireplace had spawned
+	public bool FireplaceSpawned() {
+		bFireplace = true;
+		return true;
 	}
 }
