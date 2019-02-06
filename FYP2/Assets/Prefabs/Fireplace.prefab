@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 33432600431909634}
   - component: {fileID: 23547635786437782}
   - component: {fileID: 114095099682322930}
+  - component: {fileID: 65808571806878250}
   m_Layer: 0
   m_Name: Fireplace
   m_TagString: Untagged
@@ -144,6 +145,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1836821859907110}
   m_Mesh: {fileID: 4300000, guid: 32f02fe3165d39b469dfbb2eca071260, type: 3}
+--- !u!65 &65808571806878250
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1836821859907110}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0309017, y: 0.39510608, z: 1}
+  m_Center: {x: -0.015450865, y: 0.19755274, z: 0}
 --- !u!114 &114095099682322930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCore: {fileID: 0}
+  rTile: {fileID: 0}
   fTime: 0
   iDays: 0
 --- !u!198 &198035791271969160

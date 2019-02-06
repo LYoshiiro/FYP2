@@ -49,7 +49,7 @@ public class Fire : MonoBehaviour {
 				// Loop through the 4 axis adjacent tiles
 					for (int i = 0; i < lSpread.ToArray().Length; i++) {
 					// Roll for Wild Fire
-						if (Random.Range(0, 20) == 4) {
+						if (Random.Range(0, 20) == 19) {
 						// Check for Issues
 							if ((lSpread.ToArray()[i].GetComponent<Tile>().bObstructed != true) && (lSpread.ToArray()[i].GetComponent<Tile>().bFire != true)) {
 								rMapGenerator.SpawnFire(lSpread.ToArray()[i], false);
@@ -60,7 +60,7 @@ public class Fire : MonoBehaviour {
 			}
 		// If not allowed to Spread, let the fire decay
 			else {
-				if (fTime < 10.5f)
+				if (fTime < 21.0f)
 					fTime += Time.deltaTime;
 				else {
 					rTile.bFire = false;

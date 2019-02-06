@@ -5,6 +5,7 @@ using UnityEngine;
 public class Fireplace : MonoBehaviour {
 // Reference
 	[SerializeField] private Core rCore;
+	[SerializeField] private Tile rTile;
 
 // Modifier
 	[SerializeField] private float fTime;
@@ -43,12 +44,16 @@ public class Fireplace : MonoBehaviour {
 	public void Despawn() {
 	// Hide Updating GameObject
 		transform.GetComponentInChildren<MeshRenderer>().enabled = false;
+	// Deset Tile
+		rTile.bObstructed = false;
+		rTile.bFire = false;
 	// Destroy old GameObject
 		Destroy(transform.gameObject);
 	}
 
 // Set the Core Reference for Fireplace
-	public void SetCore(Core core) {
+	public void SetCore(Core core, Tile tile) {
 		rCore = core;
+		rTile = tile;
 	}
 }

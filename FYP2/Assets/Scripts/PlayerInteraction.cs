@@ -122,6 +122,23 @@ public class PlayerInteraction : MonoBehaviour {
 									rUI.SetIndicator(sPlacing, 0);
 								}
 							}
+						
+						// Check specifially if its Fireplace
+							else if (hit.transform.GetComponent<Fireplace>() != null) {
+							// Check if it is a bucket trying to interact with it
+								if (sPlacing == "Bucket") {
+								// Despawn FirePlace
+									hit.transform.GetComponent<Fireplace>().Despawn();
+								// Reset Reference
+									sPlacing = string.Empty;
+								// Update Menu
+									rPlayerInventory.bMenuChange = true;
+								// Reset Cursor
+									rCursorIndicator.SetCursor(0);
+								// Reset Indicator
+									rUI.SetIndicator(sPlacing, 0);
+								}
+							}
 						}
 					}
 				}

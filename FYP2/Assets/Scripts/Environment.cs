@@ -13,7 +13,7 @@ public class Environment : MonoBehaviour {
 
 	private void FixedUpdate() {
 	// Check Fire Status
-		if (rTile.bFire == true)
+		if (rTile.bFire == true) {
 		// Check Fire lifespan
 			if (fFireDegrade < 10.5f)
 			// Propergade Fire lifespan
@@ -21,6 +21,11 @@ public class Environment : MonoBehaviour {
 			else
 			// Destroy Environment Object
 				Despawn();
+		}
+	// If Fire was put out
+		else
+		// Reset Degrade Timer
+			fFireDegrade = 0.0f;
 	}
 
 // Set data for references
