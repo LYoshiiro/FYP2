@@ -203,11 +203,11 @@ public class Crafting : MonoBehaviour {
 		// Tent
 			case 1:
 			// Check cost
-				if ((rItemManager.GetItems().Find(i => i.sName == "Wood").iCount >= 3) &&
-					(rItemManager.GetItems().Find(i => i.sName == "Cotton").iCount >= 3)) {
+				if ((rItemManager.GetItems().Find(i => i.sName == "Wood").iCount >= 7) &&
+					(rItemManager.GetItems().Find(i => i.sName == "Cotton").iCount >= 7)) {
 				// Reduce cost
-					rItemManager.GetItems().Find(i => i.sName == "Wood").CountUpdate(-3);
-					rItemManager.GetItems().Find(i => i.sName == "Cotton").CountUpdate(-3);
+					rItemManager.GetItems().Find(i => i.sName == "Wood").CountUpdate(-7);
+					rItemManager.GetItems().Find(i => i.sName == "Cotton").CountUpdate(-7);
 				// Add item
 					rItemManager.GetItems().Find(i => i.sName == "Tent").CountUpdate(1);
 				// Update Menu

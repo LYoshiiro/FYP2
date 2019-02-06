@@ -227,19 +227,19 @@ public class PlayerInteraction : MonoBehaviour {
 
 		// Check if the tPlacementHolder has any child
 			if (rMapGenerator.GetHolder(2).childCount != 0) {
-			// Create Transform List for Fireplace
-				List<Transform> lFireplace = new List<Transform>();
+			// Create Transform List for Cover
+				List<Transform> lCover = new List<Transform>();
 			// Populate the List
 				foreach (Transform child in rMapGenerator.GetHolder(2)) {
-					if (child.name.Contains("Fireplace"))
-						lFireplace.Add(child);
+					if ((child.name.Contains("Fireplace")) || (child.name.Contains("Tent")))
+						lCover.Add(child);
 				}
 			// Check if the List has any member else skip
-				if (lFireplace.ToArray().Length != 0) {
+				if (lCover.ToArray().Length != 0) {
 				// Loop through instances
-					for (int fireplaceInstance = 0; fireplaceInstance < lFireplace.ToArray().Length; fireplaceInstance++) {
-					// Check player distance to the Fireplace
-						if (Vector3.Magnitude(lFireplace.ToArray()[fireplaceInstance].position - transform.position) <= 1.75f) {
+					for (int CoverInstance = 0; CoverInstance < lCover.ToArray().Length; CoverInstance++) {
+					// Check player distance to the Cover
+						if (Vector3.Magnitude(lCover.ToArray()[CoverInstance].position - transform.position) <= 1.75f) {
 						// Check active Timer
 							if (fDefrossTime < 0.0f) {
 							// Make Player Lose Heat
