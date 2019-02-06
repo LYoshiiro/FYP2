@@ -64,4 +64,13 @@ public class PlayerStatus : MonoBehaviour {
 			default: rCore.Pnt("Missing Info: Status Type!"); return 0;
 		}
 	}
+
+// Set value to zero
+	public void ClampStatus(int type, int value) {
+		switch (type) {
+			case 0: iCold = value; break;
+			case 1: iEnergy = value; break;
+			default: rCore.Pnt("Missing Info: Clamp Type Missing!"); break;
+		}
+	}
 }

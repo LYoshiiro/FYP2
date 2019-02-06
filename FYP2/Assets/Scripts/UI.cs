@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour {
 // Class Reference
 	[SerializeField] private Core rCore;
+	[SerializeField] private PlayerStatus tPlayerStatus;
 
 // List Reference
 	[SerializeField] private Text tFPS;
@@ -28,6 +29,9 @@ public class UI : MonoBehaviour {
 	public void ColdDeath() {
 	// Set message active
 		lTransform.ToArray()[2].gameObject.SetActive(true);
+	// Clamp Status
+		tPlayerStatus.ClampStatus(0, 15);
+		tPlayerStatus.ClampStatus(1, 0);
 	// Set game to dead
 		rCore.bDeath = true;
 	}
@@ -35,6 +39,8 @@ public class UI : MonoBehaviour {
 	public void StarveDeath() {
 	// Set message active
 		lTransform.ToArray()[3].gameObject.SetActive(true);
+	// Clamp Status
+		tPlayerStatus.ClampStatus(1, 0);
 	// Set game to dead
 		rCore.bDeath = true;
 	}
@@ -42,6 +48,9 @@ public class UI : MonoBehaviour {
 	public void BurnedDeath() {
 	// Set message active
 		lTransform.ToArray()[4].gameObject.SetActive(true);
+	// Clamp Status
+		tPlayerStatus.ClampStatus(0, 0);
+		tPlayerStatus.ClampStatus(1, 0);
 	// Set game to dead
 		rCore.bDeath = true;
 	}

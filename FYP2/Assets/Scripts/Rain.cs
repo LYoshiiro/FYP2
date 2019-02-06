@@ -8,6 +8,10 @@ public class Rain : MonoBehaviour {
 	[SerializeField] private ParticleSystem rParticleSystem;
 
 	private void OnEnable() {
+	// Attach reference to Particle Emission
+		var vEmission = rParticleSystem.emission;
+	// Reset RoT
+		vEmission.rateOverTime = 500;
 	// Attach reference to Particle shape
 		var vShape = rParticleSystem.shape;
 	// Generate Wind Origin
@@ -18,5 +22,18 @@ public class Rain : MonoBehaviour {
 		var vForce = rParticleSystem.forceOverLifetime;
 	// Displace x-axis
 		vForce.x = -iDisplacement;
+	}
+
+	private void FixedUpdate() {
+	// Gradually lessen the rain drops
+		if (rCore.fTime > 120.0f) {
+		// Get the remainding time as percentage
+			float fRemainder = 150.0f - rCore.fTime;
+			float fTimeToEnd = fRemainder / 30.0f;
+		// Attach reference to Particle Emission
+			var vEmission = rParticleSystem.emission;
+		// Modify as time comes to an end
+			vEmission.rateOverTime = 500 * fTimeToEnd;
+		}
 	}
 }

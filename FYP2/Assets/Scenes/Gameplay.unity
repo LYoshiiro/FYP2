@@ -1469,6 +1469,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198294599687023518, guid: 17217d22367bd9143b1328e22f8f0a93,
+        type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198294599687023518, guid: 17217d22367bd9143b1328e22f8f0a93,
+        type: 2}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 17217d22367bd9143b1328e22f8f0a93, type: 2}
   m_IsPrefabParent: 0
@@ -4168,6 +4178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCore: {fileID: 1187164737}
+  tPlayerStatus: {fileID: 929006231}
   tFPS: {fileID: 728191151}
   lTransform:
   - {fileID: 1070945939}

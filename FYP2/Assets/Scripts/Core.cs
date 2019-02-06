@@ -50,14 +50,16 @@ public class Core : MonoBehaviour {
 			// Reset Time
 				fTime = 0.0f;
 			// Increase Coldness
-				rPlayerStatus.Freezing(1);
+				rPlayerStatus.Freezing(2);
 			// Increase Energy
 				rPlayerStatus.Rest(5);
 			// Generate Chance of Rain
 				bRain = (UnityEngine.Random.Range(0, 2) == 1);
+				if (bRain == true) rPlayerStatus.Freezing(2);
 			// Generate Chance of Tornado
 				iChance = UnityEngine.Random.Range(0, 21); 
 				bTornado = (iChance == 17);
+				if (bRain == true) rPlayerStatus.Freezing(2);
 			}
 			
 		// Update Skybox
