@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\Environment.cs" />
      <Compile Include="Assets\Scripts\Fire.cs" />
      <Compile Include="Assets\Scripts\Fireplace.cs" />
+     <Compile Include="Assets\Scripts\HelpMenu.cs" />
      <Compile Include="Assets\Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\ItemInteraction.cs" />
      <Compile Include="Assets\Scripts\ItemManager.cs" />

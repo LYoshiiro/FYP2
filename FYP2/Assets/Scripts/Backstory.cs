@@ -16,12 +16,12 @@ public class Backstory : MonoBehaviour {
 	private string sDialogue;
 
 	private void Start() {
-	// Set Game paused
+	// Set Game Paused
 		rCore.bPause = true;
 	// Set Reference
 		iImage = transform.GetComponent<Image>();
 		tText = transform.GetComponentInChildren<Text>();
-	// set Initial Value
+	// Set Initial Value
 		fTimer = 0.0f;
 		iSlide = 0;
 	}

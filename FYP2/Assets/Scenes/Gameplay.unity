@@ -5097,7 +5097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d767721c09eaaad47995a19bcfcfa802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rPlayerStatus: {fileID: 0}
+  rPlayerStatus: {fileID: 347527564}
   tLight: {fileID: 932312295}
   rRain: {fileID: 329749444}
   rTornado: {fileID: 663807720}
@@ -7092,7 +7092,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1494230827
 RectTransform:
   m_ObjectHideFlags: 0
