@@ -84,9 +84,4 @@ public class UI : MonoBehaviour {
 			break;
 		}
 	}
-
-	public void BucketMessage() {
-	// Turn on the Message
-		lTransform.ToArray()[6].gameObject.SetActive(true);
-	}
 }

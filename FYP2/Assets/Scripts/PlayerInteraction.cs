@@ -22,6 +22,7 @@ public class PlayerInteraction : MonoBehaviour {
 // Interaction
     public float fBounceTime;
     private float fBouncePress;
+	[SerializeField] private float fDefrossTime;
 	[SerializeField] private float fSpeedModifier;
 	public bool bProgressBar;
 	public bool bTool;
@@ -127,16 +128,23 @@ public class PlayerInteraction : MonoBehaviour {
 							else if (hit.transform.GetComponent<Fireplace>() != null) {
 							// Check if it is a bucket trying to interact with it
 								if (sPlacing == "Bucket") {
-								// Despawn FirePlace
-									hit.transform.GetComponent<Fireplace>().Despawn();
-								// Reset Reference
-									sPlacing = string.Empty;
-								// Update Menu
-									rPlayerInventory.bMenuChange = true;
-								// Reset Cursor
-									rCursorIndicator.SetCursor(0);
-								// Reset Indicator
-									rUI.SetIndicator(sPlacing, 0);
+								// Check for Energy Levels
+									if (rPlayerStatus.GetStatus(1) >= 1) {
+									// Despawn FirePlace
+										hit.transform.GetComponent<Fireplace>().Despawn();
+									// Reset Reference
+										sPlacing = string.Empty;
+									// Update Menu
+										rPlayerInventory.bMenuChange = true;
+									// Reset Cursor
+										rCursorIndicator.SetCursor(0);
+									// Reset Indicator
+										rUI.SetIndicator(sPlacing, 0);
+									// Give Player Experience
+										rSkillSystem.IncreaseExperience(15);
+									// Reduce Energy
+										rPlayerStatus.Action(1);
+									}
 								}
 							}
 						}
@@ -145,6 +153,7 @@ public class PlayerInteraction : MonoBehaviour {
 
 			// When LMB is held down
 				if (Input.GetMouseButton(0)) {
+				// Check for Energy Levels
 					if (rPlayerStatus.GetStatus(1) >= 1) {
 					// Check Bounce Timer
 						if (fBounceTime > 1.5f - fSpeedModifier) {
@@ -215,6 +224,36 @@ public class PlayerInteraction : MonoBehaviour {
 					rItemManager.DespawnTool();
 				}
             }
+
+		// Check if the tPlacementHolder has any child
+			if (rMapGenerator.GetHolder(2).childCount != 0) {
+			// Create Transform List for Fireplace
+				List<Transform> lFireplace = new List<Transform>();
+			// Populate the List
+				foreach (Transform child in rMapGenerator.GetHolder(2)) {
+					if (child.name.Contains("Fireplace"))
+						lFireplace.Add(child);
+				}
+			// Check if the List has any member else skip
+				if (lFireplace.ToArray().Length != 0) {
+				// Loop through instances
+					for (int fireplaceInstance = 0; fireplaceInstance < lFireplace.ToArray().Length; fireplaceInstance++) {
+					// Check player distance to the Fireplace
+						if (Vector3.Magnitude(lFireplace.ToArray()[fireplaceInstance].position - transform.position) <= 1.75f) {
+						// Check active Timer
+							if (fDefrossTime < 0.0f) {
+							// Make Player Lose Heat
+								rPlayerStatus.Defreeze();
+							// Reset Timer
+								fDefrossTime = 30.0f;
+							}
+							else
+							// Update Timer
+								fDefrossTime -= Time.deltaTime;
+						}
+					}
+				}
+			}
         }
 	}
 
