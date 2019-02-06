@@ -1424,7 +1424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rCore: {fileID: 0}
-  rCamera: {fileID: 0}
+  rCamera: {fileID: 19302262}
   lButtons:
   - {fileID: 1991608769}
   - {fileID: 597114244}

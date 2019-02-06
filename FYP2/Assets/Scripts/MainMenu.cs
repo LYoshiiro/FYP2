@@ -17,7 +17,19 @@ public class MainMenu : MonoBehaviour {
 
 // Function for the button to start the game
 	public void StartGame() {
-		SceneManager.LoadScene("Gameplay");
+		// SceneManager.LoadScene("Gameplay");
+	// Load Scene
+		StartCoroutine(LoadAsyncScene());
+	}
+
+// IEnumerator for Async Coroutine
+	IEnumerator LoadAsyncScene() {
+	// Load the scene in the background
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GamePlay");
+
+	// Wait until the asynchronous scene fully loads
+		while (!asyncLoad.isDone)
+			yield return null;
 	}
 
 // Function for the button to quit the game

@@ -32,6 +32,10 @@ public class Core : MonoBehaviour {
 	}
 
 	private void FixedUpdate() {
+	// Keycode for Escaping the application
+		if (Input.GetKeyDown(KeyCode.Escape))
+			Application.Quit();
+			
 	// Check for if pause button was pressed
 		if (Input.GetKeyDown(KeyCode.P) && bDeath != true)
 		// Check if the game is already over
@@ -61,6 +65,9 @@ public class Core : MonoBehaviour {
 				bTornado = (iChance == 17);
 				if (bRain == true) rPlayerStatus.Freezing(2);
 			}
+
+			if (fTime == 75.0f)
+				rPlayerStatus.Freezing(1);
 			
 		// Update Skybox
 			Quaternion qRotation = Quaternion.Euler((fTime / 150.0f * 360), 135, 0);
