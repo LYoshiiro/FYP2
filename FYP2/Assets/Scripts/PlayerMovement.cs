@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 // Class Reference
     [SerializeField] private Core rCore;
+    [SerializeField] private UI rUI;
     [SerializeField] private MapGenerator rMap;
 	[SerializeField] private Rigidbody rBody;
     [SerializeField] private Camera rCamera;
@@ -104,6 +105,14 @@ public class PlayerMovement : MonoBehaviour {
             // Freeze Player
                 rPlayerStatus.Freezing(2);
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision other) {
+    // Check if the Collision is with a Wild Fire
+        if (other.transform.GetComponent<Fire>() == true) {
+        // Notify system that the player is burned to death
+            rUI.BurnedDeath();
         }
     }
 }
