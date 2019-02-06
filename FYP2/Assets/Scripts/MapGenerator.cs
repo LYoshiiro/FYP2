@@ -148,8 +148,8 @@ public class MapGenerator : MonoBehaviour {
 					}
 				}
 			// Print Size
-				rCore.Pnt("lFireplace: " + lFireplace.ToArray().Length);
-				rCore.Pnt("lCombustable: " + lCombustable.ToArray().Length);
+				// rCore.Pnt("lFireplace: " + lFireplace.ToArray().Length);
+				// rCore.Pnt("lCombustable: " + lCombustable.ToArray().Length);
 			// Distance between fireplace and combustable objects
 				float[,] fDistance = new float[lFireplace.ToArray().Length, lCombustable.ToArray().Length];
 			// Populate the 2D distance array
@@ -164,7 +164,7 @@ public class MapGenerator : MonoBehaviour {
 				for (int k = 0; k < lFireplace.ToArray().Length; k++) {
 					for (int m = 0; m < lCombustable.ToArray().Length; m++) {
 						if (fDistance[k, m] < 2) {
-							SpawnFire(lCombustable[m].GetComponent<Environment>().GetTile());
+							SpawnFire(lCombustable[m].GetComponent<Environment>().GetTile(), true);
 						// // Print corresponding data
 						// 	rCore.Pnt(k);
 						// 	rCore.Pnt(m);
@@ -508,7 +508,7 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 // Spawn Fire
-	public bool SpawnFire(Transform parent) {
+	public bool SpawnFire(Transform parent, bool spread) {
 	// Check if the Tile is already on fire or not
 		if (parent.GetComponent<Tile>().bFire != true) {
 		// Instantiate new Fire
@@ -516,7 +516,7 @@ public class MapGenerator : MonoBehaviour {
 		// Assign Parent Object
 			tFire.parent = tPlacementHolder;
 		// Assign Fire Class
-			tFire.GetComponent<Fire>().SetFire(rCore, parent.GetComponent<Tile>());
+			tFire.GetComponent<Fire>().SetFire(rCore, parent.GetComponent<Tile>(), GetComponent<MapGenerator>(), tMapHolder, v2Size, spread);
 		// Update Tile
 			parent.GetComponent<Tile>().SetTile(rCore);
 		// Update on Fire status
