@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Check if the Player is on the Base Plate or not
 			if (transform.position.y < (tWater.position.y - rCore.BoundLengths(transform).y))	bOutofBounds = true;
-			else																				            bOutofBounds = false; 
+			else                                                                                bOutofBounds = false; 
         
         // Set Player back on the ground to the last estimated point
 			if (bOutofBounds == true) {
@@ -113,6 +113,9 @@ public class PlayerMovement : MonoBehaviour {
         if (other.transform.GetComponent<Fire>() == true) {
         // Notify system that the player is burned to death
             rUI.BurnedDeath();
+        }
+        if (other.transform.GetComponent<WaterMotion>() == true) {
+            bOutofBounds = true;
         }
     }
 }

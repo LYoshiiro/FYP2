@@ -10,6 +10,7 @@ public class Core : MonoBehaviour {
 	[SerializeField] private Transform tLight;
 	[SerializeField] private Rain rRain;
 	[SerializeField] private Tornado rTornado;
+	[SerializeField] private Transform tBack;
 
 // Global Variables
 	[SerializeField] public bool bWin;
@@ -80,6 +81,10 @@ public class Core : MonoBehaviour {
 		// Update Tornado
 			rTornado.gameObject.SetActive(bTornado);
 		}
+
+	// Set Back Button to MainMenu
+		if (bDeath == true || bWin == true)
+			tBack.gameObject.SetActive(true);
 
 	// Pause the Whole Game Cause Player Died
 		if (bDeath == true)

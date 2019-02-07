@@ -18,13 +18,12 @@ public class MainMenu : MonoBehaviour {
 
 // Function for the button to start the game
 	public void StartGame() {
-		// SceneManager.LoadScene("Gameplay");
 	// Load Scene
-		StartCoroutine(LoadAsyncScene());
+		StartCoroutine(LoadAsyncGameplayScene());
 	}
 
 // IEnumerator for Async Coroutine
-	IEnumerator LoadAsyncScene() {
+	IEnumerator LoadAsyncGameplayScene() {
 	// Load the scene in the background
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GamePlay");
 
@@ -41,8 +40,26 @@ public class MainMenu : MonoBehaviour {
 
 // Function for the button to help the game
 	public void HelpGame() {
-	// Set Active Help Menu
-		tHelpMenu.gameObject.SetActive(true);
+	// Check if Help Menu Exist
+		if (tHelpMenu != null)
+		// Set Active Help Menu
+			tHelpMenu.gameObject.SetActive(true);
+	}
+
+// Function for the button to help the game
+	public void BackGame() {
+	// Load Scene
+		StartCoroutine(LoadAsyncMainMenuScene());
+	}
+
+// IEnumerator for Async Coroutine
+	IEnumerator LoadAsyncMainMenuScene() {
+	// Load the scene in the background
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Main Menu");
+
+	// Wait until the asynchronous scene fully loads
+		while (!asyncLoad.isDone)
+			yield return null;
 	}
 
 // Function for toggling when Start is hovered
@@ -93,6 +110,23 @@ public class MainMenu : MonoBehaviour {
 			// Turn on 'No'
 				lButtons.ToArray()[4].gameObject.SetActive(true); break;
 			default: rCore.Pnt("Missing Info: Help Button"); break;
+		}
+	}
+
+// Function for returning to Main Menu
+	public void HighlightBack(int toggle) {
+		switch (toggle) {
+			case 0:
+			// Turn off 'No'
+				lButtons.ToArray()[0].gameObject.SetActive(false);
+			// Turn on 'Yes'
+				lButtons.ToArray()[1].gameObject.SetActive(true); break;
+			case 1:
+			// Turn off 'Yes'
+				lButtons.ToArray()[1].gameObject.SetActive(false);
+			// Turn on 'No'
+				lButtons.ToArray()[0].gameObject.SetActive(true); break;
+			default: rCore.Pnt("Missing Info: Back Button"); break;
 		}
 	}
 }

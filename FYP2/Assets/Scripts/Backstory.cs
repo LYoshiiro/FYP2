@@ -28,7 +28,7 @@ public class Backstory : MonoBehaviour {
 
 	private void FixedUpdate() {
 	// Update Time Limiter
-		if (fTimer < 5.0f) {
+		if (fTimer < 2.5f) {
 			fTimer += Time.deltaTime;
 		}
 		else {

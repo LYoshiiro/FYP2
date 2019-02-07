@@ -31,6 +31,8 @@ public class SkillSystem : MonoBehaviour {
 	private void Start() {
 	// Set Initial Values
 		fProgressive = 25.0f;
+	// Just for show
+		// fExperience = 1000.0f;
 	}
 
 	private void FixedUpdate() {
