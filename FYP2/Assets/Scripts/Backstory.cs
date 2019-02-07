@@ -49,10 +49,10 @@ public class Backstory : MonoBehaviour {
 		// Feed in pre-determined line
 			switch (iSlide) {
 				case 0: sDialogue = "On the flight to China for a Family Reunion, the plane crossed into a field of dark clouds."; break;
-				case 1: sDialogue = "Navigating the blacken sky, the plane was stuck down by lightning."; break;
-				case 2: sDialogue = "With the hull punctured and the control system onboard failling, the Plane erupted in flames."; break;
-				case 3: sDialogue = "With the sudden plumet, A stray object flying overhead, knocked you unconcious."; break;
-				case 4: sDialogue = "Waking up by the rough crashing waves, you spot a distant island. With all your remainding strength, you swam to the island before collapsing."; break;
+				case 1: sDialogue = "Navigating the dark skies, the plane was struck down by lightning."; break;
+				case 2: sDialogue = "With the hull punctured and the control system onboard failing, the plane erupted in flames."; break;
+				case 3: sDialogue = "With the sudden plummet, a stray object, flying overhead knocked you unconscious."; break;
+				case 4: sDialogue = "Woken up by the rough crashing waves, you spotted a distant island. With all your remaining strength, you swam to the island before collapsing."; break;
 				default: sDialogue = "Missing Dialogue Here!"; break;
 			}
 		// Update the text string
