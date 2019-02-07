@@ -2,13 +2,13 @@
 1,0,no,no,Stone,Crafting material
 2,0,no,yes,Cotton,Crafting material
 3,0,yes,yes,Berry,Crafting material
-4,1,no,yes,Raft,A means to escape
+4,0,no,yes,Raft,A means to escape
 5,0,no,no,Cotton Hat,Warm Clothing
 6,0,no,no,Cotton Shirt,Warm Clothing
 7,0,no,no,Cotton Pant,Warm Clothing
 8,0,no,no,Hoe,Tool to help gathering
 9,0,no,no,Axe,Tool to help lumbering
 10,0,no,no,Pickaxe,Tool to help mining
-11,1,no,yes,Bucket,Tool to help put out fires
-12,3,no,yes,Fireplace,Placable to keep you warm
-13,1,no,yes,Tent,Placable to keep you warm
+11,0,no,yes,Bucket,Tool to help put out fires
+12,0,no,yes,Fireplace,Placable to keep you warm
+13,0,no,yes,Tent,Placable to keep you warm

@@ -47,10 +47,10 @@ public class ItemManager : MonoBehaviour {
 	// Offset Generated Values
 		rMapGenerator.GatherOffset(name);
 	// Update Count
-		// rGather.CountUpdate(Random.Range(2 + ItemModify(name), 5 + ItemModify(name)));
+		rGather.CountUpdate(Random.Range(2 + ItemModify(name), 5 + ItemModify(name)));
 		// rGather.CountUpdate(5 + ItemModify(name));
 	// Debug Scenario
-		rGather.CountUpdate(Random.Range(12, 15));
+		// rGather.CountUpdate(Random.Range(12, 15));
 	}
 
 // Parse item list
